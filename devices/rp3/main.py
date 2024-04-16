@@ -175,7 +175,7 @@ client.on_message = on_message
 properties = Properties(PacketTypes.CONNECT)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
-client.publish("/test", "Test 2")
+###client.publish("/test", "Test 2")
 client.subscribe([(MQTT_TOPIC_GEN_START, 0), (MQTT_TOPIC_CO2_MASKS, 0), (MQTT_TOPIC_GEN_STOP, 0)])
 
 
