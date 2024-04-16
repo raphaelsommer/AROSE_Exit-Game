@@ -33,7 +33,7 @@ SEGMENT_MAP = {
 }
 
 # Buzzer Configuration
-buzzer = Buzzer(18)
+buzzer = Buzzer(21)
 
 # SPI Configuration
 spi = spidev.SpiDev()
