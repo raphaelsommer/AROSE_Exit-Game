@@ -1,4 +1,3 @@
-import RPi.GPIO as GPIO
 from gpiozero import Buzzer
 import spidev
 import time
