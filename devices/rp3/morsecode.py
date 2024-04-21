@@ -43,12 +43,12 @@ input_received_event = threading.Event()
 
 ### FUNCTIONS
 def blink_morse(signal):
+    time.sleep(1.5)
     for symbol in signal:
         GPIO.output(LED_PIN_MORSE, GPIO.HIGH)
-        time.sleep(0.2 if symbol == '.' else 0.8)
+        time.sleep(0.2 if symbol == '.' else 1)
         GPIO.output(LED_PIN_MORSE, GPIO.LOW)
-        time.sleep(0.5)
-    time.sleep(1)
+        time.sleep(0.8)
 
 def morse_blinker():
     letters_numbers = ['E', '4', 'C', '3', 'D', '7', 'O', '2']
