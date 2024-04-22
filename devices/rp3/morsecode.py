@@ -3,11 +3,14 @@ import time
 import threading
 
 # GPIO-Pin-Nummern (angepasst an Ihr Setup)
-LED_PIN_MORSE = 17
-LED_PIN_DONE = 27
+LED_PIN_MORSE = 23
+LED_PIN_DONE = 18
+RGB_RED_PIN = 17
+RGB_GREEN_PIN = 27
+RGB_BLUE_PIN = 22
 
-ROWS = [5, 6, 13, 19]  # GPIO pins for the rows
-COLUMNS = [26, 16, 20, 21]  # GPIO pins for the columns
+COLUMNS = [21, 20, 16, 12]  # GPIO pins for the rows
+ROWS = [26, 19, 13, 6]  # GPIO pins for the columns
 
 # Define the keypad mapping
 KEYPAD = [
@@ -29,10 +32,18 @@ morse_code = {
     '9': '----.'
 }
 
+SHORT = 0.2
+LONG = 0.7
+BETWEEN = 0.7
+PAUSE = 1.5
+
 # Setup GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN_MORSE, GPIO.OUT)
 GPIO.setup(LED_PIN_DONE, GPIO.OUT)
+GPIO.setup(RGB_RED_PIN, GPIO.OUT)
+GPIO.setup(RGB_GREEN_PIN, GPIO.OUT)
+GPIO.setup(RGB_BLUE_PIN, GPIO.OUT)
 for pin in COLUMNS:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.HIGH)
@@ -42,23 +53,48 @@ for pin in ROWS:
 input_received_event = threading.Event()
 
 ### FUNCTIONS
+# Function to blink LED
+def blink_rgb(color, times, interval):
+    for _ in range(times):
+        set_rgb_color(color)
+        time.sleep(interval)
+        set_rgb_color('none')
+        time.sleep(interval)
+
+# Function to set LED color
+def set_rgb_color(color):
+    colors = {
+        'red': (255, 0, 0),
+        'green': (0, 255, 0),
+        'blue': (0, 0, 255),
+        'white': (255, 255, 255),
+        'yellow': (255, 120, 0),
+        'none': (0, 0, 0)
+    }
+    GPIO.output(RGB_RED_PIN, colors[color][0])
+    GPIO.output(RGB_GREEN_PIN, colors[color][1])
+    GPIO.output(RGB_BLUE_PIN, colors[color][2])
+
 def blink_morse(signal):
-    time.sleep(1.5)
-    for symbol in signal:
-        GPIO.output(LED_PIN_MORSE, GPIO.HIGH)
-        time.sleep(0.2 if symbol == '.' else 1)
-        GPIO.output(LED_PIN_MORSE, GPIO.LOW)
-        time.sleep(0.8)
+    if not input_received_event.is_set():
+        time.sleep(PAUSE)
+        for symbol in signal:
+            if not input_received_event.is_set():
+                GPIO.output(LED_PIN_MORSE, GPIO.HIGH)
+                time.sleep(SHORT if symbol == '.' else LONG)
+                GPIO.output(LED_PIN_MORSE, GPIO.LOW)
+                time.sleep(BETWEEN)
 
 def morse_blinker():
     letters_numbers = ['E', '4', 'C', '3', 'D', '7', 'O', '2']
     while not input_received_event.is_set():
         for character in letters_numbers:
             blink_morse(morse_code[character])
-        GPIO.output(LED_PIN_DONE, GPIO.HIGH)
-        time.sleep(1)
-        GPIO.output(LED_PIN_DONE, GPIO.LOW)
-        time.sleep(1)
+        if not input_received_event.is_set():
+            GPIO.output(LED_PIN_DONE, GPIO.HIGH)
+            time.sleep(1)
+            GPIO.output(LED_PIN_DONE, GPIO.LOW)
+            time.sleep(1)
 
 def read_keypad(correct_code):
     inputted_values = []
@@ -70,6 +106,10 @@ def read_keypad(correct_code):
                     pressed_key = KEYPAD[row_num][col_num]
                     print(f"Key Pressed: {pressed_key}")
                     inputted_values.append(pressed_key)
+                    try:
+                        blink_rgb('yellow', int(pressed_key), 0.2)
+                    except:
+                        blink_rgb('red', 1, 0.5)
                     time.sleep(0.3)  # Debounce time
                     while GPIO.input(row_pin) == GPIO.LOW:
                         pass  # Wait for key release
@@ -77,9 +117,11 @@ def read_keypad(correct_code):
                         if inputted_values == correct_code:
                             print("Correct code entered!")
                             input_received_event.set()
+                            blink_rgb('green', 4, 0.5)
                             return
                         else:
                             print(f"Incorrect code: {''.join(inputted_values)}. Try again.")
+                            blink_rgb('red', 4, 0.2)
                             inputted_values = []  # Reset the inputted values for a new attempt
             GPIO.output(col_pin, GPIO.HIGH)
             time.sleep(0.1)  # Column switching delay
