@@ -1,5 +1,6 @@
 import threading
 import time
+import RPi.GPIO as GPIO
 from mfrc522 import MFRC522
 
 # GPIO Setup
@@ -76,4 +77,7 @@ def main():
         print("The program did not end with both scanners detecting the correct cards.")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        GPIO.cleanup()
