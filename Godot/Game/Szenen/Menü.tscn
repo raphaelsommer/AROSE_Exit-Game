@@ -1,0 +1,144 @@
+[gd_scene load_steps=19 format=3 uid="uid://cpqkqsbg22tkk"]
+
+[ext_resource type="Script" path="res://Skripte/Menü.gd" id="1_ynd03"]
+[ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="1_yyfok"]
+[ext_resource type="Texture2D" uid="uid://bjwiap8hremjv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Start_BTN.png" id="2_wsuxf"]
+[ext_resource type="Texture2D" uid="uid://cjtinx5n70fok" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Exit_BTN.png" id="3_ivrra"]
+[ext_resource type="AudioStream" uid="uid://bi3iatw3mdl4k" path="res://Sounds/GUI/ObservingTheStar/ObservingTheStar.ogg" id="5_8gbue"]
+[ext_resource type="Texture2D" uid="uid://lbnnbd8k873h" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Info_BTN.png" id="6_3nmul"]
+[ext_resource type="Texture2D" uid="uid://cgrh6kusnoajj" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Rating_BTN.png" id="7_l57ys"]
+[ext_resource type="Texture2D" uid="uid://b46fynvup5ltv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Settings_BTN.png" id="8_pisru"]
+[ext_resource type="Texture2D" uid="uid://hk20lpx56cg5" path="res://Gui/Title/Title-1.png" id="9_8gyvl"]
+[ext_resource type="Texture2D" uid="uid://bu631aqwo2unp" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/FAQ_BTN.png" id="9_wpsg6"]
+[ext_resource type="Texture2D" uid="uid://hj17166r8rf1" path="res://Gui/Title/Title-2.png" id="10_xhbly"]
+[ext_resource type="Texture2D" uid="uid://dn43w366x4wym" path="res://Gui/Title/Title-3.png" id="11_frs5b"]
+[ext_resource type="Texture2D" uid="uid://6wsqba14xunb" path="res://Gui/Title/Title-4.png" id="12_p4xgq"]
+[ext_resource type="Texture2D" uid="uid://depqbkq1xh5q" path="res://Erde/earth.png" id="13_61s3c"]
+[ext_resource type="Texture2D" uid="uid://cx2bjo3q4fdif" path="res://Erde/earth1.png" id="14_toeog"]
+[ext_resource type="Texture2D" uid="uid://dqersn35m0l8r" path="res://Erde/earth Kopie.png" id="15_gjb8d"]
+[ext_resource type="Texture2D" uid="uid://f38ri6yg6du0" path="res://Erde/earth Kopie 2.png" id="16_xrbxy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vulfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_61s3c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_toeog")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_gjb8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xrbxy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Menü" type="Node2D"]
+script = ExtResource("1_ynd03")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-20, 47)
+scale = Vector2(0.62552, 0.693518)
+texture = ExtResource("1_yyfok")
+metadata/_edit_lock_ = true
+
+[node name="Start" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -91.0
+offset_top = -29.0
+offset_right = 91.0
+offset_bottom = 34.0
+grow_horizontal = 0
+icon = ExtResource("2_wsuxf")
+expand_icon = true
+
+[node name="Exit" type="Button" parent="."]
+offset_left = -63.0
+offset_top = 66.0
+offset_right = 69.0
+offset_bottom = 117.0
+icon = ExtResource("3_ivrra")
+expand_icon = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("5_8gbue")
+autoplay = true
+
+[node name="Info" type="Button" parent="."]
+offset_left = 17.0
+offset_top = 166.0
+offset_right = 67.0
+offset_bottom = 215.0
+icon = ExtResource("6_3nmul")
+expand_icon = true
+
+[node name="Rating" type="Button" parent="."]
+offset_left = -160.0
+offset_top = 164.0
+offset_right = -106.0
+offset_bottom = 216.0
+icon = ExtResource("7_l57ys")
+expand_icon = true
+
+[node name="Settings" type="Button" parent="."]
+offset_left = -74.0
+offset_top = 165.0
+offset_right = -24.0
+offset_bottom = 216.0
+icon = ExtResource("8_pisru")
+expand_icon = true
+
+[node name="FAQ" type="Button" parent="."]
+offset_left = 95.0
+offset_top = 165.0
+offset_right = 144.0
+offset_bottom = 215.0
+icon = ExtResource("9_wpsg6")
+expand_icon = true
+
+[node name="A" type="Sprite2D" parent="."]
+position = Vector2(-179, -168)
+scale = Vector2(1.1, 1.12381)
+texture = ExtResource("9_8gyvl")
+
+[node name="R" type="Sprite2D" parent="."]
+position = Vector2(-58.9999, -165.75)
+scale = Vector2(1.37376, 1.76425)
+texture = ExtResource("10_xhbly")
+
+[node name="O" type="Sprite2D" parent="."]
+position = Vector2(40.9532, -165.891)
+scale = Vector2(1.81682, 1.9285)
+texture = ExtResource("11_frs5b")
+
+[node name="SE" type="Sprite2D" parent="."]
+position = Vector2(176, -164)
+scale = Vector2(1.23801, 1.87761)
+texture = ExtResource("12_p4xgq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(234, 38)
+scale = Vector2(0.320767, 0.330247)
+sprite_frames = SubResource("SpriteFrames_vulfq")
+animation = &"idle"
+autoplay = "idle"
+frame = 2
+frame_progress = 0.116772
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="FAQ" to="." method="_on_faq_pressed"]

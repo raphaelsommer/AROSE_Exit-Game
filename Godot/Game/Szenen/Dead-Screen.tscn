@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkie70hlpra3x"]
+
+[ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="1_c33sf"]
+[ext_resource type="Script" path="res://Skripte/Dead-Screen.gd" id="1_hkg1c"]
+[ext_resource type="AudioStream" uid="uid://bs62d5446b0r5" path="res://Sounds/Dead/GameOver-Music/No Hope.mp3" id="2_0sa3o"]
+[ext_resource type="Texture2D" uid="uid://bdao7fkoirr3c" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Lose/Table.png" id="3_eaj5q"]
+[ext_resource type="Texture2D" uid="uid://cxbd5putvwmf6" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Lose/Header.png" id="3_ksgsj"]
+[ext_resource type="Texture2D" uid="uid://b55evj2f73uyx" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Lose/Replay_BTN.png" id="4_wib2t"]
+[ext_resource type="Texture2D" uid="uid://bq5kar1la3vf" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Lose/Close_BTN.png" id="5_f2gjg"]
+[ext_resource type="Texture2D" uid="uid://dxlaqu2i003f7" path="res://Gui/Space_Game_GUI_PNG/PNG/Pause/Menu_BTN.png" id="8_qnlcn"]
+
+[node name="Dead-Screen" type="Node2D"]
+script = ExtResource("1_hkg1c")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_c33sf")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_0sa3o")
+autoplay = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(2.49999, -146.5)
+scale = Vector2(1.39889, 1.0396)
+texture = ExtResource("3_eaj5q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_ksgsj")
+offset = Vector2(2.08165e-12, -150)
+
+[node name="Restart" type="Button" parent="."]
+offset_left = 126.0
+offset_top = 44.0
+offset_right = 243.0
+offset_bottom = 163.0
+icon = ExtResource("4_wib2t")
+expand_icon = true
+
+[node name="Quit" type="Button" parent="."]
+offset_left = -242.0
+offset_top = 39.0
+offset_right = -124.0
+offset_bottom = 163.0
+icon = ExtResource("5_f2gjg")
+expand_icon = true
+
+[node name="Menü" type="Button" parent="."]
+offset_left = -71.0
+offset_top = 24.0
+offset_right = 78.0
+offset_bottom = 175.0
+icon = ExtResource("8_qnlcn")
+expand_icon = true
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Menü" to="." method="_on_menü_pressed"]

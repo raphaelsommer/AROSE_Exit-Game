@@ -1,0 +1,146 @@
+[gd_scene load_steps=14 format=3 uid="uid://vfxxdcnnxscd"]
+
+[ext_resource type="Script" path="res://Skripte/Abspann.gd" id="1_k72h5"]
+[ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="1_ye2br"]
+[ext_resource type="Texture2D" uid="uid://hk20lpx56cg5" path="res://Gui/Title/Title-1.png" id="2_7pyea"]
+[ext_resource type="Texture2D" uid="uid://hj17166r8rf1" path="res://Gui/Title/Title-2.png" id="3_4pw0d"]
+[ext_resource type="Texture2D" uid="uid://dn43w366x4wym" path="res://Gui/Title/Title-3.png" id="4_ai5uk"]
+[ext_resource type="Texture2D" uid="uid://sxg2cfd3jlk2" path="res://Gui/Space_Game_GUI_PNG/PNG/Upgrade/Window.png" id="4_k56ti"]
+[ext_resource type="Texture2D" uid="uid://6wsqba14xunb" path="res://Gui/Title/Title-4.png" id="5_hmtwt"]
+[ext_resource type="AudioStream" uid="uid://d2jnjko4s8fu" path="res://Sounds/Abspann/Intense.mp3" id="6_fwbdn"]
+[ext_resource type="Texture2D" uid="uid://f38ri6yg6du0" path="res://Erde/earth Kopie 2.png" id="9_qq1kj"]
+[ext_resource type="Texture2D" uid="uid://depqbkq1xh5q" path="res://Erde/earth.png" id="10_rt526"]
+[ext_resource type="Texture2D" uid="uid://cx2bjo3q4fdif" path="res://Erde/earth1.png" id="11_fey8e"]
+[ext_resource type="Texture2D" uid="uid://dqersn35m0l8r" path="res://Erde/earth Kopie.png" id="12_4nnbl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cejlk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_qq1kj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_rt526")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fey8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4nnbl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Abspann" type="Node2D"]
+script = ExtResource("1_k72h5")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_ye2br")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fwbdn")
+autoplay = true
+
+[node name="Bastian Streck" type="Sprite2D" parent="."]
+position = Vector2(255.5, 31)
+scale = Vector2(0.203192, 0.142857)
+texture = ExtResource("4_k56ti")
+
+[node name="Bastian Streck2" type="Sprite2D" parent="."]
+position = Vector2(-230.5, 24.5)
+scale = Vector2(0.203192, 0.123571)
+texture = ExtResource("4_k56ti")
+
+[node name="Menü" type="Button" parent="."]
+offset_left = -171.0
+offset_top = -222.0
+offset_right = -33.0
+offset_bottom = -109.0
+icon = ExtResource("2_7pyea")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -283.5
+offset_top = -65.0
+offset_right = -169.5
+offset_bottom = -42.0
+text = "Game-Design"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 199.0
+offset_top = -71.0
+offset_right = 309.0
+offset_bottom = -47.0
+text = "Technik-Team"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 200.0
+offset_top = -23.0
+offset_right = 313.0
+offset_bottom = 1.0
+text = "Bastian Streck"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 191.0
+offset_top = 85.0
+offset_right = 323.0
+offset_bottom = 109.0
+text = "Max Stolzenberg"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="."]
+offset_left = 188.0
+offset_top = 13.0
+offset_right = 328.0
+offset_bottom = 37.0
+text = "Raphael Sommer"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="."]
+offset_left = -288.5
+offset_top = -20.0
+offset_right = -165.5
+offset_bottom = 4.0
+text = "Henrik Herbert"
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="."]
+offset_left = 192.0
+offset_top = 50.0
+offset_right = 324.0
+offset_bottom = 74.0
+text = "Kerim Nurdogan"
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="."]
+offset_left = -282.5
+offset_top = 15.0
+offset_right = -177.5
+offset_bottom = 39.0
+text = "Leander Uka"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, -149.5)
+texture = ExtResource("3_4pw0d")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(66.5, -150.5)
+texture = ExtResource("4_ai5uk")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(159.5, -150.5)
+texture = ExtResource("5_hmtwt")
+
+[node name="Earth" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, 32)
+scale = Vector2(0.3131, 0.266534)
+sprite_frames = SubResource("SpriteFrames_cejlk")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.548283
+
+[connection signal="pressed" from="Menü" to="." method="_on_button_pressed"]

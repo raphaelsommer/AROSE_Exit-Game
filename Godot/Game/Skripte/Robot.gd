@@ -1,0 +1,58 @@
+extends Node2D
+
+
+
+
+func _on_ready():
+	$AnimatedSprite2D.play("off")
+	
+	
+
+func _on_area_2d_body_entered(body):
+	if(body.is_in_group("Player")):
+		$AnimatedSprite2D.play("on")
+		$Press.visible = true
+		$I.visible = true
+
+
+func _physics_process(delta):
+	if(Input.is_action_just_pressed("Interagieren")):
+		$Press.visible = false
+		$I.visible = false
+		$"Text Robot".visible = true
+		
+	if(Input.is_action_just_pressed("Abbruch")):
+		$"Text Robot".visible = false
+		$Press.visible = true
+		$I.visible = true
+		
+	if(Input.is_action_just_pressed("kaufen")):
+		Global.coins -= 5
+		Global.player1_hp += 1
+		print(Global.player1_hp)
+		if(Global.coins < 5):
+			$"Text Robot/RichTextLabel".visible = false
+			$"Text Robot/Leave".visible = false
+			$"Text Robot/Buy".visible = false
+			$Keinecoins.visible = true
+			$Continue.visible = true
+	if(Input.is_action_just_pressed("Continue")):
+		$"Text Robot".visible = false
+		$Continue.visible = false
+		$Keinecoins.visible = false
+		
+	
+		
+	
+	#$Sprite2D.visible = true
+	#if(Input.is_action_just_pressed("kaufen")):
+	#Global.coins -= 5
+	#Global.player1_hp += 1
+	#if(Input.is_action_just_pressed("Abbruch")):
+	#$Sprite2D.visible = false
+
+
+func _on_area_2d_body_exited(body):
+	if(body.is_in_group("Player")):
+		$Press.visible = false
+		$I.visible = false
