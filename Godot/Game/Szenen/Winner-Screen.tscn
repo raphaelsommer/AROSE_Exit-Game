@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://6r2cnn7xxcr"]
+
+[ext_resource type="Script" path="res://Skripte/Winner-Screen.gd" id="1_ekseo"]
+[ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="1_vlde0"]
+[ext_resource type="Texture2D" uid="uid://dwfdrs88opese" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Win/Table.png" id="2_fgcs5"]
+[ext_resource type="Texture2D" uid="uid://dr1vfanh5g1hf" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Win/Header.png" id="3_5h4uj"]
+[ext_resource type="Texture2D" uid="uid://dnpmglfi0qxn" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Win/Window.png" id="4_o7434"]
+[ext_resource type="Texture2D" uid="uid://c2sthyii3g7c6" path="res://Gui/Space_Game_GUI_PNG/PNG/Upgrade/Ok_BTN.png" id="6_4ievt"]
+[ext_resource type="AudioStream" uid="uid://h5p558rpkhcf" path="res://Sounds/Abspann/Heavy_ConceptB.wav" id="6_pnpud"]
+[ext_resource type="Texture2D" uid="uid://d0b085cxj1f0a" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Win/Play_BTN.png" id="7_1cuur"]
+
+[node name="Winner-Screen" type="Node2D"]
+script = ExtResource("1_ekseo")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_vlde0")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0.625006, -144.375)
+scale = Vector2(1.23338, 1.18069)
+texture = ExtResource("2_fgcs5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_5h4uj")
+offset = Vector2(2.08165e-12, -150)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(3.99999, 73)
+scale = Vector2(0.28883, 0.24838)
+texture = ExtResource("4_o7434")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = -82.0
+offset_right = 106.0
+offset_bottom = 41.0
+text = "Mission Abgeschlossen"
+
+[node name="TextEdit3" type="TextEdit" parent="."]
+offset_left = -83.0
+offset_top = 103.0
+offset_right = 105.0
+offset_bottom = 144.0
+text = "        Tiere Gerettet "
+
+[node name="TextEdit2" type="TextEdit" parent="."]
+offset_left = -83.0
+offset_top = 50.0
+offset_right = 105.0
+offset_bottom = 91.0
+text = "    Sauerstoffmasken"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_pnpud")
+autoplay = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(5, -45)
+scale = Vector2(0.390476, 0.37619)
+texture = ExtResource("6_4ievt")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -32.0
+offset_top = 151.0
+offset_right = 41.0
+offset_bottom = 228.0
+icon = ExtResource("7_1cuur")
+expand_icon = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

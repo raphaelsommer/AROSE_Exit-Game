@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxp0ib0ujljkq"
+path="res://.godot/imported/Retro_No hope.wav-77f353e091008fc175fd6d9fc8cca19f.sample"
+
+[deps]
+
+source_file="res://Sounds/Dead/GameOver-Music/Retro_No hope.wav"
+dest_files=["res://.godot/imported/Retro_No hope.wav-77f353e091008fc175fd6d9fc8cca19f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
