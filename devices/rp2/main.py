@@ -12,7 +12,8 @@ MQTT_TRANSPORT_PROTOCOL = "tcp"
 
 MQTT_TOPIC_GEN_START = "/gen/start"
 MQTT_TOPIC_GEN_STOP = "/gen/stop"
-MQTT_TOPIC_DOOR_A5 = "/door/a-5"
+MQTT_TOPIC_DOOR_A5 = "/door/a5"
+MQTT_TOPIC_C1_RFID = "/c1/rfid"
 
 isStartMIDIIPGame = False
 isStartTimer = False
@@ -54,6 +55,12 @@ while not stop:
         print("Starting MIDI-IP-Game")
         MIDIIpGame = MIDIIpGame()
         thread2 = threading.Thread(target=MIDIIpGame.startGame).start()
+        isStartMIDIIPGame = False
+    if MIDIIpGame.getFinished():
+        print("Stopping MIDI-IP-Game")
+        MIDIIpGame.stopGame()
+        client.publish(topic=MQTT_TOPIC_C1_RFID, payload="1", qos=2)
+
     
     thread1.join()
     thread2.join()
