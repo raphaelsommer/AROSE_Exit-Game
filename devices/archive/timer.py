@@ -19,11 +19,6 @@ SEGMENT_MAP = {
 # Buzzer Configuration
 buzzer = Buzzer(12)
 
-# SPI Configuration
-spi = spidev.SpiDev()
-spi.open(0, 0)  # Open SPI bus 0, device 0
-spi.max_speed_hz = 5000
-
 # Display configuration
 DISPLAY_BRIGHTNESS = 8
 NUM_DIGITS = 4
@@ -38,6 +33,11 @@ timerMin1 = INITTIME % 10
 timerSec10 = 0
 timerSec1 = 0
 
+
+# SPI Configuration
+spi = spidev.SpiDev()
+spi.open(0, 0)  # Open SPI bus 0, device 0
+spi.max_speed_hz = 5000
 
 # Display and Logic Functions
 def write_byte(register, data):
@@ -102,28 +102,13 @@ def alarm():
             count5sec += 1
             start_time = current_time 
 
-def extend_timer(min):
+""" def extend_timer(min):
     global timerMin1, timerMin10
     # Implement timer extension logic
     timerMin1 += min
     if timerMin1 > 9:
         timerMin10 += (timerMin1 - (timerMin1 % 10)) // 10
-        timerMin1 = timerMin1 % 10
-
-
-""" # MQTT Methods
-def on_message(client, userdata, msg):
-    global start, stopped
-    print(msg.topic + " " + str(msg.payload))
-    if msg.topic == MQTT_TOPIC_GEN_START and msg.payload.decode() == '1':
-        print("Timer start")
-        start = True
-    if msg.topic == MQTT_TOPIC_CO2_MASKS and msg.payload.decode() == '1':
-        print("CO2 mask detected, extending timer")
-        extend_timer(8)
-    if msg.topic == MQTT_TOPIC_GEN_STOP and msg.payload.decode() == '1':
-        print("Timer stopped")
-        stopped = True """
+        timerMin1 = timerMin1 % 10 """
 
 
 # Timer Method
