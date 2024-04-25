@@ -5,16 +5,16 @@ from gpiozero import TonalBuzzer
 from gpiozero.tones import Tone
 
 # USB MIDI Port configuration:
-PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 20:0'
+PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 24:0'
 
 # Raspberry Pi pin configuration:
-lcd_rs = 25
-lcd_en = 24
-lcd_d4 = 23
-lcd_d5 = 17
-lcd_d6 = 21
-lcd_d7 = 22
-buzzer = TonalBuzzer(20)
+lcd_rs = 24
+lcd_en = 23
+lcd_d4 = 22
+lcd_d5 = 27
+lcd_d6 = 17
+lcd_d7 = 25
+buzzer = TonalBuzzer(18)
 
 # Define LCD column and row size
 lcd_columns = 16
@@ -37,13 +37,13 @@ try:
                 break
             if not input.is_meta and input.type == 'note_on':
                 IP_part = input.note
-                buzzer.play(Tone(midi=IP_part))
+                #buzzer.play(Tone(midi=IP_part))
                 IP_entered.append((IP_part-32)*6)
                 IP_string = '.'.join(str(ip) for ip in IP_entered)
                 lcd.clear()
                 lcd.message(f'Change door1 IP:\n{IP_string}')
                 time.sleep(0.5)
-                buzzer.stop()
+                #buzzer.stop()
     lcd.clear()
     lcd.message(f'door1 IP now is\n{IP_string}')
     time.sleep(1)
