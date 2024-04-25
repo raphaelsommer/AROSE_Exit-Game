@@ -121,6 +121,7 @@ class Timer:
         self.clear_display()
         self.alarm()
         self.timerFinished = True
+        self.stopTimer()
 
     ### Define a method to stop the timer
     def stopTimer(self):

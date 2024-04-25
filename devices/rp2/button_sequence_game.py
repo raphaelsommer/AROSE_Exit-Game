@@ -89,6 +89,10 @@ class ButtonSequenceGame:
         GPIO.output(self.GREEN_PIN, colors[color][1])
         GPIO.output(self.BLUE_PIN, colors[color][2])
 
+    ### Define a method to get the finish state of the game
+    def getFinished(self):
+        return self.finished
+
     ### Define a method to start the Button Sequence Game from the main.py file
     def startGame(self):
 
@@ -105,6 +109,7 @@ class ButtonSequenceGame:
         # Wait until the game is finished
         while not self.finished:
             time.sleep(0.1)
+        self.stopGame()
     
     ### Define a method to stop/interrupt the Button Sequence Game from the main.py file
     def stopGame(self):

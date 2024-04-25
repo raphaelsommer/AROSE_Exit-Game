@@ -68,45 +68,50 @@ thread3 = threading.Thread(target=MIDIIpGame.startGame)
 thread2 = threading.Thread(target=ButtonGame.startGame)
 
 stop = False
-while not stop:
-    if isStartTimer:
-        print("Starting Timer")
-        thread1.start()
-        isStartTimer = False
-    if isStartMIDIIPGame:
-        print("Starting MIDI-IP-Game")
-        thread3.start()
-        isStartMIDIIPGame = False
-    if isStartButtonSequence:
-        print("Starting Button-Sequence-Game")
-        thread2.start()
-        isStartButtonSequence = False
+try:
+    while not stop:
+        if isStartTimer:
+            print("Starting Timer")
+            thread1.start()
+            isStartTimer = False
+        if isStartMIDIIPGame:
+            print("Starting MIDI-IP-Game")
+            thread3.start()
+            isStartMIDIIPGame = False
+        if isStartButtonSequence:
+            print("Starting Button-Sequence-Game")
+            thread2.start()
+            isStartButtonSequence = False
 
-    
-    if MIDIIpGame.getFinished():
-        print("Stopping MIDI-IP-Game")
-        MIDIIpGame.stopGame()
-        client.publish(topic=MQTT_TOPIC_C1_RFID, payload="start", qos=2)
-    if ButtonGame.getFinished():
-        print("Stopping Button-Sequence-Game")
-        ButtonGame.stopGame()
-        client.publish(topic=MQTT_TOPIC_B2_GRAVITY, payload="on", qos=2)
-        client.publish(topic=MQTT_TOPIC_DOOR_B5, payload="1", qos=2)
-        client.publish(topic=MQTT_TOPIC_DOOR_A5, payload="1", qos=2)
-        client.publish(topic=MQTT_TOPIC_DOOR_B3, payload="1", qos=2)
-        client.publish(topic=MQTT_TOPIC_DOOR_A3, payload="1", qos=2)
-        client.publish(topic=MQTT_TOPIC_DOOR_B2, payload="1", qos=2)
-    if MainTimer.getFinished():
-        print("Stopping Timer")
-        client.publish(topic=MQTT_TOPIC_GEN_GLOBAL, payload="stop", qos=2)
-        stop = True
+        
+        if MIDIIpGame.getFinished():
+            print("Stopping MIDI-IP-Game")
+            MIDIIpGame.stopGame()
+            client.publish(topic=MQTT_TOPIC_C1_RFID, payload="start", qos=2)
+        if ButtonGame.getFinished():
+            print("Stopping Button-Sequence-Game")
+            ButtonGame.stopGame()
+            client.publish(topic=MQTT_TOPIC_B2_GRAVITY, payload="on", qos=2)
+            client.publish(topic=MQTT_TOPIC_DOOR_B5, payload="1", qos=2)
+            client.publish(topic=MQTT_TOPIC_DOOR_A5, payload="1", qos=2)
+            client.publish(topic=MQTT_TOPIC_DOOR_B3, payload="1", qos=2)
+            client.publish(topic=MQTT_TOPIC_DOOR_A3, payload="1", qos=2)
+            client.publish(topic=MQTT_TOPIC_DOOR_B2, payload="1", qos=2)
+        if MainTimer.getFinished():
+            print("Stopping Timer")
+            client.publish(topic=MQTT_TOPIC_GEN_GLOBAL, payload="stop", qos=2)
+            stop = True
 
-    if thread1.is_alive():
-        if thread2.is_alive():
-            if thread3.is_alive():
-                thread3.join()
-            thread2.join()
-        thread1.join()
-
-client.disconnect()
-client.loop_stop()
+        if thread1.is_alive():
+            if thread2.is_alive():
+                if thread3.is_alive():
+                    thread3.join()
+                thread2.join()
+            thread1.join()
+except KeyboardInterrupt:
+    MainTimer.stopTimer()
+    MIDIIpGame.stopGame()
+    ButtonGame.stopGame()
+finally:
+    client.disconnect()
+    client.loop_stop()

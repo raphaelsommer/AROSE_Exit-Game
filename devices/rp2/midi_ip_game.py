@@ -94,6 +94,7 @@ class MidiIpGame:
                     self.lcd.clear()
                     self.IP1_entered = self.resetIP(self.IP1_entered)
                     self.IP2_entered = self.resetIP(self.IP2_entered)
+            self.stopGame()
         except KeyboardInterrupt:
             self.lcd.clear()
 
