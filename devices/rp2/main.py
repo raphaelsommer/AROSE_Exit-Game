@@ -14,18 +14,22 @@ MQTT_TRANSPORT_PROTOCOL = "tcp"
 # Topics for General and Timer
 MQTT_TOPIC_GEN_START = "/gen/start"
 MQTT_TOPIC_GEN_STOP = "/gen/stop"
-# Topics for the MIDI-IP-Game and RFID
+# Topics for the MIDI-IP-Game
 MQTT_TOPIC_DOOR_A5 = "/door/a5"
+# Topics for the RFID-Reader
 MQTT_TOPIC_C1_RFID = "/c1/rfid"
+# Topics for the Button-Sequence
+MQTT_TOPIC_A3_BUTTON = "/a3/button"
 
 # Flags for the MIDI-IP-Game and Timer
 isStartMIDIIPGame = False
 isStartTimer = False
+isStartButtonSequence = False
 
 
 ### MQTT Methods
 def on_message(client, userdata, msg):
-    global isStartMIDIIPGame, isStartTimer
+    global isStartMIDIIPGame, isStartTimer, isStartButtonSequence
     # print(msg.topic + " " + str(msg.payload))
     if msg.topic == MQTT_TOPIC_GEN_START and msg.payload.decode() == '1':
         print("Timer start")
@@ -33,6 +37,9 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_DOOR_A5 and msg.payload.decode() == '1':
         print("Door from A-4 to A-5 opened, starting MIDI-IP-Game")
         isStartMIDIIPGame = True
+    if msg.topic == MQTT_TOPIC_A3_BUTTON and msg.payload.decode() == '1':
+        print("Button-Sequence started")
+        isStartButtonSequence = True
 
 
 ##### Client Setup
@@ -43,7 +50,7 @@ client.on_message = on_message
 properties = Properties(PacketTypes.CONNECT)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
-client.subscribe([(MQTT_TOPIC_GEN_START, 2), (MQTT_TOPIC_GEN_STOP, 2), (MQTT_TOPIC_DOOR_A5, 2)])
+client.subscribe([(MQTT_TOPIC_GEN_START, 2), (MQTT_TOPIC_GEN_STOP, 2), (MQTT_TOPIC_DOOR_A5, 2), (MQTT_TOPIC_C1_RFID, 2), (MQTT_TOPIC_A3_BUTTON, 2)])
 
 MIDIIpGame = MidiIpGame()
 MainTimer = Timer()
