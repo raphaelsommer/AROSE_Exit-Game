@@ -17,6 +17,7 @@ func _on_area_2d_body_entered(body):
 
 func _physics_process(delta):
 	if(Input.is_action_just_pressed("Interagieren")):
+		$AudioStreamPlayer2D1.play()
 		$Press.visible = false
 		$I.visible = false
 		$"Text Robot".visible = true
@@ -27,9 +28,13 @@ func _physics_process(delta):
 		$I.visible = true
 		
 	if(Input.is_action_just_pressed("kaufen")):
+		print(Global.coins)
+		$AudioStreamPlayer2D2.play()
 		Global.coins -= 5
-		Global.player1_hp += 1
-		print(Global.player1_hp)
+		print(Global.coins)
+		Global.player_hp += 1
+		Global.player_hp2 += 1
+		print(Global.player_hp)
 		if(Global.coins < 5):
 			$"Text Robot/RichTextLabel".visible = false
 			$"Text Robot/Leave".visible = false
@@ -56,3 +61,4 @@ func _on_area_2d_body_exited(body):
 	if(body.is_in_group("Player")):
 		$Press.visible = false
 		$I.visible = false
+		$AnimatedSprite2D.play("off")

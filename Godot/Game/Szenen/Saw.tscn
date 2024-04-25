@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://f62f8i2orquf" path="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Objects/Saw Kopie 2.png" id="5_ge5gr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d13if"]
-radius = 39.1152
+radius = 22.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_55mgr"]
 animations = [{
@@ -38,8 +38,8 @@ script = ExtResource("1_yvfrl")
 shape = SubResource("CircleShape2D_d13if")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.16649, -0.362704)
-scale = Vector2(0.228069, 0.182842)
+position = Vector2(1.90735e-06, 2.86102e-06)
+scale = Vector2(0.122806, 0.117647)
 sprite_frames = SubResource("SpriteFrames_55mgr")
 animation = &"idle"
 autoplay = "idle"

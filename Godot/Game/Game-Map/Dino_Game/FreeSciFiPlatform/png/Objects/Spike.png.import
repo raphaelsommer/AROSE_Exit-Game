@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3sa01ebsdutp"
-path="res://.godot/imported/Spike.png-58cc6dc168ca5dcac91913bbb5c75714.ctex"
+path="res://.godot/imported/Spike.png-45358c9a11e2c38c9917fc73adb2598d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Tiles/Spike.png"
-dest_files=["res://.godot/imported/Spike.png-58cc6dc168ca5dcac91913bbb5c75714.ctex"]
+source_file="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Objects/Spike.png"
+dest_files=["res://.godot/imported/Spike.png-45358c9a11e2c38c9917fc73adb2598d.ctex"]
 
 [params]
 
