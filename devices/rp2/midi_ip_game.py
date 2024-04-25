@@ -50,6 +50,8 @@ class MidiIpGame:
 
     ### Define a method to enter the IP address via the MIDI Piano
     def enterIP(self, IP, door):
+        self.lcd.clear()
+        self.lcd.message(f'Change door{door} IP:')
         with mido.open_input(self.PORT) as listener:
             for input in listener:
                 if len(IP) > 3:
@@ -71,6 +73,7 @@ class MidiIpGame:
     ### Define a method to start the IP Game from the main.py file
     def startGame(self):
         self.lcd.message('Enter door IPs\non the Piano')
+        time.sleep(3)
         try:
             while not self.areBothIPsRight:
                 self.enterIP(self.IP1_entered, 1)
@@ -94,12 +97,12 @@ class MidiIpGame:
                     self.lcd.clear()
                     self.IP1_entered = self.resetIP(self.IP1_entered)
                     self.IP2_entered = self.resetIP(self.IP2_entered)
-            self.stopGame()
         except KeyboardInterrupt:
             self.lcd.clear()
 
     ### Define a method to stop/interrupt the IP Game from the main.py file
     def stopGame(self):
+        self.buzzer.close()
         self.lcd.clear()
         self.buzzer.stop()
         self.resetIP(self.IP1_entered)

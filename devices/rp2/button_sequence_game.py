@@ -109,7 +109,7 @@ class ButtonSequenceGame:
         # Wait until the game is finished
         while not self.finished:
             time.sleep(0.1)
-        self.stopGame()
+        #self.stopGame()
     
     ### Define a method to stop/interrupt the Button Sequence Game from the main.py file
     def stopGame(self):
@@ -117,11 +117,10 @@ class ButtonSequenceGame:
         self.set_led_color('none')
         # Reset the variables
         self.button_sequence.clear()
-        self.finished = False
         self.wrong_sequence_counter = 0
-        # Remove the event detection
-        GPIO.remove_event_detect(self.BUTTON1)
-        GPIO.remove_event_detect(self.BUTTON2)
-        GPIO.remove_event_detect(self.BUTTON3)
         # Clean up the GPIO
         GPIO.cleanup()
+        # Remove the event detection
+        #GPIO.remove_event_detect(self.BUTTON1)
+        #GPIO.remove_event_detect(self.BUTTON2)
+        #GPIO.remove_event_detect(self.BUTTON3)

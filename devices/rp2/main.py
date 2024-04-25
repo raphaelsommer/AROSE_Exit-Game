@@ -29,21 +29,24 @@ MQTT_TOPIC_DOOR_B2 = "/doors/b2" # pub
 
 
 # Flags for the MIDI-IP-Game, Timer and Button
-isStartMIDIIPGame = False
+isStartMidiIpGame = False
 isStartTimer = False
 isStartButtonSequence = False
+isStoppedMidiIpGame = False
+isStoppedTimer = False
+isStoppedButtonSequence = False
 
 
 ### MQTT Methods
 def on_message(client, userdata, msg):
-    global isStartMIDIIPGame, isStartTimer, isStartButtonSequence
+    global isStartMidiIpGame, isStartTimer, isStartButtonSequence
     # print(msg.topic + " " + str(msg.payload))
     if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'start':
         print("Timer start")
         isStartTimer = True
     if msg.topic == MQTT_TOPIC_A5_PIANO and msg.payload.decode() == 'start':
         print("Starting MIDI-IP-Game")
-        isStartMIDIIPGame = True
+        isStartMidiIpGame = True
     if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'off':
         print("Button-Sequence started")
         isStartButtonSequence = True
@@ -63,51 +66,59 @@ MIDIIpGame = MidiIpGame()
 MainTimer = Timer()
 ButtonGame = ButtonSequenceGame()
 
-thread1 = threading.Thread(target=MainTimer.startTimer)
-thread3 = threading.Thread(target=MIDIIpGame.startGame)
-thread2 = threading.Thread(target=ButtonGame.startGame)
+thread1 = threading.Thread(target=None)
+thread2 = threading.Thread(target=None)
+thread3 = threading.Thread(target=None)
 
 stop = False
+threads_started = {thread1: False, thread2: False, thread3: False}
 try:
     while not stop:
-        if isStartTimer:
-            print("Starting Timer")
-            thread1.start()
+        if not thread1.is_alive() and not threads_started[thread1] and isStartTimer:
             isStartTimer = False
-        if isStartMIDIIPGame:
-            print("Starting MIDI-IP-Game")
+            thread1 = threading.Thread(target=MainTimer.startTimer)
+            thread1.start()
+            threads_started[thread1] = True
+        if not thread3.is_alive() and not threads_started[thread3] and isStartMidiIpGame:
+            isStartMidiIpGame = False
+            thread3 = threading.Thread(target=MIDIIpGame.startGame)
             thread3.start()
-            isStartMIDIIPGame = False
-        if isStartButtonSequence:
-            print("Starting Button-Sequence-Game")
-            thread2.start()
+            threads_started[thread3] = True
+        if not thread2.is_alive() and not threads_started[thread2] and isStartButtonSequence:
             isStartButtonSequence = False
+            thread2 = threading.Thread(target=ButtonGame.startGame)
+            thread2.start()
+            threads_started[thread2] = True
 
         
-        if MIDIIpGame.getFinished():
+        if MIDIIpGame.getFinished() and not isStoppedMidiIpGame:
             print("Stopping MIDI-IP-Game")
             MIDIIpGame.stopGame()
+            isStoppedMidiIpGame = True
             client.publish(topic=MQTT_TOPIC_C1_RFID, payload="start", qos=2)
-        if ButtonGame.getFinished():
+        if ButtonGame.getFinished() and not isStoppedButtonSequence:
             print("Stopping Button-Sequence-Game")
             ButtonGame.stopGame()
+            isStoppedButtonSequence = True
             client.publish(topic=MQTT_TOPIC_B2_GRAVITY, payload="on", qos=2)
             client.publish(topic=MQTT_TOPIC_DOOR_B5, payload="1", qos=2)
             client.publish(topic=MQTT_TOPIC_DOOR_A5, payload="1", qos=2)
             client.publish(topic=MQTT_TOPIC_DOOR_B3, payload="1", qos=2)
             client.publish(topic=MQTT_TOPIC_DOOR_A3, payload="1", qos=2)
             client.publish(topic=MQTT_TOPIC_DOOR_B2, payload="1", qos=2)
-        if MainTimer.getFinished():
+        if MainTimer.getFinished() and not isStoppedTimer:
             print("Stopping Timer")
+            isStoppedTimer = True
             client.publish(topic=MQTT_TOPIC_GEN_GLOBAL, payload="stop", qos=2)
             stop = True
 
-        if thread1.is_alive():
-            if thread2.is_alive():
-                if thread3.is_alive():
-                    thread3.join()
-                thread2.join()
-            thread1.join()
+
+        for thread in [thread1, thread2, thread3]:
+            if threads_started[thread] and not thread.is_alive():
+                thread.join()
+                threads_started[thread] = False
+
+
 except KeyboardInterrupt:
     MainTimer.stopTimer()
     MIDIIpGame.stopGame()
