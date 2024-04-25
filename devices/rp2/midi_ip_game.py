@@ -9,7 +9,7 @@ import time
 class MidiIpGame:
 
     # Configure the USB MIDI Port:
-    PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 24:0'
+    PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 20:0'
         
     # Configure the Raspberry Pi pins for the LCD Display and the Buzzer:
     lcd_rs = 24
@@ -70,6 +70,7 @@ class MidiIpGame:
 
     ### Define a method to start the IP Game from the main.py file
     def startGame(self):
+        self.lcd.message('Enter door IPs\non the Piano')
         try:
             while not self.areBothIPsRight:
                 self.enterIP(self.IP1_entered, 1)

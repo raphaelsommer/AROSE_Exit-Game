@@ -4,6 +4,7 @@ from paho.mqtt.properties import Properties
 from paho.mqtt.packettypes import PacketTypes
 import ssl
 import threading
+from midi_ip_game import MidiIpGame
 
 # MQTT Konfigurationen
 MQTT_BROKER = "192.168.0.102"  # Beispiel-Broker, ersetze diesen durch deinen Broker
@@ -43,27 +44,30 @@ client.loop_start()  # Starte den MQTT-Client im Hintergrund
 ###client.publish("/test", "Test 2")
 client.subscribe([(MQTT_TOPIC_GEN_START, 2), (MQTT_TOPIC_GEN_STOP, 2), (MQTT_TOPIC_DOOR_A5, 2)])
 
+MIDIIpGame = MidiIpGame()
 
 # MAIN LOOP
 stop = False
+
+thread2 = threading.Thread(target=MIDIIpGame.startGame)
+#thread1 = threading.Thread(target=Timer.startTimer)
 while not stop:
     if isStartTimer:
         print("Starting Timer")
-        Timer = Timer()
-        thread1 = threading.Thread(target=Timer.startTimer).start()
+        #Timer = Timer()
+        #thread1.start()
     if isStartMIDIIPGame:
         print("Starting MIDI-IP-Game")
-        MIDIIpGame = MIDIIpGame()
-        thread2 = threading.Thread(target=MIDIIpGame.startGame).start()
+        thread2.start()
         isStartMIDIIPGame = False
     if MIDIIpGame.getFinished():
         print("Stopping MIDI-IP-Game")
         MIDIIpGame.stopGame()
         client.publish(topic=MQTT_TOPIC_C1_RFID, payload="1", qos=2)
 
-    
-    thread1.join()
-    thread2.join()
+    if thread2.is_alive():
+        #thread1.join()
+        thread2.join()
 
 client.disconnect()
 client.loop_stop()
