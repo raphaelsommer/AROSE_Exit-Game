@@ -50,34 +50,42 @@ class RFIDReader:
                         print(f"Scanner {self.device}: Incorrect card.")
             time.sleep(0.5)
 
-def end_program(scanners):
-    for scanner in scanners:
-        scanner.reader.Close()
+class RFID:
 
-def main():
-    RIGHT_CARD_UID1 = {0xB3, 0xD8, 0x61, 0x1A, 0x10}
-    RIGHT_CARD_UID2 = {0x3, 0x41, 0x8D, 0x1A, 0xD5}
+    finished = False
 
-    scanner1 = RFIDReader(device=0, right_uid=RIGHT_CARD_UID1)
-    scanner2 = RFIDReader(device=1, right_uid=RIGHT_CARD_UID2)
+    def getFinished(self):
+        return self.finished
 
-    thread1 = threading.Thread(target=scanner1.run)
-    thread2 = threading.Thread(target=scanner2.run)
+    def stopGame(self, scanners):
+        for scanner in scanners:
+            scanner.reader.Close()
 
-    thread1.start()
-    thread2.start()
+    def startGame(self):
+        RIGHT_CARD_UID1 = {0xB3, 0xD8, 0x61, 0x1A, 0x10}
+        RIGHT_CARD_UID2 = {0x3, 0x41, 0x8D, 0x1A, 0xD5}
 
-    thread1.join()
-    thread2.join()
+        scanner1 = RFIDReader(device=0, right_uid=RIGHT_CARD_UID1)
+        scanner2 = RFIDReader(device=1, right_uid=RIGHT_CARD_UID2)
 
-    if scanner1.success and scanner2.success:
-        print("Success! Both correct cards detected simultaneously.")
-        end_program(scanners=(scanner1, scanner2))
-    else:
-        print("The program did not end with both scanners detecting the correct cards.")
+        thread1 = threading.Thread(target=scanner1.run)
+        thread2 = threading.Thread(target=scanner2.run)
 
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        GPIO.cleanup()
+        thread1.start()
+        thread2.start()
+
+        thread1.join()
+        thread2.join()
+
+        if scanner1.success and scanner2.success:
+            print("Success! Both correct cards detected simultaneously.")
+            self.finished = True
+            self.stopGame(scanners=(scanner1, scanner2))
+        else:
+            print("The program did not end with both scanners detecting the correct cards.")
+
+    """ if __name__ == "__main__":
+        try:
+            main()
+        except KeyboardInterrupt:
+            GPIO.cleanup() """

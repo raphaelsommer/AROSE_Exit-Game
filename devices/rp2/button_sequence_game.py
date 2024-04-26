@@ -102,9 +102,9 @@ class ButtonSequenceGame:
         self.blink_led('white', 3, 0.25)
 
         # Add the button callback function to the GPIO event detection
-        GPIO.add_event_detect(self.BUTTON1, GPIO.FALLING, callback=self.button_callback, bouncetime=200)
-        GPIO.add_event_detect(self.BUTTON2, GPIO.FALLING, callback=self.button_callback, bouncetime=200)
-        GPIO.add_event_detect(self.BUTTON3, GPIO.FALLING, callback=self.button_callback, bouncetime=200)
+        GPIO.add_event_detect(self.BUTTON1, GPIO.FALLING, callback=self.button_callback, bouncetime=500)
+        GPIO.add_event_detect(self.BUTTON2, GPIO.FALLING, callback=self.button_callback, bouncetime=500)
+        GPIO.add_event_detect(self.BUTTON3, GPIO.FALLING, callback=self.button_callback, bouncetime=500)
 
         # Wait until the game is finished
         while not self.finished:
