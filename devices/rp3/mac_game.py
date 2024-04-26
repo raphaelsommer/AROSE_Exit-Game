@@ -17,8 +17,8 @@ class MAC:
             data, addr = self.server_socket.recvfrom(1050)
             msg = data.decode().split()
             mac = msg[0]
-            print(f"{mac} (received)")
-            print(self.RIGHT_MAC_ADRESS)
+            #print(f"{mac} (received)")
+            #print(self.RIGHT_MAC_ADRESS)
             if mac == self.RIGHT_MAC_ADRESS:
                 self.MAC_ADDRESS = data.decode()
                 response = "Right MAC entered"
