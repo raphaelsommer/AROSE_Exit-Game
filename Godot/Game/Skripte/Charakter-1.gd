@@ -24,6 +24,7 @@ func _physics_process(delta):
 	if(Input.is_action_just_pressed("Shoot_player1") and Global.gun_on):
 		animSprite.play("shoot")
 		spawnBullet()
+		
 	
 	
 	
@@ -32,15 +33,16 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		
 		if(velocity.y > 0):
-			animSprite.play("idle")
+			animSprite.play("fall")
 		else:
 			animSprite.play("jump")
+			
 	else:
 		if(velocity.x == 0):
 			animSprite.play("idle")
 		else:
 			animSprite.play("run")
-
+			
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -61,7 +63,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 	if(Global.player_hp <= 0):
-		Global.player1_canMove = false
+		
 		animSprite.play("dead")
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")

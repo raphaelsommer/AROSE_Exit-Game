@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://ctkusclqvcnqd"]
+[gd_scene load_steps=25 format=3 uid="uid://ctkusclqvcnqd"]
 
 [ext_resource type="Script" path="res://Skripte/Charakter-2.gd" id="1_d8dum"]
 [ext_resource type="Texture2D" uid="uid://dqi7y33ae4kpg" path="res://Charaktere/Charakter_2/Dead/Dead-2-P2.png" id="3_ugwg7"]
 [ext_resource type="Texture2D" uid="uid://yg2qpk2truxn" path="res://Charaktere/Charakter_2/Dead/Dead-3-P2.png" id="4_dcnjt"]
 [ext_resource type="Texture2D" uid="uid://rihwsafyxney" path="res://Charaktere/Charakter_2/Dead/Dead-4-P2.png" id="5_iufk0"]
+[ext_resource type="Texture2D" uid="uid://coa3btshp5o4v" path="res://Charaktere/Charakter_2/Jump/Jump-6-P2.png" id="5_u6vr8"]
 [ext_resource type="Texture2D" uid="uid://d1fbbilmrsi1a" path="res://Charaktere/Charakter_2/Idle/Idle-1-P2.png" id="6_hcp7a"]
 [ext_resource type="Texture2D" uid="uid://bckn24i677xvm" path="res://Charaktere/Charakter_2/Idle/Idle-2-P2.png" id="7_elnsy"]
 [ext_resource type="Texture2D" uid="uid://c50ngpdcmqxrw" path="res://Charaktere/Charakter_2/Idle/Idle-3.P2.png" id="8_26i0q"]
@@ -39,6 +40,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_u6vr8")
+}],
+"loop": false,
+"name": &"fall",
 "speed": 5.0
 }, {
 "frames": [{
@@ -124,7 +133,5 @@ shape = SubResource("RectangleShape2D_0gs4m")
 position = Vector2(8, -7.25)
 scale = Vector2(1.47059, 1.46774)
 sprite_frames = SubResource("SpriteFrames_x3niq")
-animation = &"dead"
+animation = &"fall"
 autoplay = "idle"
-
-[node name="Camera2D" type="Camera2D" parent="."]

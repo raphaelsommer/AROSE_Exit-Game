@@ -1,0 +1,119 @@
+[gd_scene load_steps=20 format=3 uid="uid://b7ueudnhflbl3"]
+
+[ext_resource type="Texture2D" uid="uid://b1mttakwyx41e" path="res://Türen/X-Achse/Door_close/Close.png" id="1_a4usu"]
+[ext_resource type="Script" path="res://Skripte/Door-k-2.gd" id="1_gp4gb"]
+[ext_resource type="Texture2D" uid="uid://cbigxj133bgsa" path="res://Türen/X-Achse/Door_closes/Close-1.png" id="2_wkpx5"]
+[ext_resource type="Texture2D" uid="uid://bb1tf666hk6nh" path="res://Türen/X-Achse/Door_closes/Close-2.png" id="3_rplux"]
+[ext_resource type="Texture2D" uid="uid://dws5cwsam3j6p" path="res://Türen/X-Achse/Door_closes/Close-3.png" id="4_jr77c"]
+[ext_resource type="Texture2D" uid="uid://cnxu37jglp6si" path="res://Türen/X-Achse/Door_closes/Close-4.png" id="5_5ns6l"]
+[ext_resource type="Texture2D" uid="uid://bgu0yj7s0of0r" path="res://Türen/X-Achse/Door_closes/Close-5.png" id="6_lb7t2"]
+[ext_resource type="Texture2D" uid="uid://dbw68ckxqrylt" path="res://Türen/X-Achse/Door_closes/Close-6.png" id="7_3t7rp"]
+[ext_resource type="Texture2D" uid="uid://dskh4uiov2ukg" path="res://Türen/X-Achse/Door_open/Open.png" id="8_qd67v"]
+[ext_resource type="Texture2D" uid="uid://84t6bbayqg7i" path="res://Türen/X-Achse/Door_opens/Open-1.png" id="9_ap7io"]
+[ext_resource type="Texture2D" uid="uid://dd2j84klhmij" path="res://Türen/X-Achse/Door_opens/Open-2.png" id="10_umt6g"]
+[ext_resource type="Texture2D" uid="uid://bus01sm8rgsqg" path="res://Türen/X-Achse/Door_opens/Open-3.png" id="11_ywh5v"]
+[ext_resource type="Texture2D" uid="uid://1a83e8oqa76y" path="res://Türen/X-Achse/Door_opens/Open-4.png" id="12_2fp4y"]
+[ext_resource type="Texture2D" uid="uid://sbo5c13bb6d8" path="res://Türen/X-Achse/Door_opens/Open-5.png" id="13_up87o"]
+[ext_resource type="Texture2D" uid="uid://bw5jqv208rim1" path="res://Türen/X-Achse/Door_opens/Open-6.png" id="14_qw1ka"]
+[ext_resource type="Texture2D" uid="uid://djcjti2ifmg2r" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_5.png" id="16_73nk2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgih4"]
+size = Vector2(20, 147.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a7w0q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a4usu")
+}],
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wkpx5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rplux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jr77c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5ns6l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lb7t2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3t7rp")
+}],
+"loop": false,
+"name": &"closes",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_qd67v")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ap7io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_umt6g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ywh5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2fp4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_up87o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qw1ka")
+}],
+"loop": false,
+"name": &"opens",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pows"]
+size = Vector2(49, 44.75)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-166, -34)
+scale = Vector2(0.21875, 0.179688)
+texture = ExtResource("16_73nk2")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_gp4gb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-38, -3.25)
+shape = SubResource("RectangleShape2D_lgih4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, 17.5)
+scale = Vector2(0.827586, 0.75)
+sprite_frames = SubResource("SpriteFrames_a7w0q")
+animation = &"close"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-168, -2.625)
+shape = SubResource("RectangleShape2D_3pows")
+
+[connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_exited"]

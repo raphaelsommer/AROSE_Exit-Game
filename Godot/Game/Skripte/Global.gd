@@ -7,22 +7,44 @@ var player_hp2 = 1
 var player1_canMove = true
 var gun_on = false
 var robot_hp = 10
-
-
-func dead():
-	if(Global.robot_hp <= 0):
-		$explosion.visible = true
-		$explosion.play("explosion")
-		await get_tree().create_timer(0.5).timeout
-		$".".queue_free()
+var szenen_wechsel = false
+var animals = false
+var ki_destroyed = false
+var sauerstoff = true
+var key = false
 
 
 
-# Called when the node enters the scene tree for the first time.
+var timer
+
 func _ready():
-	pass # Replace with function body.
+	timer = Timer.new()
+	timer.wait_time = float(18 * 60)
+	timer.one_shot = true
+	timer.start()
+	timer.autostart = true
+	add_child(timer)
+	
+	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

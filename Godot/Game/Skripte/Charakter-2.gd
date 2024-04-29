@@ -9,18 +9,28 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animSprite = $AnimatedSprite2D
 
+
+func spawnBullet():
+	var b = preload("res://Szenen/Bullets.tscn").instantiate()
+	
+	b.position = self.position
+	get_parent().add_child(b)
+
+
+
+
 func _physics_process(delta):
 	# Add the gravity.
 	if(Input.is_action_just_pressed("Shoot_player2") and Global.gun_on):
 		animSprite.play("shoot")
-	
+		spawnBullet()
 	
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
 		if(velocity.y > 0):
-			animSprite.play("idle")
+			animSprite.play("fall")
 		else:
 			animSprite.play("jump")
 	else:
@@ -52,7 +62,7 @@ func _physics_process(delta):
 		
 		
 	if(Global.player_hp2 <= 0):
-		Global.player1_canMove = false
+		
 		animSprite.play("dead")
 
 	move_and_slide()

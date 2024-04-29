@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=3 uid="uid://nhhpdwp7pqdr"]
+
+[ext_resource type="Texture2D" uid="uid://bkuwo3i5mqnab" path="res://Key/Idle/1.png" id="1_27dha"]
+[ext_resource type="Script" path="res://Skripte/Key.gd" id="1_xa3mp"]
+[ext_resource type="Texture2D" uid="uid://c0avf73b6hrmf" path="res://Key/Idle/2.png" id="2_0r3wo"]
+[ext_resource type="Texture2D" uid="uid://dp3xmld60ywm2" path="res://Key/Idle/3.png" id="3_7wcsa"]
+[ext_resource type="Texture2D" uid="uid://bvf3v87u85s5o" path="res://Key/Idle/4.png" id="4_ygbe3"]
+[ext_resource type="Texture2D" uid="uid://dhj4b4px5h8da" path="res://Key/Idle/5.png" id="5_1w302"]
+[ext_resource type="Texture2D" uid="uid://dvjhono4dta1u" path="res://Key/Idle/6.png" id="6_eh4ih"]
+[ext_resource type="Texture2D" uid="uid://bgsllxf5wbsqa" path="res://Key/Idle/7.png" id="7_s3mr8"]
+[ext_resource type="Texture2D" uid="uid://cqv6mgqkim1v0" path="res://Key/Idle/8.png" id="8_om8hr"]
+[ext_resource type="AudioStream" uid="uid://ehlduo4o71vl" path="res://Sounds/Effects/Animal/Meow/collectRed.wav" id="10_0lkwd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcmbw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_27dha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0r3wo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7wcsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ygbe3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1w302")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_eh4ih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_s3mr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_om8hr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ei0sp"]
+size = Vector2(8, 15)
+
+[node name="Key" type="Node2D"]
+script = ExtResource("1_xa3mp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kcmbw")
+animation = &"idle"
+autoplay = "idle"
+frame = 4
+frame_progress = 0.256207
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ei0sp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_0lkwd")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

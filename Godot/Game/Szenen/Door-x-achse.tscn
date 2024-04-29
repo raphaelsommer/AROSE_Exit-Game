@@ -95,9 +95,7 @@ script = ExtResource("1_n43aj")
 position = Vector2(-2.5, -17)
 scale = Vector2(0.913793, 0.757143)
 sprite_frames = SubResource("SpriteFrames_g0nml")
-animation = &"Closes"
-frame = 6
-frame_progress = 1.0
+animation = &"Opens"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_pdygb")

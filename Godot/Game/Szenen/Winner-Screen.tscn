@@ -38,23 +38,34 @@ texture = ExtResource("4_o7434")
 
 [node name="TextEdit" type="TextEdit" parent="."]
 offset_left = -82.0
-offset_right = 106.0
-offset_bottom = 41.0
+offset_top = -8.0
+offset_right = 112.0
+offset_bottom = 33.0
 text = "Mission Abgeschlossen"
 
+[node name="TextEdit4" type="TextEdit" parent="."]
+visible = false
+offset_left = -80.0
+offset_top = 113.0
+offset_right = 112.0
+offset_bottom = 154.0
+text = "           KI-Zerstört"
+
 [node name="TextEdit3" type="TextEdit" parent="."]
-offset_left = -83.0
-offset_top = 103.0
-offset_right = 105.0
-offset_bottom = 144.0
+visible = false
+offset_left = -81.0
+offset_top = 72.0
+offset_right = 112.0
+offset_bottom = 113.0
 text = "        Tiere Gerettet "
 
 [node name="TextEdit2" type="TextEdit" parent="."]
-offset_left = -83.0
-offset_top = 50.0
-offset_right = 105.0
-offset_bottom = 91.0
-text = "    Sauerstoffmasken"
+visible = false
+offset_left = -81.0
+offset_top = 32.0
+offset_right = 112.0
+offset_bottom = 73.0
+text = "   Sauerstoff hergestellt"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_pnpud")
