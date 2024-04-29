@@ -55,7 +55,7 @@ class Morse:
     # Constructor
     def __init__(self):
         # Setup GPIO
-        GPIO.setmode(GPIO.BCM)
+        #GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.LED_PIN_MORSE, GPIO.OUT)
         GPIO.setup(self.LED_PIN_DONE, GPIO.OUT)
         GPIO.setup(self.RGB_RED_PIN, GPIO.OUT)
@@ -66,6 +66,8 @@ class Morse:
             GPIO.output(pin, GPIO.HIGH)
         for pin in self.ROWS:
             GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        self.blink_rgb('none', 1, 0.5)
+        GPIO.output(self.LED_PIN_MORSE, GPIO.LOW)
 
     # Function to blink LED
     def blink_rgb(self, color, times, interval):
@@ -124,10 +126,10 @@ class Morse:
                             pass  # Wait for key release
                         if len(inputted_values) == len(correct_code):  # Check if we have enough digits
                             if inputted_values == correct_code:
+                                self.blink_rgb('green', 4, 0.5)
                                 print("Correct code entered!")
                                 self.input_received_event.set()
                                 self.finished = True
-                                self.blink_rgb('green', 4, 0.5)
                                 return
                             else:
                                 print(f"Incorrect code: {''.join(inputted_values)}. Try again.")

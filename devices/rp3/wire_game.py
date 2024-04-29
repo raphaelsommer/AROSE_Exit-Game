@@ -1,7 +1,8 @@
-from RPi.GPIO import GPIO
+import RPi.GPIO as GPIO
+import time
 
 # Set up the GPIO pins
-GPIO.setmode(GPIO.BCM)
+#GPIO.setmode(GPIO.BCM)
 
 class Wire:
 
@@ -11,8 +12,8 @@ class Wire:
 
     # Constructor
     def __init__(self):
-        self.GPIO.setup(3, GPIO.IN)
-        self.GPIO.setup(4, GPIO.IN)
+        GPIO.setup(3, GPIO.IN)
+        GPIO.setup(4, GPIO.IN)
     
     def getFailed(self):
         return self.failed
@@ -22,12 +23,14 @@ class Wire:
 
     # Start the Wire Game from the main.py
     def startGame(self):
-        while not self.failed or not self.success:
+        """ while not self.failed or not self.success:
             if GPIO.input(3) == 1:
                 self.failed = True
             elif GPIO.input(4) == 1:
                 self.success = True
-        self.stopGame()
+        self.stopGame() """
+        time.sleep(1)
+        pass
 
     # Stop the Wire Game from the main.py
     def stopGame(self):
