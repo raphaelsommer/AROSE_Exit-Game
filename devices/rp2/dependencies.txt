@@ -1,0 +1,24 @@
+git:
+sudo apt install git
+
+repository:
+git clone https://github.com/raphaelsommer/dhbw-wwi23h-systemanalyse-team1.git
+(git switch devices)
+username: raphaelsommer
+passkey: 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
+  
+pip:
+sudo apt-get install python3-pip
+
+gpiozero:
+sudo apt install python3-gpiozero
+  
+LCD:
+sudo git clone https://github.com/adafruit/Adafruit_Python_CharLCD.git
+sudo apt-get update
+sudo apt-get install build-essential python-dev python-smbus python-pip
+sudo python setup.py install
+
+MIDI:
+sudo python3 -m pip install mido[ports-rtmidi]
+sudo apt-get install libjack-jackd2-dev
