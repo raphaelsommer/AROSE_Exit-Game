@@ -12,6 +12,9 @@ git config --global user.name "raphaelsommer"
 pip:
 sudo apt-get install python3-pip
 
+paho:
+pip install paho-mqtt
+
 gpiozero:
 sudo apt install python3-gpiozero
 
