@@ -1,5 +1,5 @@
 # Import libraries for handling: LCD Display, MIDI input, Tonal GPIO Buzzer, Time (for artificial delays)
-import Adafruit_CharLCD as LCD
+import adafruit_character_lcd.character_lcd as LCD
 import mido
 from gpiozero import TonalBuzzer
 from gpiozero.tones import Tone
@@ -33,7 +33,7 @@ class MidiIpGame:
     ### Define the constructor of the class
     def __init__(self):
         # Initialize the LCD using the pins
-        self.lcd = LCD.Adafruit_CharLCD(self.lcd_rs, self.lcd_en, self.lcd_d4, self.lcd_d5, self.lcd_d6, self.lcd_d7,
+        self.lcd = LCD.Character_LCD_Mono(self.lcd_rs, self.lcd_en, self.lcd_d4, self.lcd_d5, self.lcd_d6, self.lcd_d7,
                                    self.lcd_columns, self.lcd_rows)
         # Clear the LCD Display to avoid any previous messages and to prevent any errors and glitches
         self.lcd.clear()
