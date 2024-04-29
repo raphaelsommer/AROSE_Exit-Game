@@ -1,12 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Code-Activated Content</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AROSE</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
+    
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
+    <div>
+        <h1>AROSE</h1>
+        <div  class="menu">                                 <!--Überschrift + Menüleiste-->
+            <button class="menu-item">Vorgeschichte</button>
+            <button class="menu-item">Ausblick</button>
+            <button class="menu-item">Spielanleitung</button>
+            <button class="menu-item">Über Uns</button>
+         </div>
+     </div>
+<div>
+    <button>Vorgeschichte</button>
+    <div>
+        <h6>Leica</h6>
+        <div><p>Leica Vorgeschichte</p></div>
+        <h6>Juri</h6>
+        <div><p>Juri Vorgeschichte</p></div>
+    </div>
+</div>
+
+<div>
+    <button>Ausblick</button>
+    <div>  
+        <p>Sauerstoffmaschiene</p>
+        <p>Problem/Gefahr - Tiere einbeziehen</p>
+        <p>Rätsel um KI andeuten</p>
+        <p>Minigames in Bezug zur Story als Hürden vorstellen</p>
+    </div>
+</div>
+<div>
+    <button>Spielanleitung</button>
+    <div>
     <input type="text" id="secretCode" placeholder="Enter your code">
     <button onclick="revealContent()">Reveal Content</button>
     <div id="extraContent" class="hidden">
@@ -14,5 +46,9 @@
         <p>This is the secret content that appears when the correct code is entered.</p>
     </div>
     <script src="script.js"></script>
+    </div>
+</div>
+
+
 </body>
 </html>

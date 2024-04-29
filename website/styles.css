@@ -1,7 +1,30 @@
-.hidden {
-    display: none;
+*{
+    padding: 0;
+    margin: 0;
 }
+html{
+    height: 100%;
+}
+body{
 
-.visible {
-    display: block;
+    background-image: url(SpaceShuttle.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+
+
+ }
+ .menu{
+    margin-top: 40px;
+ }
+.menu-item {
+    margin-top: 20px;
+}
+button{
+    margin-right: 50px;
+    text-decoration: none;
+    color: none;
+    background-image: none;
+    
 }
