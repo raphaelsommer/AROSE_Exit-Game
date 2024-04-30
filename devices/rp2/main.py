@@ -54,7 +54,7 @@ def on_message(client, userdata, msg):
 
 ##### Client Setup
 client = mqtt.Client(client_id="rp2", protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
-client.username_pw_set(username="rp2_sub", password="rp2arose1234!")
+client.username_pw_set(username="rp2", password="rp2Arose1234!")
 '''client.on_connect = on_connect'''
 client.on_message = on_message
 properties = Properties(PacketTypes.CONNECT)
