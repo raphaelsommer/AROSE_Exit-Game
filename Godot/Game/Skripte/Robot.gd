@@ -27,7 +27,7 @@ func _physics_process(delta):
 		$Press.visible = true
 		$I.visible = true
 		
-	if(Input.is_action_just_pressed("kaufen")):
+	if(Input.is_action_just_pressed("kaufen")and Global.coins >= 5):
 		print(Global.coins)
 		$AudioStreamPlayer2D2.play()
 		Global.coins -= 5

@@ -1,7 +1,7 @@
 extends Node
 
 var door_open = false
-var coins = 0
+var coins = 20
 var player_hp = 1
 var player_hp2 = 1
 var player1_canMove = true

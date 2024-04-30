@@ -2186,7 +2186,6 @@ texture = ExtResource("7_xcax0")
 6:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e0obo"]
-load_path = "res://.godot/imported/Kapsel.png-a93c1ab86c921b1f10d9343b7b74fa68.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvi3u"]
 texture = SubResource("CompressedTexture2D_e0obo")
