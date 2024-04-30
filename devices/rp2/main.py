@@ -29,9 +29,9 @@ MQTT_TOPIC_DOOR_B2 = "/doors/b2" # pub
 
 
 # Flags for the MIDI-IP-Game, Timer and Button
-isStartMidiIpGame = False
-isStartTimer = False
-isStartButtonSequence = False
+isStartMidiIpGame = True
+isStartTimer = True
+isStartButtonSequence = True
 isStoppedMidiIpGame = False
 isStoppedTimer = False
 isStoppedButtonSequence = False

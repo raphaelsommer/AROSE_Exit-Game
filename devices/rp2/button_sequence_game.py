@@ -6,12 +6,12 @@ import random
 class ButtonSequenceGame:
 
     # Pin configuration
-    RED_PIN = 26
-    GREEN_PIN = 19
-    BLUE_PIN = 4
-    BUTTON1 = 5
-    BUTTON2 = 6
-    BUTTON3 = 13
+    RED_PIN = 19
+    GREEN_PIN = 13
+    BLUE_PIN = 26
+    BUTTON1 = 4
+    BUTTON2 = 5
+    BUTTON3 = 6
 
     # Variables for debouncing softening
     last_press_time = 0
