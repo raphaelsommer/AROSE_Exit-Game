@@ -5,7 +5,7 @@ from paho.mqtt.packettypes import PacketTypes
 import threading
 import RPi.GPIO as GPIO
 
-from mac_game import MAC
+from ip_game import IP
 from morse_game import Morse
 from rfid_game import RFID
 from wire_game import Wire
@@ -21,8 +21,8 @@ MQTT_TRANSPORT_PROTOCOL = "tcp"
 MQTT_TOPIC_GEN_GLOBAL = "/gen/global" # sub/pub
 # Topics for the RFID-Game
 MQTT_TOPIC_C1_RFID = "/c1/rfid" # sub
-# Topics for the MAC-Game
-MQTT_TOPIC_C0_MAC = "/c0/mac" # sub/pub
+# Topics for the IP-Game
+MQTT_TOPIC_C0_IP = "/c0/ip" # sub/pub
 # Topics for the Wire-Game
 MQTT_TOPIC_RK_WIRE = "/rk/wire" # sub/pub
 # Topics for opening doors
@@ -36,29 +36,29 @@ MQTT_TOPIC_DOOR_B4 = "/doors/b4" # pub
 # Flags for the Morse, RFID, MAC and Wire Game
 isStartMorseGame = False
 isStartRfidGame = False
-isStartMacGame = False
+isStartIpGame = False
 isStartWireGame = False
 
 isStoppedMorseGame = False
 isStoppedRfidGame = False
-isStoppedMacGame = False
+isStoppedIpGame = False
 isStoppedWireGame = False
 
 
 ### MQTT Methods
 def on_message(client, userdata, msg):
-    global isStartMorseGame, isStartRfidGame, isStartMacGame, isStartWireGame
-    # print(msg.topic + " " + str(msg.payload))
+    global isStartMorseGame, isStartRfidGame, isStartIpGame, isStartWireGame
+    #print(msg.topic + " " + str(msg.payload))
     if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'start':
         print("Morse-Game start")
         isStartMorseGame = True
     if msg.topic == MQTT_TOPIC_C1_RFID and msg.payload.decode() == 'start':
         print("RFID-Game start")
         isStartRfidGame = True
-    """ if msg.topic == MQTT_TOPIC_C0_MAC and msg.payload.decode() == 'start':
-        print("MAC-Game start")
-        isStartMacGame = True
-    if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == 'start':
+    if msg.topic == MQTT_TOPIC_C0_IP and msg.payload.decode() == 'start':
+        print("IP-Game start")
+        isStartIpGame = True
+    """ if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == 'start':
         print("Wire-Game start")
         isStartWireGame = True """
 
@@ -70,15 +70,15 @@ client.on_message = on_message
 properties = Properties(PacketTypes.CONNECT)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
-client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 2), (MQTT_TOPIC_C1_RFID, 2), (MQTT_TOPIC_C0_MAC, 2), (MQTT_TOPIC_RK_WIRE, 2)])
+client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 2), (MQTT_TOPIC_C1_RFID, 2), (MQTT_TOPIC_C0_IP, 2), (MQTT_TOPIC_RK_WIRE, 2)])
 
-GPIO.cleanup()
+#GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
 MorseGame = Morse()
 RfidGame = RFID()
-""" MacGame = MAC()
-WireGame = Wire() """
+IpGame = IP()
+#WireGame = Wire()
 
 thread1 = threading.Thread(target=None)
 thread2 = threading.Thread(target=None)
@@ -102,12 +102,12 @@ try:
             thread2 = threading.Thread(target=RfidGame.startGame)
             thread2.start()
             threads_started[thread2] = True
-        """ if not thread3.is_alive() and not threads_started[thread3] and isStartMacGame:
-            isStartMacGame = False
-            thread3 = threading.Thread(target=MacGame.listen)
+        if not thread3.is_alive() and not threads_started[thread3] and isStartIpGame:
+            isStartIpGame = False
+            thread3 = threading.Thread(target=IpGame.listen)
             thread3.start()
             threads_started[thread3] = True
-        if not thread4.is_alive() and not threads_started[thread4] and isStartWireGame:
+        """ if not thread4.is_alive() and not threads_started[thread4] and isStartWireGame:
             isStartWireGame = False
             thread4 = threading.Thread(target=WireGame.startGame)
             thread4.start()
@@ -126,11 +126,11 @@ try:
             #RfidGame.stopGame() ### The script does it itself
             isStoppedRfidGame = True
             client.publish(topic=MQTT_TOPIC_DOOR_JNR, payload="1", qos=2)
-        """ if (MacGame.getMAC != "") and not isStoppedMacGame:
-            print("Stopping MAC-Game")
-            isStoppedMacGame = True
+        if (IpGame.getIP() != "") and not isStoppedIpGame:
+            print("Stopping IP-Game")
+            isStoppedIpGame = True
             client.publish(topic=MQTT_TOPIC_DOOR_RK, payload="1", qos=2)
-        if (WireGame.getSuccess or WireGame.getFailed) and not isStoppedWireGame:
+        """ if (WireGame.getSuccess or WireGame.getFailed) and not isStoppedWireGame:
             print("Stopping Wire-Game")
             WireGame.stopGame()
             isStoppedWireGame = True
@@ -150,8 +150,8 @@ try:
 except KeyboardInterrupt:
     MorseGame.stopGame()
     RfidGame.stopGame()
-    """ MacGame.stop()
-    WireGame.stopGame() """
+    IpGame.stop()
+    # WireGame.stopGame()
 finally:
     client.disconnect()
     client.loop_stop()

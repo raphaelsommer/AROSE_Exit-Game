@@ -1,11 +1,11 @@
-from mac_game import MAC
+from ip_game import IP
 
-MacGame = MAC()
+IpGame = IP()
 
 finished = False
 
 while not finished:
-    MacGame.listen()
-    if MacGame.getMAC() != "":
+    IpGame.listen()
+    if IpGame.getIP() != "":
         print("Opened the door to the rescue capsule!")
         finished = True
