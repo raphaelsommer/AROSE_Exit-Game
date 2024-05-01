@@ -32,6 +32,8 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'off':
         print("Closed door to B3")
         client.publish(topic="/doors/b3", payload="0", qos=2)
+    if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'on':
+        print("Opened door to B3")
     if msg.topic == "/doors/b2" and msg.payload.decode() == '1':
         print("Opened door to B2")
     if msg.topic == "/doors/b3" and msg.payload.decode() == '1':
@@ -51,11 +53,13 @@ def on_message(client, userdata, msg):
     if msg.topic == "doors/rk" and msg.payload.decode() == '1':
         print("Opened door to RK")
     
+def on_connect(client, userdata, flags, reason_code, properties):
+    print("Connected: " + str(reason_code))
 
 ##### Client Setup
-client = mqtt.Client(client_id="rp2", protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
-client.username_pw_set(username="rp2", password="rp2Arose1234!")
-'''client.on_connect = on_connect'''
+client = mqtt.Client(client_id="rsMac", protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+client.username_pw_set(username="rsMac", password="rsMacArose1234!")
+client.on_connect = on_connect
 client.on_message = on_message
 properties = Properties(PacketTypes.CONNECT)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)

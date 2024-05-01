@@ -123,7 +123,9 @@ try:
             MorseGame.stopGame()
             isStoppedMorseGame = True
             client.publish(topic=MQTT_TOPIC_DOOR_B3, payload="1", qos=2)
+            time.sleep(0.5)
             client.publish(topic=MQTT_TOPIC_DOOR_A4, payload="1", qos=2)
+            time.sleep(0.5)
             client.publish(topic=MQTT_TOPIC_DOOR_B4, payload="1", qos=2)
         if RfidGame.getFinished() and not isStoppedRfidGame:
             print("Stopping Rfid-Game")

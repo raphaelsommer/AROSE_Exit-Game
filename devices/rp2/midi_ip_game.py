@@ -104,7 +104,7 @@ class MidiIpGame:
     def stopGame(self):
         self.buzzer.close()
         self.lcd.clear()
-        self.buzzer.stop()
+        #self.buzzer.stop()
         self.resetIP(self.IP1_entered)
         self.resetIP(self.IP2_entered)
         self.areBothIPsRight = False

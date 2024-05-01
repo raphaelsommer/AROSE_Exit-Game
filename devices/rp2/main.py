@@ -111,7 +111,7 @@ try:
             ButtonGame.stopGame()
             isStoppedButtonSequence = True
             client.publish(topic=MQTT_TOPIC_B2_GRAVITY, payload="on", qos=2)
-            client.publish(topic=MQTT_TOPIC_DOOR_B5, payload="1", qos=2)
+            #client.publish(topic=MQTT_TOPIC_DOOR_B5, payload="1", qos=2)
             client.publish(topic=MQTT_TOPIC_DOOR_A5, payload="1", qos=2)
             client.publish(topic=MQTT_TOPIC_DOOR_B3, payload="1", qos=2)
             client.publish(topic=MQTT_TOPIC_DOOR_A3, payload="1", qos=2)
