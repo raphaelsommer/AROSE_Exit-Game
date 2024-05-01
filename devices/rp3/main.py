@@ -62,10 +62,14 @@ def on_message(client, userdata, msg):
         print("Wire-Game start")
         isStartWireGame = True """
 
+def on_connect(client, userdata, flags, rc):
+    print("Connected " + str(client) + " with result code " + str(rc))
+
 
 ##### Client Setup
 client = mqtt.Client(client_id="rp3", protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 client.username_pw_set(username="rp3", password="rp3Arose1234!")
+client.on_connect = on_connect
 client.on_message = on_message
 properties = Properties(PacketTypes.CONNECT)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
