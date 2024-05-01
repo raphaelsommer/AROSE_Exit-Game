@@ -153,5 +153,6 @@ except KeyboardInterrupt:
     IpGame.stop()
     # WireGame.stopGame()
 finally:
+    GPIO.cleanup()
     client.disconnect()
     client.loop_stop()

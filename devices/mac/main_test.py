@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 from paho.mqtt.properties import Properties
 from paho.mqtt.packettypes import PacketTypes
+import time
 
 # MQTT Konfigurationen
 MQTT_BROKER = "192.168.0.102"  # Beispiel-Broker, ersetze diesen durch deinen Broker
@@ -21,9 +22,13 @@ MQTT_DOORS = "/doors/+" # sub/pub
 
 ### MQTT Methods
 def on_message(client, userdata, msg):
+    global stop
     # print(msg.topic + " " + str(msg.payload))
+    if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'start':
+        print("Starting the game")
     if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'stop':
         print("Time ran out - Game over!")
+        stop = True
     if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'off':
         print("Closed door to B3")
         client.publish(topic="/doors/b3", payload="0", qos=2)
@@ -56,3 +61,8 @@ properties = Properties(PacketTypes.CONNECT)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
 client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 2), (MQTT_TOPIC_B2_GRAVITY, 2), (MQTT_TOPIC_A5_PIANO, 2), (MQTT_DOORS, 2), (MQTT_TOPIC_C0_IP, 2), (MQTT_TOPIC_RK_WIRE, 2)])
+
+stop = False
+
+while not stop:
+    pass

@@ -12,6 +12,7 @@ from button_sequence_game import ButtonSequenceGame
 # MQTT Konfigurationen
 MQTT_BROKER = "localhost"  # Beispiel-Broker, ersetze diesen durch deinen Broker
 MQTT_PORT = 1883
+MQTT_TRANSPORT_PROTOCOL = "tcp"
 
 ### Needed MQTT Topics
 # Topics for General and Timer
