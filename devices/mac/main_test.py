@@ -32,8 +32,8 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'off':
         print("Closed door to B3")
         client.publish(topic="/doors/b3", payload="0", qos=2)
-    if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'on':
-        print("Opened door to B3")
+    #if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'on':
+    #    print("Opened door to B3")
     if msg.topic == "/doors/b2" and msg.payload.decode() == '1':
         print("Opened door to B2")
     if msg.topic == "/doors/b3" and msg.payload.decode() == '1':
