@@ -55,7 +55,7 @@ class Morse:
     # Constructor
     def __init__(self):
         # Setup GPIO
-        #GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.LED_PIN_MORSE, GPIO.OUT)
         GPIO.setup(self.LED_PIN_DONE, GPIO.OUT)
         GPIO.setup(self.RGB_RED_PIN, GPIO.OUT)
