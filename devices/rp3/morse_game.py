@@ -153,6 +153,7 @@ class Morse:
         morse_thread.join()  # Wait for the Morse thread to finish if the correct code is entered
         input_thread.join()  # Ensure the input thread also finishes
     
-    # Function to stop the game and cleanup GPIO
+    # Function to stop the game and cleanup GPIO 
+    ''' not needed anymore as the game is stopped by the input_received_event
     def stopGame(self):
-        GPIO.cleanup()
+        GPIO.cleanup()'''

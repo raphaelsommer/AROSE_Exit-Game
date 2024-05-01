@@ -115,7 +115,7 @@ try:
         
         if MorseGame.getFinished() and not isStoppedMorseGame:
             print("Stopping Morse-Game")
-            MorseGame.stopGame()
+            #MorseGame.stopGame()
             isStoppedMorseGame = True
             client.publish(topic=MQTT_TOPIC_B3_MORSE, payload="finished", qos=2)
         if RfidGame.getFinished() and not isStoppedRfidGame:
