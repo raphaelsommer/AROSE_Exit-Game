@@ -64,7 +64,7 @@ client.on_message = on_message
 properties = Properties(PacketTypes.CONNECT)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
-client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 0), (MQTT_TOPIC_B2_GRAVITY, 2), (MQTT_TOPIC_A5_PIANO, 2), (MQTT_DOORS, 2), (MQTT_TOPIC_C0_IP, 2), (MQTT_TOPIC_RK_WIRE, 2)])
+client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 0), (MQTT_TOPIC_B2_GRAVITY, 0), (MQTT_TOPIC_A5_PIANO, 0), (MQTT_DOORS, 0), (MQTT_TOPIC_C0_IP, 0), (MQTT_TOPIC_RK_WIRE, 0)])
 
 stop = False
 
