@@ -62,8 +62,8 @@ def on_message(client, userdata, msg):
         print("Wire-Game start")
         isStartWireGame = True """
 
-def on_connect(client, userdata, flags, rc):
-    print("Connected " + str(client) + " with result code " + str(rc))
+def on_connect(client, userdata, flags, reason_code, properties):
+    print("Connected " + str(client) + " with result code " + str(reason_code))
 
 
 ##### Client Setup
