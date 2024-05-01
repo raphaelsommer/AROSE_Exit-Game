@@ -59,18 +59,21 @@ class RFID:
     scanner1 = RFIDReader(device=0, right_uid=RIGHT_CARD_UID1)
     scanner2 = RFIDReader(device=1, right_uid=RIGHT_CARD_UID2)
 
+    stopReader = False
+
     def getFinished(self):
         return self.finished
 
     def stopGame(self):
-        global scanner1, scanner2
-        scanner1.reader.Close()
-        scanner2.reader.Close()
+        self.scanner1.reader.Close()
+        self.scanner2.reader.Close()
 
     def startGame(self):
 
-        thread1 = threading.Thread(target=scanner1.run)
-        thread2 = threading.Thread(target=scanner2.run)
+        
+
+        thread1 = threading.Thread(target=self.scanner1.run)
+        thread2 = threading.Thread(target=self.scanner2.run)
 
         thread1.start()
         thread2.start()
@@ -78,10 +81,10 @@ class RFID:
         thread1.join()
         thread2.join()
 
-        if scanner1.success and scanner2.success:
+        if self.scanner1.success and self.scanner2.success:
             print("Success! Both correct cards detected simultaneously.")
             self.finished = True
-            self.stopGame(scanners=(scanner1, scanner2))
+            self.stopGame()
         else:
             print("The program did not end with both scanners detecting the correct cards.")
 

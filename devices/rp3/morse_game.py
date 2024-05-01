@@ -157,4 +157,5 @@ class Morse:
     def stopGame(self):
         self.input_received_event.set()
         self.finished = True
+        time.sleep(2)
         #GPIO.cleanup()
