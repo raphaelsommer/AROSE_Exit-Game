@@ -110,7 +110,7 @@ try:
             print("Time ran out - Game over!")
             isStoppedTimer = True
             '''Timer does not need to be stopped, as it is a one-time countdown.'''
-            client.publish(topic=MQTT_TOPIC_GEN_GLOBAL, payload="stop", qos=2)
+            client.publish(topic=MQTT_TOPIC_GEN_GLOBAL, payload="stop", qos=0)
             stop = True
 
 
