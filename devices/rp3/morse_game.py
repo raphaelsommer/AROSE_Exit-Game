@@ -3,15 +3,15 @@ import time
 import threading
 
 class Morse:
-    # GPIO-Pin-Nummern (angepasst an Ihr Setup)
+    # GPIO-Pin-Nummern
     LED_PIN_MORSE = 23
     LED_PIN_DONE = 18
     RGB_RED_PIN = 17
     RGB_GREEN_PIN = 27
     RGB_BLUE_PIN = 22
 
-    COLUMNS = [21, 20, 16, 12]  # GPIO pins for the rows
-    ROWS = [26, 19, 13, 6]  # GPIO pins for the columns
+    COLUMNS = [21, 20, 16, 12] 
+    ROWS = [26, 19, 13, 6] 
 
     # Define the keypad mapping
     KEYPAD = [
@@ -55,7 +55,7 @@ class Morse:
     # Constructor
     def __init__(self):
         # Setup GPIO
-        GPIO.setmode(GPIO.BCM)
+        #GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.LED_PIN_MORSE, GPIO.OUT)
         GPIO.setup(self.LED_PIN_DONE, GPIO.OUT)
         GPIO.setup(self.RGB_RED_PIN, GPIO.OUT)
