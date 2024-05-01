@@ -53,11 +53,13 @@ def on_message(client, userdata, msg):
         print("Button-Sequence started")
         isStartButtonSequence = True
 
+def on_connect(client, userdata, flags, reason_code, properties):
+    print("Connected: " + str(reason_code))
 
 ##### Client Setup
 client = mqtt.Client(client_id="rp2", protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 client.username_pw_set(username="rp2", password="rp2Arose1234!")
-'''client.on_connect = on_connect'''
+client.on_connect = on_connect
 client.on_message = on_message
 properties = Properties(PacketTypes.CONNECT)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
