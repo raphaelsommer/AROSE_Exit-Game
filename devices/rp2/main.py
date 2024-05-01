@@ -10,7 +10,7 @@ from general_timer import Timer
 from button_sequence_game import ButtonSequenceGame
 
 # MQTT Konfigurationen
-MQTT_BROKER = "localhost"  # Beispiel-Broker, ersetze diesen durch deinen Broker
+MQTT_BROKER = "127.0.0.1"  # Beispiel-Broker, ersetze diesen durch deinen Broker
 MQTT_PORT = 1883
 MQTT_TRANSPORT_PROTOCOL = "tcp"
 
@@ -34,6 +34,7 @@ MQTT_TOPIC_DOOR_B2 = "/doors/b2" # pub
 isStartMidiIpGame = False
 isStartTimer = False
 isStartButtonSequence = False
+
 isStoppedMidiIpGame = False
 isStoppedTimer = False
 isStoppedButtonSequence = False
