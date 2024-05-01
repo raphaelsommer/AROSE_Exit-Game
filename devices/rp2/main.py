@@ -107,7 +107,7 @@ try:
             isStoppedButtonSequence = True
             client.publish(topic=MQTT_TOPIC_A3_BUTTON, payload="finished", qos=2)
         if MainTimer.getFinished() and not isStoppedTimer:
-            print("Stopping Timer")
+            print("Time ran out - Game over!")
             isStoppedTimer = True
             '''Timer does not need to be stopped, as it is a one-time countdown.'''
             client.publish(topic=MQTT_TOPIC_GEN_GLOBAL, payload="stop", qos=2)

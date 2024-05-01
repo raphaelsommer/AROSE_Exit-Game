@@ -31,7 +31,7 @@ class Timer:
     start = True
     stopped = False
     timerFinished = False
-    INITTIME = 18
+    INITTIME = 1
     timerMin10 = (INITTIME - (INITTIME % 10)) // 10
     timerMin1 = INITTIME % 10
     timerSec10 = 0
@@ -130,7 +130,6 @@ class Timer:
     def stopTimer(self):
         self.stopped = True
         self.clear_display()
-        self.buzzer.off()
         self.timerMin10 = (self.INITTIME - (self.INITTIME % 10)) // 10
         self.timerMin1 = self.INITTIME % 10
         self.timerSec10 = 0

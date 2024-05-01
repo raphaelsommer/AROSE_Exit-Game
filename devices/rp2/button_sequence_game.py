@@ -26,7 +26,6 @@ class ButtonSequenceGame:
     ### Define the constructor of the class
     def __init__(self):
         # Set up the GPIO
-        #GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.RED_PIN, GPIO.OUT)
         GPIO.setup(self.GREEN_PIN, GPIO.OUT)
         GPIO.setup(self.BLUE_PIN, GPIO.OUT)
