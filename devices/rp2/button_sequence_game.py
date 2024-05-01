@@ -6,9 +6,9 @@ import random
 class ButtonSequenceGame:
 
     # Pin configuration
-    RED_PIN = 19
-    GREEN_PIN = 13
-    BLUE_PIN = 26
+    RED_PIN = 26
+    GREEN_PIN = 19
+    BLUE_PIN = 13
     BUTTON1 = 4
     BUTTON2 = 5
     BUTTON3 = 6
@@ -26,7 +26,7 @@ class ButtonSequenceGame:
     ### Define the constructor of the class
     def __init__(self):
         # Set up the GPIO
-        GPIO.setmode(GPIO.BCM)
+        #GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.RED_PIN, GPIO.OUT)
         GPIO.setup(self.GREEN_PIN, GPIO.OUT)
         GPIO.setup(self.BLUE_PIN, GPIO.OUT)
@@ -119,7 +119,7 @@ class ButtonSequenceGame:
         self.button_sequence.clear()
         self.wrong_sequence_counter = 0
         # Clean up the GPIO
-        GPIO.cleanup()
+        #GPIO.cleanup()
         # Remove the event detection
         #GPIO.remove_event_detect(self.BUTTON1)
         #GPIO.remove_event_detect(self.BUTTON2)

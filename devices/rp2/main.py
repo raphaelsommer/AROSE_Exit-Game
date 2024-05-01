@@ -3,6 +3,8 @@ import paho.mqtt.client as mqtt
 from paho.mqtt.properties import Properties
 from paho.mqtt.packettypes import PacketTypes
 import threading
+import RPi.GPIO as GPIO
+
 from midi_ip_game import MidiIpGame
 from general_timer import Timer
 from button_sequence_game import ButtonSequenceGame
@@ -62,10 +64,15 @@ client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
 client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 2), (MQTT_TOPIC_A5_PIANO, 2), (MQTT_TOPIC_B2_GRAVITY, 2)])
 
+# Set up GPIO mode once
+GPIO.setmode(GPIO.BCM)
+
+# Initialize the games
 MIDIIpGame = MidiIpGame()
 MainTimer = Timer()
 ButtonGame = ButtonSequenceGame()
 
+# "Prepare" (instantiate) threads for the games
 thread1 = threading.Thread(target=None)
 thread2 = threading.Thread(target=None)
 thread3 = threading.Thread(target=None)
@@ -124,5 +131,6 @@ except KeyboardInterrupt:
     MIDIIpGame.stopGame()
     ButtonGame.stopGame()
 finally:
+    GPIO.cleanup()
     client.disconnect()
     client.loop_stop()
