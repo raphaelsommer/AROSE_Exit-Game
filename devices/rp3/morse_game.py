@@ -109,7 +109,7 @@ class Morse:
     def read_keypad(self):
         correct_code = [self.CODE_TO_MORSE[1], self.CODE_TO_MORSE[3], self.CODE_TO_MORSE[5], self.CODE_TO_MORSE[7]]
         inputted_values = []
-        while correct_code is not inputted_values:  # Loop indefinitely until the correct code is entered
+        while (not self.finished) and (correct_code is not inputted_values):  # Loop indefinitely until the correct code is entered
             for col_num, col_pin in enumerate(self.COLUMNS):
                 GPIO.output(col_pin, GPIO.LOW)
                 for row_num, row_pin in enumerate(self.ROWS):
@@ -154,6 +154,7 @@ class Morse:
         input_thread.join()  # Ensure the input thread also finishes
     
     # Function to stop the game and cleanup GPIO 
-    ''' not needed anymore as the game is stopped by the input_received_event
     def stopGame(self):
-        GPIO.cleanup()'''
+        self.input_received_event.set()
+        self.finished = True
+        #GPIO.cleanup()
