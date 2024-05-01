@@ -53,8 +53,11 @@ class RFIDReader:
 class RFID:
 
     finished = False
-    scanner1 = None
-    scanner2 = None
+    RIGHT_CARD_UID1 = {0xB3, 0xD8, 0x61, 0x1A, 0x10}
+    RIGHT_CARD_UID2 = {0x3, 0x41, 0x8D, 0x1A, 0xD5}
+
+    scanner1 = RFIDReader(device=0, right_uid=RIGHT_CARD_UID1)
+    scanner2 = RFIDReader(device=1, right_uid=RIGHT_CARD_UID2)
 
     def getFinished(self):
         return self.finished
@@ -65,12 +68,6 @@ class RFID:
         scanner2.reader.Close()
 
     def startGame(self):
-        global scanner1, scanner2
-        RIGHT_CARD_UID1 = {0xB3, 0xD8, 0x61, 0x1A, 0x10}
-        RIGHT_CARD_UID2 = {0x3, 0x41, 0x8D, 0x1A, 0xD5}
-
-        scanner1 = RFIDReader(device=0, right_uid=RIGHT_CARD_UID1)
-        scanner2 = RFIDReader(device=1, right_uid=RIGHT_CARD_UID2)
 
         thread1 = threading.Thread(target=scanner1.run)
         thread2 = threading.Thread(target=scanner2.run)
