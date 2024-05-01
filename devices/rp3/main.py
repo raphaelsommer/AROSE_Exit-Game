@@ -19,18 +19,13 @@ MQTT_TRANSPORT_PROTOCOL = "tcp"
 ### Needed MQTT Topics
 # Topics for General and Morse-Game
 MQTT_TOPIC_GEN_GLOBAL = "/gen/global" # sub/pub
+MQTT_TOPIC_B3_MORSE = "/b3/morse" # pub
 # Topics for the RFID-Game
-MQTT_TOPIC_C1_RFID = "/c1/rfid" # sub
+MQTT_TOPIC_C1_RFID = "/c1/rfid" # sub/pub
 # Topics for the IP-Game
 MQTT_TOPIC_C0_IP = "/c0/ip" # sub/pub
 # Topics for the Wire-Game
 MQTT_TOPIC_RK_WIRE = "/rk/wire" # sub/pub
-# Topics for opening doors
-MQTT_TOPIC_DOOR_RK = "/doors/rk" # pub
-MQTT_TOPIC_DOOR_JNR = "/doors/jnr" # pub
-MQTT_TOPIC_DOOR_B3 = "/doors/b3" # pub
-MQTT_TOPIC_DOOR_A4 = "/doors/a4" # pub
-MQTT_TOPIC_DOOR_B4 = "/doors/b4" # pub
 
 
 # Flags for the Morse, RFID, MAC and Wire Game
@@ -122,20 +117,15 @@ try:
             print("Stopping Morse-Game")
             MorseGame.stopGame()
             isStoppedMorseGame = True
-            client.publish(topic=MQTT_TOPIC_DOOR_B3, payload="1", qos=2)
-            time.sleep(1)
-            client.publish(topic=MQTT_TOPIC_DOOR_A4, payload="1", qos=2)
-            time.sleep(1)
-            client.publish(topic=MQTT_TOPIC_DOOR_B4, payload="1", qos=2)
+            client.publish(topic=MQTT_TOPIC_B3_MORSE, payload="finished", qos=2)
         if RfidGame.getFinished() and not isStoppedRfidGame:
             print("Stopping Rfid-Game")
-            #RfidGame.stopGame() ### The script does it itself
             isStoppedRfidGame = True
-            client.publish(topic=MQTT_TOPIC_DOOR_JNR, payload="1", qos=2)
+            client.publish(topic=MQTT_TOPIC_C1_RFID, payload="finished", qos=2)
         if (IpGame.getIP() != "") and not isStoppedIpGame:
             print("Stopping IP-Game")
             isStoppedIpGame = True
-            client.publish(topic=MQTT_TOPIC_DOOR_RK, payload="1", qos=2)
+            client.publish(topic=MQTT_TOPIC_C0_IP, payload="finished", qos=2)
         """ if (WireGame.getSuccess or WireGame.getFailed) and not isStoppedWireGame:
             print("Stopping Wire-Game")
             WireGame.stopGame()

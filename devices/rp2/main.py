@@ -21,13 +21,8 @@ MQTT_TOPIC_GEN_GLOBAL = "/gen/global" # sub/pub
 MQTT_TOPIC_A5_PIANO = "/a5/piano" # sub
 MQTT_TOPIC_C1_RFID = "/c1/rfid" # pub
 # Topics for the Button-Sequence-Game
-MQTT_TOPIC_B2_GRAVITY = "/b2/gravity" # sub/pub
-# Topics for opening doors
-MQTT_TOPIC_DOOR_B5 = "/doors/b5" # pub
-MQTT_TOPIC_DOOR_A5 = "/doors/a5" # pub
-MQTT_TOPIC_DOOR_B3 = "/doors/b3" # pub
-MQTT_TOPIC_DOOR_A3 = "/doors/a3" # pub
-MQTT_TOPIC_DOOR_B2 = "/doors/b2" # pub
+MQTT_TOPIC_B2_GRAVITY = "/b2/gravity" # sub
+MQTT_TOPIC_A3_BUTTON = "/a3/button" # pub
 
 
 # Flags for the MIDI-IP-Game, Timer and Button
@@ -110,15 +105,11 @@ try:
             print("Stopping Button-Sequence-Game")
             ButtonGame.stopGame()
             isStoppedButtonSequence = True
-            client.publish(topic=MQTT_TOPIC_B2_GRAVITY, payload="on", qos=2)
-            #client.publish(topic=MQTT_TOPIC_DOOR_B5, payload="1", qos=2)
-            client.publish(topic=MQTT_TOPIC_DOOR_A5, payload="1", qos=2)
-            client.publish(topic=MQTT_TOPIC_DOOR_B3, payload="1", qos=2)
-            client.publish(topic=MQTT_TOPIC_DOOR_A3, payload="1", qos=2)
-            client.publish(topic=MQTT_TOPIC_DOOR_B2, payload="1", qos=2)
+            client.publish(topic=MQTT_TOPIC_A3_BUTTON, payload="finished", qos=2)
         if MainTimer.getFinished() and not isStoppedTimer:
             print("Stopping Timer")
             isStoppedTimer = True
+            '''Timer does not need to be stopped, as it is a one-time countdown.'''
             client.publish(topic=MQTT_TOPIC_GEN_GLOBAL, payload="stop", qos=2)
             stop = True
 
