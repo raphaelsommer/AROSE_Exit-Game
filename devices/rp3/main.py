@@ -152,6 +152,14 @@ except KeyboardInterrupt:
     IpGame.stop()
     # WireGame.stopGame()
 finally:
+    if not isStoppedMorseGame:
+        MorseGame.stopGame()
+    if not isStoppedRfidGame:
+        RfidGame.stopGame()
+    if not isStoppedIpGame:
+        IpGame.stop()
+    # if not isStoppedWireGame:
+    #     WireGame.stopGame()
     GPIO.cleanup()
     client.disconnect()
     client.loop_stop()
