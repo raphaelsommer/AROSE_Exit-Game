@@ -15,6 +15,7 @@ func _process(delta):
 		Global.sauerstoff = true
 		$pc/Area2D.queue_free()
 		Global.timer.wait_time += float(5 * 60)
+		
 
 
 
