@@ -31,7 +31,7 @@ class Timer:
     start = True
     stopped = False
     timerFinished = False
-    INITTIME = 1
+    INITTIME = 19
     timerMin10 = (INITTIME - (INITTIME % 10)) // 10
     timerMin1 = INITTIME % 10
     timerSec10 = 0

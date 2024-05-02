@@ -10,7 +10,7 @@ from general_timer import Timer
 from button_sequence_game import ButtonSequenceGame
 
 # MQTT Konfigurationen
-MQTT_BROKER = "127.0.0.1"  # Beispiel-Broker, ersetze diesen durch deinen Broker
+MQTT_BROKER = "192.168.0.102"  # Beispiel-Broker, ersetze diesen durch deinen Broker
 MQTT_PORT = 1883
 MQTT_TRANSPORT_PROTOCOL = "tcp"
 

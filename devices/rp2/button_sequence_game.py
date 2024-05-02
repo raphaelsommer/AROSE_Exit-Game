@@ -120,6 +120,6 @@ class ButtonSequenceGame:
         # Clean up the GPIO
         #GPIO.cleanup()
         # Remove the event detection
-        #GPIO.remove_event_detect(self.BUTTON1)
-        #GPIO.remove_event_detect(self.BUTTON2)
-        #GPIO.remove_event_detect(self.BUTTON3)
+        GPIO.remove_event_detect(self.BUTTON1)
+        GPIO.remove_event_detect(self.BUTTON2)
+        GPIO.remove_event_detect(self.BUTTON3)

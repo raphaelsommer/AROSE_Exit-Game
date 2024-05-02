@@ -57,14 +57,18 @@ class MidiIpGame:
                 if len(IP) > 3:
                           break
                 if not input.is_meta and input.type == 'note_on':
-                    IP_part = input.note
-                    self.buzzer.play(Tone(midi=IP_part))
-                    IP.append((IP_part-32)*6)
-                    self.lcd.clear()
-                    self.lcd.message(f'Change door{door} IP:\n{self.IPToString(IP)}')
-                    time.sleep(1)
-                    self.buzzer.stop()
-                    time.sleep(1)
+		    IP_part = input.note
+                    if IP_part > 56:
+				self.buzzer.play(Tone(midi=IP_part))
+                    		IP.append((IP_part-32)*6)
+                    		self.lcd.clear()
+                    		self.lcd.message(f'Change door{door} IP:\n{self.IPToString(IP)}')
+                    		time.sleep(1)
+                    		self.buzzer.stop()
+                    		time.sleep(1)
+		    	else:
+				self.lcd.clear()
+				self.lcd.message(f'Note value too\nlow, try again...')
 
     ### Define a method to get the status of the IP Game for the main.py file    
     def getFinished(self):
