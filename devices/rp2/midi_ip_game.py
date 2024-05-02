@@ -55,10 +55,10 @@ class MidiIpGame:
         with mido.open_input(self.PORT) as listener:
             for input in listener:
                 if len(IP) > 3:
-                          break
+			break
                 if not input.is_meta and input.type == 'note_on':
-		    IP_part = input.note
-                    if IP_part > 56:
+			IP_part = input.note
+			if IP_part > 56:
 				self.buzzer.play(Tone(midi=IP_part))
                     		IP.append((IP_part-32)*6)
                     		self.lcd.clear()
