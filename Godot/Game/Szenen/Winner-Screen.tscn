@@ -37,11 +37,11 @@ scale = Vector2(0.28883, 0.24838)
 texture = ExtResource("4_o7434")
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_left = -82.0
+offset_left = -91.0
 offset_top = -8.0
-offset_right = 112.0
+offset_right = 103.0
 offset_bottom = 33.0
-text = "Mission Abgeschlossen"
+text = "  Mission Abgeschlossen"
 
 [node name="TextEdit4" type="TextEdit" parent="."]
 visible = false

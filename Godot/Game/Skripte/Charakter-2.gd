@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
 
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -25,19 +26,23 @@ func _physics_process(delta):
 		animSprite.play("shoot")
 		spawnBullet()
 	
-	
-	if not is_on_floor():
-		velocity.y += gravity * delta
-		
-		if(velocity.y > 0):
-			animSprite.play("fall")
+	if(Global.gravity):
+		if not is_on_floor():
+			velocity.y += gravity * delta
+			
+			if(velocity.y > 0):
+				animSprite.play("fall")
+			else:
+				animSprite.play("jump")
 		else:
-			animSprite.play("jump")
+			if(velocity.x == 0):
+				animSprite.play("idle")
+			else:
+				animSprite.play("run")
+				
 	else:
-		if(velocity.x == 0):
-			animSprite.play("idle")
-		else:
-			animSprite.play("run")
+		$".".position.y -= 1
+		
 		
 		
 
@@ -48,7 +53,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
-	if direction and Global.player1_canMove:
+	if direction and Global.player2_canMove:
 		velocity.x = direction * SPEED
 		
 		if(velocity.x < 0):

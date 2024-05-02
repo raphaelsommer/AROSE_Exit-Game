@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8jl8k4wctjhb"]
+[gd_scene load_steps=8 format=3 uid="uid://b8jl8k4wctjhb"]
 
 [ext_resource type="Script" path="res://Skripte/Kapsel.gd" id="1_de72y"]
 [ext_resource type="Texture2D" uid="uid://cacsloi4u01gi" path="res://Spaceship/spaceRockets_001.png" id="2_wvhf4"]
 [ext_resource type="Texture2D" uid="uid://dwwrjyiygogy8" path="res://Spaceship/Antrieb.png" id="3_u7wmt"]
 [ext_resource type="Texture2D" uid="uid://cx10iknvpd6l0" path="res://Spaceship/rocket animated.png" id="4_jn3xn"]
+[ext_resource type="AudioStream" uid="uid://ge38pfcqtogw" path="res://Sounds/Effects/ScatterNoise1.mp3" id="5_2nv0e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfdyd"]
 size = Vector2(189, 20)
@@ -46,5 +47,9 @@ texture = ExtResource("3_u7wmt")
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 position = Vector2(-515, -4)
 texture = ExtResource("4_jn3xn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2nv0e")
+autoplay = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
