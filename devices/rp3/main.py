@@ -59,6 +59,13 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == 'start':
         print("Wire-Game start")
         isStartWireGame = True
+    # TEST MESSAGE FOR THE WIRE GAME
+    if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == '1':
+        print("Wire touched")
+        WireGame.changeState(1)
+    if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == '2':
+        print("Nail touched - Wire not touched")
+        WireGame.changeState(2)
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print("Connected:" + str(reason_code))
@@ -80,7 +87,7 @@ GPIO.setmode(GPIO.BCM)
 MorseGame = Morse()
 RfidGame = RFID()
 IpGame = IP()
-#WireGame = Wire()
+WireGame = Wire()
 
 thread1 = threading.Thread(target=None)
 thread2 = threading.Thread(target=None)
@@ -109,11 +116,11 @@ try:
             thread3 = threading.Thread(target=IpGame.listen)
             thread3.start()
             threads_started[thread3] = True
-        """if not thread4.is_alive() and not threads_started[thread4] and isStartWireGame:
+        if not thread4.is_alive() and not threads_started[thread4] and isStartWireGame:
             isStartWireGame = False
             thread4 = threading.Thread(target=WireGame.startGame)
             thread4.start()
-            threads_started[thread4] = True"""
+            threads_started[thread4] = True
 
         
         if MorseGame.getFinished() and not isStoppedMorseGame:
@@ -129,15 +136,14 @@ try:
             print("Stopping IP-Game")
             isStoppedIpGame = True
             client.publish(topic=MQTT_TOPIC_C0_IP, payload="finished", qos=2)
-        """ if (WireGame.getSuccess or WireGame.getFailed) and not isStoppedWireGame:
+        if (WireGame.getSuccess or WireGame.getFailed) and not isStoppedWireGame:
             print("Stopping Wire-Game")
-            WireGame.stopGame()
             isStoppedWireGame = True
             if WireGame.getSuccess():
                 client.publish(topic=MQTT_TOPIC_RK_WIRE, payload="win", qos=2)
             elif WireGame.getFailed():
                 client.publish(topic=MQTT_TOPIC_RK_WIRE, payload="fail", qos=2)
-            #stop = True """
+            #stop = True
 
 
         for thread in [thread1, thread2, thread3, thread4]:

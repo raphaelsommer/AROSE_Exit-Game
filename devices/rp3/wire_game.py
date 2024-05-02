@@ -7,31 +7,29 @@ import time
 class Wire:
 
     # Flags for the Wire Game
-    failed = False
-    success = False
+    gameState = 0
 
     # Constructor
     def __init__(self):
-        GPIO.setup(3, GPIO.IN)
         GPIO.setup(4, GPIO.IN)
+        GPIO.setup(5, GPIO.IN)
     
     def getFailed(self):
-        return self.failed
+        return self.gameState == 1
 
     def getSuccess(self):
-        return self.success
+        return self.gameState == 2
+
+    def changeState(self, state):
+        self.gameState = state
 
     # Start the Wire Game from the main.py
     def startGame(self):
-        """ while not self.failed or not self.success:
-            if GPIO.input(3) == 1:
-                self.failed = True
-            elif GPIO.input(4) == 1:
-                self.success = True
-        self.stopGame() """
-        time.sleep(1)
-        pass
-
-    # Stop the Wire Game from the main.py
-    def stopGame(self):
-        pass
+        while self.gameState == 0:
+            if GPIO.input(4) == 1:
+                time.sleep(0.1)
+                if GPIO.input(4) == 1:
+                    self.gameState = 1
+            if GPIO.input(5) == 1:
+                self.gameState = 2
+            time.sleep(0.05)
