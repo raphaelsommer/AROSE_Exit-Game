@@ -18,6 +18,7 @@ func _process(delta):
 		$pc/RichTextLabel.visible = true
 		await get_tree().create_timer(2).timeout
 		$pc/RichTextLabel.queue_free()
+		sauerstoff = false
 		
 
 
@@ -43,3 +44,7 @@ func _ready():
 	#Global.timer.autostart = true
 	#add_child(Global.timer)
 	pass
+
+
+func _on_audio_stream_player_ready():
+	$AudioStreamPlayer2.play()

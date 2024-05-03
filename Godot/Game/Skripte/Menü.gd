@@ -33,3 +33,9 @@ func _on_rating_pressed():
 
 func _on_exit_list_pressed():
 	$Rating/Sprite2D.visible = false
+	
+
+
+
+func _on_info_pressed():
+	$Info/Sprite2D.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cpqkqsbg22tkk"]
+[gd_scene load_steps=21 format=3 uid="uid://cpqkqsbg22tkk"]
 
 [ext_resource type="Script" path="res://Skripte/Menü.gd" id="1_ynd03"]
 [ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="1_yyfok"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cjtinx5n70fok" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Exit_BTN.png" id="3_ivrra"]
 [ext_resource type="AudioStream" uid="uid://bi3iatw3mdl4k" path="res://Sounds/GUI/ObservingTheStar/ObservingTheStar.ogg" id="5_8gbue"]
 [ext_resource type="Texture2D" uid="uid://lbnnbd8k873h" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Info_BTN.png" id="6_3nmul"]
+[ext_resource type="Texture2D" uid="uid://bc0pbmj0np2fw" path="res://Gui/Space_Game_GUI_PNG/PNG/Rating/Table_02.png" id="7_hslnn"]
 [ext_resource type="Texture2D" uid="uid://cgrh6kusnoajj" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Rating_BTN.png" id="7_l57ys"]
 [ext_resource type="Texture2D" uid="uid://d0ybjqar6trru" path="res://Gui/Space_Game_GUI_PNG/PNG/Hangar/Window.png" id="8_l7yie"]
 [ext_resource type="Texture2D" uid="uid://b46fynvup5ltv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Settings_BTN.png" id="8_pisru"]
@@ -84,6 +85,12 @@ offset_right = 67.0
 offset_bottom = 215.0
 icon = ExtResource("6_3nmul")
 expand_icon = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Info"]
+visible = false
+position = Vector2(26, -16)
+scale = Vector2(0.285036, 0.236842)
+texture = ExtResource("7_hslnn")
 
 [node name="Rating" type="Button" parent="."]
 offset_left = -160.0
@@ -172,6 +179,7 @@ frame_progress = 0.116772
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Info" to="." method="_on_info_pressed"]
 [connection signal="pressed" from="Rating" to="." method="_on_rating_pressed"]
 [connection signal="pressed" from="Rating/Sprite2D/Exit_List" to="." method="_on_exit_list_pressed"]
 [connection signal="pressed" from="FAQ" to="." method="_on_faq_pressed"]

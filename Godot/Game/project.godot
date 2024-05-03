@@ -23,6 +23,10 @@ Global="*res://Skripte/Global.gd"
 
 window/stretch/scale=4.0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/mqtt/plugin.cfg")
+
 [input]
 
 kaufen={

@@ -12,9 +12,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _process(delta):
 	if(Global.robot_hp <= 0):
 		$AnimatedSprite2D2.play("explosion")
+		Global.ki_destroyed = true
 		await get_tree().create_timer(0.5).timeout
 		$".".queue_free()
-		Global.ki_destroyed = true
+	
 
 
 
