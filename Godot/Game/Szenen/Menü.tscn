@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cpqkqsbg22tkk"]
+[gd_scene load_steps=20 format=3 uid="uid://cpqkqsbg22tkk"]
 
 [ext_resource type="Script" path="res://Skripte/Menü.gd" id="1_ynd03"]
 [ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="1_yyfok"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bi3iatw3mdl4k" path="res://Sounds/GUI/ObservingTheStar/ObservingTheStar.ogg" id="5_8gbue"]
 [ext_resource type="Texture2D" uid="uid://lbnnbd8k873h" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Info_BTN.png" id="6_3nmul"]
 [ext_resource type="Texture2D" uid="uid://cgrh6kusnoajj" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Rating_BTN.png" id="7_l57ys"]
+[ext_resource type="Texture2D" uid="uid://d0ybjqar6trru" path="res://Gui/Space_Game_GUI_PNG/PNG/Hangar/Window.png" id="8_l7yie"]
 [ext_resource type="Texture2D" uid="uid://b46fynvup5ltv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Settings_BTN.png" id="8_pisru"]
 [ext_resource type="Texture2D" uid="uid://hk20lpx56cg5" path="res://Gui/Title/Title-1.png" id="9_8gyvl"]
 [ext_resource type="Texture2D" uid="uid://bu631aqwo2unp" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/FAQ_BTN.png" id="9_wpsg6"]
@@ -92,6 +93,36 @@ offset_bottom = 216.0
 icon = ExtResource("7_l57ys")
 expand_icon = true
 
+[node name="Sprite2D" type="Sprite2D" parent="Rating"]
+visible = false
+position = Vector2(24.0001, -122.5)
+scale = Vector2(0.210638, 0.179286)
+texture = ExtResource("8_l7yie")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Rating/Sprite2D"]
+offset_left = -442.0
+offset_top = -694.0
+offset_right = 442.0
+offset_bottom = 660.0
+theme_override_font_sizes/normal_font_size = 88
+text = "         Bestenliste
+
+1. Raphael + Henrik
+Zeit: 7:30 min
+
+2. Max und Leander
+Zeit: 9:30 min
+
+3. Kerim und Bastian
+Zeit: 11:30 min"
+
+[node name="Exit_List" type="Button" parent="Rating/Sprite2D"]
+offset_left = -204.142
+offset_top = 532.669
+offset_right = 213.858
+offset_bottom = 661.669
+icon = ExtResource("3_ivrra")
+
 [node name="Settings" type="Button" parent="."]
 offset_left = -74.0
 offset_top = 165.0
@@ -109,22 +140,22 @@ icon = ExtResource("9_wpsg6")
 expand_icon = true
 
 [node name="A" type="Sprite2D" parent="."]
-position = Vector2(-179, -168)
+position = Vector2(-178.5, -158)
 scale = Vector2(1.1, 1.12381)
 texture = ExtResource("9_8gyvl")
 
 [node name="R" type="Sprite2D" parent="."]
-position = Vector2(-58.9999, -165.75)
+position = Vector2(-58.4999, -155.75)
 scale = Vector2(1.37376, 1.76425)
 texture = ExtResource("10_xhbly")
 
 [node name="O" type="Sprite2D" parent="."]
-position = Vector2(40.9532, -165.891)
+position = Vector2(41.4532, -155.891)
 scale = Vector2(1.81682, 1.9285)
 texture = ExtResource("11_frs5b")
 
 [node name="SE" type="Sprite2D" parent="."]
-position = Vector2(176, -164)
+position = Vector2(176.5, -154)
 scale = Vector2(1.23801, 1.87761)
 texture = ExtResource("12_p4xgq")
 
@@ -141,4 +172,6 @@ frame_progress = 0.116772
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Rating" to="." method="_on_rating_pressed"]
+[connection signal="pressed" from="Rating/Sprite2D/Exit_List" to="." method="_on_exit_list_pressed"]
 [connection signal="pressed" from="FAQ" to="." method="_on_faq_pressed"]

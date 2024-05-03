@@ -2,7 +2,10 @@ extends Node2D
 var text_edit
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://Szenen/Abspann-Kapsel.tscn")
+	if(Global.ki_destroyed):
+		get_tree().change_scene_to_file("res://Szenen/Abspann-Kapsel.tscn")
+	else:
+		get_tree().change_scene_to_file("res://Szenen/Abspann.tscn")
 
 
 func _process(delta):

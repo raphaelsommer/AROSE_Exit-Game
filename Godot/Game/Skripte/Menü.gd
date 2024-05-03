@@ -20,3 +20,16 @@ func _on_exit_pressed():
 
 func _on_faq_pressed():
 	pass # Replace with function body.
+	
+
+
+
+
+func _on_rating_pressed():
+	$Rating/Sprite2D.visible = true
+	
+
+
+
+func _on_exit_list_pressed():
+	$Rating/Sprite2D.visible = false

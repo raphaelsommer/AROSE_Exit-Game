@@ -42,6 +42,7 @@ offset_top = -8.0
 offset_right = 103.0
 offset_bottom = 33.0
 text = "  Mission Abgeschlossen"
+editable = false
 
 [node name="TextEdit4" type="TextEdit" parent="."]
 visible = false
@@ -50,6 +51,7 @@ offset_top = 113.0
 offset_right = 112.0
 offset_bottom = 154.0
 text = "           KI-Zerstört"
+editable = false
 
 [node name="TextEdit3" type="TextEdit" parent="."]
 visible = false
@@ -58,6 +60,7 @@ offset_top = 72.0
 offset_right = 112.0
 offset_bottom = 113.0
 text = "        Tiere Gerettet "
+editable = false
 
 [node name="TextEdit2" type="TextEdit" parent="."]
 visible = false
@@ -66,6 +69,7 @@ offset_top = 32.0
 offset_right = 112.0
 offset_bottom = 73.0
 text = "   Sauerstoff hergestellt"
+editable = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_pnpud")

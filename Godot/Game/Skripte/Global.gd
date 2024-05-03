@@ -14,6 +14,7 @@ var sauerstoff = false
 var key = false
 var gravity = true
 var player2_canMove = true
+var timer_on = false
 
 
 
@@ -21,13 +22,13 @@ var player2_canMove = true
 var timer
 
 func _ready():
-	#timer = Timer.new()
-	#timer.wait_time = float(5 * 60)
-	#timer.one_shot = true
-	#timer.start()
-	#timer.autostart = true
-	#add_child(timer)
-	pass
+	timer = Timer.new()
+	timer.wait_time = float(5 * 60)
+	timer.one_shot = true
+	timer.start()
+	timer.autostart = true
+	add_child(timer)
+	
 	
 	
 func _process(delta):
