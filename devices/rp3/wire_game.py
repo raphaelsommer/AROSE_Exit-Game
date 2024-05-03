@@ -11,8 +11,8 @@ class Wire:
 
     # Constructor
     def __init__(self):
-        GPIO.setup(4, GPIO.IN)
-        GPIO.setup(5, GPIO.IN)
+        GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     
     def getGameState(self):
         return self.gameState
@@ -23,10 +23,10 @@ class Wire:
     # Start the Wire Game from the main.py
     def startGame(self):
         while self.gameState == 0:
-            if GPIO.input(5) == 1:
-                time.sleep(0.1)
+            if GPIO.input(5):
+                time.sleep(0.2)
                 if GPIO.input(5) == 1:
                     self.gameState = 1
-            if GPIO.input(4) == 1:
+            if GPIO.input(4):
                 self.gameState = 2
             time.sleep(0.05)
