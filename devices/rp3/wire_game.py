@@ -25,8 +25,13 @@ class Wire:
         while self.gameState == 0:
             if GPIO.input(5):
                 time.sleep(0.2)
-                if GPIO.input(5) == 1:
+                if GPIO.input(5):
                     self.gameState = 1
+                    print(self.gameState)
             if GPIO.input(4):
                 self.gameState = 2
+                print(self.gameState)
             time.sleep(0.05)
+
+    def stopGame(self):
+        self.changeState(3)

@@ -14,7 +14,7 @@ class IP:
     def listen(self):
         
         while not self.finished:
-            print("Server is listening...")
+            print("UDP-Server is listening...")
             data, addr = self.server_socket.recvfrom(1024)  # Standard buffer size
             msg = data.decode().split()
             ip = msg[0]
@@ -34,4 +34,4 @@ class IP:
     def stop(self):
         self.server_socket.close()
         self.IP_ADDRESS = ""
-        print("Server socket closed.")
+        print("UDP-Server socket closed.")

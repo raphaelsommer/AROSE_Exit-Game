@@ -59,13 +59,13 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == 'start':
         print("Wire-Game start")
         isStartWireGame = True
-    # TEST MESSAGE FOR THE WIRE GAME
+    '''# TEST MESSAGE FOR THE WIRE GAME
     if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == '1':
         print("Wire touched")
         WireGame.changeState(1)
     if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == '2':
         print("Nail touched - Wire not touched")
-        WireGame.changeState(2)
+        WireGame.changeState(2)'''
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print("Connected:" + str(reason_code))
@@ -101,23 +101,23 @@ try:
 
     while not stop:
         
-        if (not thread1.is_alive()) and (not threads_started[thread1]) and isStartMorseGame:
-            isStartMorseGame = False
+        if not thread1.is_alive() and not threads_started[thread1] and isStartMorseGame:
+            #isStartMorseGame = False
             thread1 = threading.Thread(target=MorseGame.startGame)
             thread1.start()
             threads_started[thread1] = True
         if not thread2.is_alive() and not threads_started[thread2] and isStartRfidGame:
-            isStartRfidGame = False
+            #isStartRfidGame = False
             thread2 = threading.Thread(target=RfidGame.startGame)
             thread2.start()
             threads_started[thread2] = True
         if not thread3.is_alive() and not threads_started[thread3] and isStartIpGame:
-            isStartIpGame = False
+            #isStartIpGame = False
             thread3 = threading.Thread(target=IpGame.listen)
             thread3.start()
             threads_started[thread3] = True
         if not thread4.is_alive() and not threads_started[thread4] and isStartWireGame:
-            isStartWireGame = False
+            #isStartWireGame = False
             thread4 = threading.Thread(target=WireGame.startGame)
             thread4.start()
             threads_started[thread4] = True
@@ -136,14 +136,14 @@ try:
             print("Stopping IP-Game")
             isStoppedIpGame = True
             client.publish(topic=MQTT_TOPIC_C0_IP, payload="finished", qos=2)
-        if (WireGame.getGameState == 1 or WireGame.getGameState == 2) and not isStoppedWireGame:
+        if (WireGame.getGameState() == 1 or WireGame.getGameState() == 2) and not isStoppedWireGame:
             print("Stopping Wire-Game")
             isStoppedWireGame = True
-            if WireGame.getSuccess():
+            if WireGame.getGameState() == 2:
                 client.publish(topic=MQTT_TOPIC_RK_WIRE, payload="win", qos=2)
-            elif WireGame.getFailed():
+            elif WireGame.getGameState() == 1:
                 client.publish(topic=MQTT_TOPIC_RK_WIRE, payload="fail", qos=2)
-            #stop = True
+            stop = True
 
 
         for thread in [thread1, thread2, thread3, thread4]:
@@ -153,10 +153,14 @@ try:
 
 
 except KeyboardInterrupt:
-    MorseGame.stopGame()
-    RfidGame.stopGame()
-    IpGame.stop()
-    # WireGame.stopGame()
+    if isStartMorseGame:
+        MorseGame.stopGame()
+    if isStartRfidGame:
+        RfidGame.stopGame()
+    if isStartIpGame:
+        IpGame.stop()
+    if isStartWireGame:
+        WireGame.stopGame
 finally:
     if not isStoppedMorseGame:
         MorseGame.stopGame()
@@ -164,8 +168,8 @@ finally:
         RfidGame.stopGame()
     if not isStoppedIpGame:
         IpGame.stop()
-    # if not isStoppedWireGame:
-    #     WireGame.stopGame()
+    if not isStoppedWireGame:
+        WireGame.stopGame()
     GPIO.cleanup()
     client.disconnect()
     client.loop_stop()
