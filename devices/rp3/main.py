@@ -136,14 +136,14 @@ try:
             print("Stopping IP-Game")
             isStoppedIpGame = True
             client.publish(topic=MQTT_TOPIC_C0_IP, payload="finished", qos=2)
-        if (WireGame.getSuccess or WireGame.getFailed) and not isStoppedWireGame:
+        '''if (WireGame.getSuccess or WireGame.getFailed) and not isStoppedWireGame:
             print("Stopping Wire-Game")
             isStoppedWireGame = True
             if WireGame.getSuccess():
                 client.publish(topic=MQTT_TOPIC_RK_WIRE, payload="win", qos=2)
             elif WireGame.getFailed():
                 client.publish(topic=MQTT_TOPIC_RK_WIRE, payload="fail", qos=2)
-            #stop = True
+            #stop = True'''
 
 
         for thread in [thread1, thread2, thread3, thread4]:
