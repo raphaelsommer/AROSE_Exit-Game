@@ -43,11 +43,11 @@ class Morse:
     }
 
     CODE_TO_MORSE = ['E', '4', 'C', '3', 'D', '7', 'O', '2']
-
+    CORRECT_CODE = [CODE_TO_MORSE[3], CODE_TO_MORSE[7], CODE_TO_MORSE[5], CODE_TO_MORSE[1]]
     SHORT = 0.2
-    LONG = 0.7
-    BETWEEN = 0.7
-    PAUSE = 1.5
+    LONG = 0.8
+    BETWEEN = 1
+    PAUSE = 2
 
     input_received_event = threading.Event()
     finished = False
@@ -107,9 +107,9 @@ class Morse:
 
     # Function to read the keypad input
     def read_keypad(self):
-        correct_code = [self.CODE_TO_MORSE[1], self.CODE_TO_MORSE[3], self.CODE_TO_MORSE[5], self.CODE_TO_MORSE[7]]
+        
         inputted_values = []
-        while (not self.finished) and (correct_code is not inputted_values):  # Loop indefinitely until the correct code is entered
+        while (not self.finished) and (self.CORRECT_CODE is not inputted_values):  # Loop indefinitely until the correct code is entered
             for col_num, col_pin in enumerate(self.COLUMNS):
                 GPIO.output(col_pin, GPIO.LOW)
                 for row_num, row_pin in enumerate(self.ROWS):
@@ -124,8 +124,8 @@ class Morse:
                         time.sleep(0.3)  # Debounce time
                         while GPIO.input(row_pin) == GPIO.LOW:
                             pass  # Wait for key release
-                        if len(inputted_values) == len(correct_code):  # Check if we have enough digits
-                            if inputted_values == correct_code:
+                        if len(inputted_values) == len(self.CORRECT_CODE):  # Check if we have enough digits
+                            if inputted_values == self.CORRECT_CODE:
                                 self.blink_rgb('green', 4, 0.5)
                                 print("Correct code entered!")
                                 self.input_received_event.set()
