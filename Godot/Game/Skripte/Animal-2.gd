@@ -14,6 +14,7 @@ func _physics_process(delta):
 		$".".position.x -= 2
 		await get_tree().create_timer(18.7).timeout
 		$".".queue_free()
+		move = false
 
 	move_and_slide()
 

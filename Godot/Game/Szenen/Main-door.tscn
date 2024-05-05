@@ -111,6 +111,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("23_rkb3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_h72wj")
 }],
 "loop": false,
 "name": &"opens",

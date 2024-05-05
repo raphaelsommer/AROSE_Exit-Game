@@ -15,6 +15,18 @@ var key = false
 var gravity = true
 var player2_canMove = true
 var timer_on = false
+var door_a5 = 1
+var door_a4 = 1
+var door_a3 = 1
+var game_hard = false
+var door_c1 = 1
+var door_b4 = 1
+var door_b3 = 1
+var door_b2 = 1
+var door_rk = 0
+var door_c0 = 1
+
+
 
 
 
@@ -28,6 +40,7 @@ func _ready():
 	timer.start()
 	timer.autostart = true
 	add_child(timer)
+		
 	
 	
 	

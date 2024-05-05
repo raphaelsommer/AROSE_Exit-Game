@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d6ojv3wob75r"]
+[gd_scene load_steps=19 format=3 uid="uid://d6ojv3wob75r"]
 
 [ext_resource type="Script" path="res://Skripte/Door-x-achse-3.gd" id="1_rec75"]
 [ext_resource type="Texture2D" uid="uid://b1mttakwyx41e" path="res://Türen/X-Achse/Door_close/Close.png" id="2_8rsfe"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://1a83e8oqa76y" path="res://Türen/X-Achse/Door_opens/Open-4.png" id="13_ssw3t"]
 [ext_resource type="Texture2D" uid="uid://sbo5c13bb6d8" path="res://Türen/X-Achse/Door_opens/Open-5.png" id="14_cdwt0"]
 [ext_resource type="Texture2D" uid="uid://bw5jqv208rim1" path="res://Türen/X-Achse/Door_opens/Open-6.png" id="15_mbbql"]
+[ext_resource type="AudioStream" uid="uid://dp5m2nocjda84" path="res://Sounds/Effects/yd-Sounds/door_open.ogg" id="16_xvr1r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w7c0a"]
 animations = [{
@@ -81,6 +82,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjsph"]
+size = Vector2(51, 145)
+
 [node name="Door-x-achse-3" type="Node2D"]
 script = ExtResource("1_rec75")
 
@@ -89,3 +93,12 @@ position = Vector2(-3.5, 17.5)
 scale = Vector2(0.87931, 0.75)
 sprite_frames = SubResource("SpriteFrames_w7c0a")
 animation = &"close"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-3.5, -2.5)
+shape = SubResource("RectangleShape2D_vjsph")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_xvr1r")

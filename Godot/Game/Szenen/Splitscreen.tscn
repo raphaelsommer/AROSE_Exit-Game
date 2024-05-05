@@ -15,13 +15,15 @@ theme_override_constants/separation = 0
 layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer"]
+disable_3d = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(360, 573)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
+[node name="MainGate" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_125j2")]
 
-[node name="Main-Gate" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_125j2")]
+[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(10, 2.08165e-12)
@@ -32,7 +34,8 @@ layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(576, 580)
+audio_listener_enable_2d = true
+size = Vector2i(550, 579)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer2/SubViewport"]
+[node name="Camera2D2" type="Camera2D" parent="HBoxContainer/SubViewportContainer2/SubViewport"]

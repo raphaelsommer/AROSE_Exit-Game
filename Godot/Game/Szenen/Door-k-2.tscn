@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b7ueudnhflbl3"]
+[gd_scene load_steps=21 format=3 uid="uid://b7ueudnhflbl3"]
 
 [ext_resource type="Texture2D" uid="uid://b1mttakwyx41e" path="res://Türen/X-Achse/Door_close/Close.png" id="1_a4usu"]
 [ext_resource type="Script" path="res://Skripte/Door-k-2.gd" id="1_gp4gb"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://sbo5c13bb6d8" path="res://Türen/X-Achse/Door_opens/Open-5.png" id="13_up87o"]
 [ext_resource type="Texture2D" uid="uid://bw5jqv208rim1" path="res://Türen/X-Achse/Door_opens/Open-6.png" id="14_qw1ka"]
 [ext_resource type="Texture2D" uid="uid://djcjti2ifmg2r" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_5.png" id="16_73nk2"]
+[ext_resource type="AudioStream" uid="uid://dp5m2nocjda84" path="res://Sounds/Effects/yd-Sounds/door_open.ogg" id="17_k5jpg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgih4"]
 size = Vector2(20, 147.5)
@@ -114,6 +115,9 @@ animation = &"close"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-168, -2.625)
 shape = SubResource("RectangleShape2D_3pows")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_k5jpg")
 
 [connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_exited"]

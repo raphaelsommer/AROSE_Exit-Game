@@ -138,10 +138,9 @@ sprite_frames = SubResource("SpriteFrames_hm6ix")
 animation = &"fall"
 autoplay = "idle"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("23_7v6ge")
 
 [node name="Node2D" parent="." instance=ExtResource("24_5fwvr")]
+
+[node name="Camera2D" type="Camera2D" parent="."]

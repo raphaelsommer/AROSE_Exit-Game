@@ -11,7 +11,8 @@ func _process(delta):
 	var elapsed = int(Global.timer.wait_time + Global.timer.time_left)
 	var minutes = int(elapsed / 60)
 	var seconds = elapsed % 60
-	'%02d:%02d' % [minutes, seconds]
+	
+
 	
 	
 	$VBoxContainer/HBoxContainer/Leben.text = str (Global.player_hp)

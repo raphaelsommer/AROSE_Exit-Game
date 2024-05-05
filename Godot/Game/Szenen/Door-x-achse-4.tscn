@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://3ga25umycrds"]
+[gd_scene load_steps=19 format=3 uid="uid://3ga25umycrds"]
 
 [ext_resource type="Script" path="res://Skripte/Door-x-achse-4.gd" id="1_fn5te"]
 [ext_resource type="Texture2D" uid="uid://b1mttakwyx41e" path="res://Türen/X-Achse/Door_close/Close.png" id="1_ww5i3"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://1a83e8oqa76y" path="res://Türen/X-Achse/Door_opens/Open-4.png" id="12_brwoy"]
 [ext_resource type="Texture2D" uid="uid://sbo5c13bb6d8" path="res://Türen/X-Achse/Door_opens/Open-5.png" id="13_71j03"]
 [ext_resource type="Texture2D" uid="uid://bw5jqv208rim1" path="res://Türen/X-Achse/Door_opens/Open-6.png" id="14_u4wjs"]
+[ext_resource type="AudioStream" uid="uid://dp5m2nocjda84" path="res://Sounds/Effects/yd-Sounds/door_open.ogg" id="16_0fco4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r7ckh"]
 animations = [{
@@ -44,6 +45,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_8ytnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ww5i3")
 }],
 "loop": false,
 "name": &"closes",
@@ -81,11 +85,26 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3s5pe"]
+size = Vector2(214, 106)
+
 [node name="Door-x-achse-4" type="Node2D"]
 script = ExtResource("1_fn5te")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-6, 17.5)
-scale = Vector2(0.793104, 0.75)
+position = Vector2(-1.00001, 10.5)
+scale = Vector2(0.965517, 0.85)
 sprite_frames = SubResource("SpriteFrames_r7ckh")
 animation = &"close"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_0fco4")
+
+[node name="Area2D" type="Area2D" parent="AudioStreamPlayer2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AudioStreamPlayer2D/Area2D"]
+position = Vector2(5, 17)
+shape = SubResource("RectangleShape2D_3s5pe")
+
+[connection signal="body_entered" from="AudioStreamPlayer2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="AudioStreamPlayer2D/Area2D" to="." method="_on_area_2d_body_exited"]

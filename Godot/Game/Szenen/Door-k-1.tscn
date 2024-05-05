@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cb221yv1tlrhr"]
+[gd_scene load_steps=23 format=3 uid="uid://cb221yv1tlrhr"]
 
 [ext_resource type="Script" path="res://Skripte/Door-k-1.gd" id="1_ukhsp"]
 [ext_resource type="Texture2D" uid="uid://b1mttakwyx41e" path="res://Türen/X-Achse/Door_close/Close.png" id="2_xhowp"]
@@ -17,8 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bw5jqv208rim1" path="res://Türen/X-Achse/Door_opens/Open-6.png" id="15_dmw3x"]
 [ext_resource type="Texture2D" uid="uid://b6olfavny71oh" path="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Objects/Switch (2).png" id="16_jiosu"]
 [ext_resource type="Texture2D" uid="uid://ie2ly4yfdm26" path="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Objects/Switch (1).png" id="17_bm2mg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f52ov"]
+[ext_resource type="AudioStream" uid="uid://dp5m2nocjda84" path="res://Sounds/Effects/yd-Sounds/door_open.ogg" id="18_laj0w"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_25l4n"]
 animations = [{
@@ -85,6 +84,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f52ov"]
+size = Vector2(40, 162)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_s8m2u"]
 animations = [{
 "frames": [{
@@ -104,13 +106,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4fdo"]
+size = Vector2(34, 154)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ukhsp")
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_f52ov")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-8.5, 15.5)
@@ -118,9 +118,26 @@ scale = Vector2(0.706897, 0.778571)
 sprite_frames = SubResource("SpriteFrames_25l4n")
 animation = &"close"
 
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-10, -9)
+shape = SubResource("RectangleShape2D_f52ov")
+
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(-91, -20)
 scale = Vector2(0.423611, 0.295233)
 sprite_frames = SubResource("SpriteFrames_s8m2u")
 animation = &"off"
 flip_v = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-89, 1)
+shape = SubResource("RectangleShape2D_x4fdo")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_laj0w")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

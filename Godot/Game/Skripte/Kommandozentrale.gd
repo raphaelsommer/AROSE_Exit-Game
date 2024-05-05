@@ -7,3 +7,16 @@ func _physics_process(delta):
 	if(Global.animals):
 		$CharacterBody2D4.visible = true
 		$CharacterBody2D5.visible = true
+	
+	
+
+
+
+func _on_ip_body_entered(body):
+	if(body.is_in_group("Player")):
+		$RichTextLabel.visible = true
+
+
+func _on_ip_body_exited(body):
+	if(body.is_in_group("Player")):
+		$RichTextLabel.visible = false

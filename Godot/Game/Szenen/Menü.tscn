@@ -1,8 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cpqkqsbg22tkk"]
+[gd_scene load_steps=25 format=3 uid="uid://cpqkqsbg22tkk"]
 
 [ext_resource type="Script" path="res://Skripte/Menü.gd" id="1_ynd03"]
 [ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="1_yyfok"]
+[ext_resource type="Texture2D" uid="uid://yf6e7b57gxr0" path="res://Gui/Space_Game_GUI_PNG/PNG/Ship_Shop/Ship_Icon.png" id="2_gb258"]
 [ext_resource type="Texture2D" uid="uid://bjwiap8hremjv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Start_BTN.png" id="2_wsuxf"]
+[ext_resource type="Texture2D" uid="uid://dwwrjyiygogy8" path="res://Spaceship/Antrieb.png" id="3_1vqkt"]
 [ext_resource type="Texture2D" uid="uid://cjtinx5n70fok" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Exit_BTN.png" id="3_ivrra"]
 [ext_resource type="AudioStream" uid="uid://bi3iatw3mdl4k" path="res://Sounds/GUI/ObservingTheStar/ObservingTheStar.ogg" id="5_8gbue"]
 [ext_resource type="Texture2D" uid="uid://lbnnbd8k873h" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/Info_BTN.png" id="6_3nmul"]
@@ -15,10 +17,12 @@
 [ext_resource type="Texture2D" uid="uid://hj17166r8rf1" path="res://Gui/Title/Title-2.png" id="10_xhbly"]
 [ext_resource type="Texture2D" uid="uid://dn43w366x4wym" path="res://Gui/Title/Title-3.png" id="11_frs5b"]
 [ext_resource type="Texture2D" uid="uid://6wsqba14xunb" path="res://Gui/Title/Title-4.png" id="12_p4xgq"]
+[ext_resource type="Texture2D" uid="uid://dnpmglfi0qxn" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Win/Window.png" id="13_4bc55"]
 [ext_resource type="Texture2D" uid="uid://depqbkq1xh5q" path="res://Erde/earth.png" id="13_61s3c"]
 [ext_resource type="Texture2D" uid="uid://cx2bjo3q4fdif" path="res://Erde/earth1.png" id="14_toeog"]
 [ext_resource type="Texture2D" uid="uid://dqersn35m0l8r" path="res://Erde/earth Kopie.png" id="15_gjb8d"]
 [ext_resource type="Texture2D" uid="uid://f38ri6yg6du0" path="res://Erde/earth Kopie 2.png" id="16_xrbxy"]
+[ext_resource type="Texture2D" uid="uid://bdhqpyb7pg7l7" path="res://Gui/Space_Game_GUI_PNG/PNG/Rating/Window.png" id="20_222lp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vulfq"]
 animations = [{
@@ -42,6 +46,31 @@ animations = [{
 
 [node name="Menü" type="Node2D"]
 script = ExtResource("1_ynd03")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-820, 186)
+rotation = 1.57242
+scale = Vector2(0.204172, 0.277997)
+texture = ExtResource("2_gb258")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-4.29476, 273.39)
+rotation = -1.58498
+scale = Vector2(1.66508, 0.778367)
+texture = ExtResource("3_1vqkt")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(881, -209)
+rotation = 1.57242
+scale = Vector2(0.204172, 0.277997)
+texture = ExtResource("2_gb258")
+flip_v = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D2"]
+position = Vector2(-0.603098, -273.384)
+rotation = 1.56389
+scale = Vector2(1.69318, 0.599361)
+texture = ExtResource("3_1vqkt")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -138,13 +167,35 @@ offset_bottom = 216.0
 icon = ExtResource("8_pisru")
 expand_icon = true
 
-[node name="FAQ" type="Button" parent="."]
-offset_left = 95.0
-offset_top = 165.0
-offset_right = 144.0
-offset_bottom = 215.0
-icon = ExtResource("9_wpsg6")
-expand_icon = true
+[node name="Sprite2D3" type="Sprite2D" parent="Settings"]
+visible = false
+position = Vector2(26, -81)
+scale = Vector2(0.166489, 0.155556)
+texture = ExtResource("13_4bc55")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/Sprite2D3"]
+offset_left = -402.428
+offset_top = -520.714
+offset_right = 425.572
+offset_bottom = -365.714
+theme_override_font_sizes/normal_font_size = 77
+text = "   Schwierigkeitsgrad"
+
+[node name="Simple" type="Button" parent="Settings/Sprite2D3"]
+offset_left = -330.352
+offset_top = -212.143
+offset_right = 347.648
+offset_bottom = -69.1428
+theme_override_font_sizes/font_size = 67
+text = "Simple"
+
+[node name="Hard" type="Button" parent="Settings/Sprite2D3"]
+offset_left = -324.345
+offset_top = 128.571
+offset_right = 353.655
+offset_bottom = 271.571
+theme_override_font_sizes/font_size = 67
+text = "Hard"
 
 [node name="A" type="Sprite2D" parent="."]
 position = Vector2(-178.5, -158)
@@ -175,6 +226,41 @@ autoplay = "idle"
 frame = 2
 frame_progress = 0.116772
 
+[node name="FAQ" type="Button" parent="."]
+offset_left = 95.0
+offset_top = 165.0
+offset_right = 144.0
+offset_bottom = 215.0
+icon = ExtResource("9_wpsg6")
+expand_icon = true
+
+[node name="Sprite2D" type="Sprite2D" parent="FAQ"]
+visible = false
+position = Vector2(26, -90)
+scale = Vector2(0.164096, 0.134107)
+texture = ExtResource("20_222lp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FAQ/Sprite2D"]
+offset_left = -434.0
+offset_top = -670.0
+offset_right = 451.0
+offset_bottom = 659.0
+theme_override_font_sizes/normal_font_size = 74
+text = "                  FAQ
+
+F: Wieviele möglichkeiten gibt es zu Gewinnen?
+A: 2
+
+F: Kann man das Spiel neustarten?
+A: Nein"
+
+[node name="Exit_Faq" type="Button" parent="FAQ/Sprite2D"]
+offset_left = -212.67
+offset_top = 516.078
+offset_right = 205.33
+offset_bottom = 670.078
+icon = ExtResource("3_ivrra")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
@@ -182,4 +268,8 @@ frame_progress = 0.116772
 [connection signal="pressed" from="Info" to="." method="_on_info_pressed"]
 [connection signal="pressed" from="Rating" to="." method="_on_rating_pressed"]
 [connection signal="pressed" from="Rating/Sprite2D/Exit_List" to="." method="_on_exit_list_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Settings/Sprite2D3/Simple" to="." method="_on_simple_pressed"]
+[connection signal="pressed" from="Settings/Sprite2D3/Hard" to="." method="_on_hard_pressed"]
 [connection signal="pressed" from="FAQ" to="." method="_on_faq_pressed"]
+[connection signal="pressed" from="FAQ/Sprite2D/Exit_Faq" to="." method="_on_exit_faq_pressed"]

@@ -13,11 +13,12 @@ script = ExtResource("1_t36e7")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -42.0
+offset_left = -48.0
 offset_top = 1.0
-offset_right = 18.0
+offset_right = 12.0
 offset_bottom = 99.0
 grow_horizontal = 0
+scale = Vector2(0.994601, 1.01285)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

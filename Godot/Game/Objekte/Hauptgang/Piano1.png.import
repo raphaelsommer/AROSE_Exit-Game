@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci1gh1nxruf3t"
-path="res://.godot/imported/Ship_Main_Icon.png-ff74333cd3455a77e08a42308037f98f.ctex"
+uid="uid://df2lwp6dxtxrw"
+path="res://.godot/imported/Piano1.png-f167d7cd7c5dda066759fd4abfe42bdf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gui/Space_Game_GUI_PNG/PNG/Ship_Parts/Ship_Main_Icon.png"
-dest_files=["res://.godot/imported/Ship_Main_Icon.png-ff74333cd3455a77e08a42308037f98f.ctex"]
+source_file="res://Objekte/Hauptgang/Piano1.png"
+dest_files=["res://.godot/imported/Piano1.png-f167d7cd7c5dda066759fd4abfe42bdf.ctex"]
 
 [params]
 

@@ -1,27 +1,10 @@
 extends Node2D
 
-const MQTT = preload("res://addons/mqtt/mqtt.gd")
-var mqtt = MQTT.new()
-
-
-
-
-func _ready():
-	mqtt.connect_to_broker("localhost")
-	#mqtt.user = "rsMac"
-	#mqtt.pswd = "rsMacArose1234!"
-	#mqtt.client_id = "rsMac"
-	mqtt.publish("/test", "hallo", false, 0)
-	
-	
-	
-	
-	
-func _on_mqtt_connection_error():
-	print ("Fehler beim Verbinden")
-	
-	
-	
-	
+func _process(delta):
+	if(Global.door_a4 == 0):
+		$AnimatedSprite2D.play("opens")
+		$AudioStreamPlayer2D.play()
+		$CharacterBody2D.collision_layer = 2
+		Global.door_a4 = 1
 
 

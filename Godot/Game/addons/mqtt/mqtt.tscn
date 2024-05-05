@@ -4,3 +4,4 @@
 
 [node name="MQTT" type="Node"]
 script = ExtResource("1_unkqx")
+client_id = "rr2615764379"

@@ -1,21 +1,33 @@
-[gd_scene load_steps=46 format=3 uid="uid://csr2iccem55o2"]
+[gd_scene load_steps=79 format=3 uid="uid://csr2iccem55o2"]
 
 [ext_resource type="Texture2D" uid="uid://chypa8pvqoa25" path="res://Game-Map/Main_Gate/End_Left/Main-Gate-End-Left-1.png" id="1_pix7x"]
 [ext_resource type="Script" path="res://Skripte/Main-Gate.gd" id="1_ybx1y"]
 [ext_resource type="Texture2D" uid="uid://ceg24kgt155m5" path="res://Game-Map/Main_Gate/End_Right/Main-Gate-End-Right.png" id="2_j2dn2"]
+[ext_resource type="Texture2D" uid="uid://ci1gh1nxruf3t" path="res://Objekte/Hauptgang/Ship_Main_Icon.png" id="2_yq83s"]
 [ext_resource type="Texture2D" uid="uid://cao6mvkgirrhx" path="res://Game-Map/Main_Gate/Middle/Main-Gate-Middle-1.png" id="3_got4r"]
+[ext_resource type="Texture2D" uid="uid://dwwrjyiygogy8" path="res://Spaceship/Antrieb.png" id="3_nxvkg"]
+[ext_resource type="Texture2D" uid="uid://mvt6xodc1ulj" path="res://Objekte/Hauptgang/rocket animated.png" id="4_gs68c"]
 [ext_resource type="Texture2D" uid="uid://mi7iw1rvurod" path="res://Game-Map/Main_Gate/Middle/Main-Gate-Middle-2.png" id="4_la8xg"]
 [ext_resource type="Texture2D" uid="uid://dwtjyvkx0g3t1" path="res://Game-Map/Main_Gate/Middle/Main-Gate-Middle-3.png" id="5_0y0hr"]
+[ext_resource type="Texture2D" uid="uid://86s5rortv8na" path="res://Effekte/Explosion/sprites/explosion-animation1.png" id="5_iftxu"]
+[ext_resource type="Texture2D" uid="uid://34mn0upncnsv" path="res://Effekte/Explosion/sprites/explosion-animation2.png" id="6_b5mq8"]
 [ext_resource type="Texture2D" uid="uid://7oy3p3o0hqvr" path="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Objects/DoorOpen.png" id="6_m7wpk"]
 [ext_resource type="AudioStream" uid="uid://dhuwocr2q31uf" path="res://Sounds/Haupgang/projects/MyVeryOwnDeadShip.ogg" id="6_xiexq"]
+[ext_resource type="Texture2D" uid="uid://bo1ppdsvm7d8r" path="res://Effekte/Explosion/sprites/explosion-animation3.png" id="7_dlhwe"]
 [ext_resource type="PackedScene" uid="uid://bla874ul27aiy" path="res://Szenen/Door-x-achse.tscn" id="7_offx1"]
+[ext_resource type="Texture2D" uid="uid://cm5ktv5af7p8v" path="res://Effekte/Explosion/sprites/explosion-animation4.png" id="8_5th2s"]
 [ext_resource type="PackedScene" uid="uid://b52hksdnkoo4u" path="res://Szenen/Main-door.tscn" id="8_wwvyy"]
+[ext_resource type="Texture2D" uid="uid://xiprhyqk6sr0" path="res://Effekte/Explosion/sprites/explosion-animation5.png" id="9_ubh5i"]
+[ext_resource type="Texture2D" uid="uid://ddxpv2gs408kq" path="res://Effekte/Explosion/sprites/explosion-animation6.png" id="10_axiuc"]
+[ext_resource type="Texture2D" uid="uid://brbxsepf5t20x" path="res://Effekte/Explosion/sprites/explosion-animation7.png" id="11_6vfnp"]
 [ext_resource type="PackedScene" uid="uid://3ga25umycrds" path="res://Szenen/Door-x-achse-4.tscn" id="11_fmmal"]
 [ext_resource type="PackedScene" uid="uid://pnodf86gr4xv" path="res://Szenen/Door-x-achse-2.tscn" id="11_m81kn"]
 [ext_resource type="PackedScene" uid="uid://djeclnf0t85n3" path="res://Szenen/Charakter-1.tscn" id="11_mv8gp"]
 [ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="12_5oexh"]
+[ext_resource type="Texture2D" uid="uid://dskhxblhatpm0" path="res://Effekte/Explosion/sprites/explosion-animation8.png" id="12_i4nqy"]
 [ext_resource type="PackedScene" uid="uid://d2xwvt7fhko4n" path="res://Szenen/Coin.tscn" id="12_jfuyw"]
 [ext_resource type="PackedScene" uid="uid://d6ojv3wob75r" path="res://Szenen/Door-x-achse-3.tscn" id="12_l4qw1"]
+[ext_resource type="Texture2D" uid="uid://badikj6md4e4a" path="res://Effekte/Explosion/sprites/explosion-animation9.png" id="13_1kc7i"]
 [ext_resource type="PackedScene" uid="uid://bv6f40so75sdp" path="res://Szenen/Door-x-achse-5.tscn" id="13_qp5te"]
 [ext_resource type="PackedScene" uid="uid://0rrgar1upijj" path="res://Szenen/Door-x-achse-6.tscn" id="14_8gxyx"]
 [ext_resource type="PackedScene" uid="uid://dq776m1pqih7e" path="res://Szenen/Door-x-asche-7.tscn" id="15_fnyd1"]
@@ -35,6 +47,64 @@
 [ext_resource type="Texture2D" uid="uid://demxwu1kdg5o5" path="res://Objekte/Hauptgang/redlight.png" id="32_im6nf"]
 [ext_resource type="Texture2D" uid="uid://22c2blfiopbt" path="res://Objekte/Hauptgang/greenlight.png" id="33_vjuqp"]
 [ext_resource type="AudioStream" uid="uid://bsbh8tiltkccg" path="res://Sounds/Effects/Party Sector.mp3" id="34_wvyl4"]
+[ext_resource type="Texture2D" uid="uid://csi4ae7olsy63" path="res://Objekte/Hauptgang/Lamp-off.png" id="36_flyc6"]
+[ext_resource type="Texture2D" uid="uid://deonf3wk6okqd" path="res://Objekte/Hauptgang/Lamp-on.png" id="37_x5erc"]
+[ext_resource type="Texture2D" uid="uid://dqv3gwnrd7mfh" path="res://Objekte/Hauptgang/hanging-terminal.png" id="38_k55u1"]
+[ext_resource type="Texture2D" uid="uid://2a4so7v8y7ud" path="res://Objekte/Hauptgang/Leer.png" id="39_s11g2"]
+[ext_resource type="Texture2D" uid="uid://df2lwp6dxtxrw" path="res://Objekte/Hauptgang/Piano1.png" id="40_4nhfl"]
+[ext_resource type="AudioStream" uid="uid://ywmlnl830ekm" path="res://Sounds/Effects/yd-Sounds/explosion07.wav" id="53_26ek5"]
+[ext_resource type="Texture2D" uid="uid://cmiw5mvqr4e8k" path="res://Objekte/Hauptgang/BlackButton-Active.png" id="54_p0upy"]
+[ext_resource type="Texture2D" uid="uid://u8pmbgdamtq8" path="res://Objekte/Hauptgang/gcAppleIIPaddles.png" id="55_7dkaf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jm20p"]
+size = Vector2(34.9753, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcqwe"]
+size = Vector2(34.7526, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_003yn"]
+size = Vector2(328.35, 136.283)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5hhv6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_iftxu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_b5mq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dlhwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5th2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ubh5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_axiuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6vfnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_i4nqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_1kc7i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_s11g2")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1beu"]
+size = Vector2(328.266, 136.234)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lptt5"]
 texture = ExtResource("1_pix7x")
@@ -3021,8 +3091,122 @@ size = Vector2(38, 47)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cdxh1"]
 size = Vector2(20, 128)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_nh5v1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_flyc6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_x5erc")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_poktt"]
+size = Vector2(85.4118, 143.49)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akbwn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39_s11g2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_0xqtp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txdep"]
+size = Vector2(1007.32, 834.768)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8a1lq"]
+size = Vector2(20, 257)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4017"]
+size = Vector2(85, 91)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqlmr"]
+size = Vector2(102.537, 139.15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcrld"]
+size = Vector2(69, 81)
+
 [node name="Main-Gate" type="Node2D"]
 script = ExtResource("1_ybx1y")
+
+[node name="Rocket" type="Sprite2D" parent="."]
+position = Vector2(-2430.04, 140.854)
+rotation = -0.000458945
+scale = Vector2(0.321963, 0.264732)
+skew = 0.000556946
+texture = ExtResource("4_gs68c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocket"]
+position = Vector2(-33.8615, -0.020462)
+scale = Vector2(0.228615, 0.0776424)
+texture = ExtResource("3_nxvkg")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Rocket" groups=["Dead"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket/CharacterBody2D"]
+position = Vector2(7.48779, -3.05176e-05)
+shape = SubResource("RectangleShape2D_jm20p")
+
+[node name="Rocket2" type="Sprite2D" parent="."]
+position = Vector2(-2430.04, 112.854)
+rotation = -0.000458945
+scale = Vector2(0.324852, 0.246766)
+skew = 0.000556946
+texture = ExtResource("4_gs68c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocket2"]
+position = Vector2(-36.9401, -0.0223324)
+scale = Vector2(0.246423, 0.0950246)
+texture = ExtResource("3_nxvkg")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Rocket2" groups=["Dead"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket2/CharacterBody2D"]
+position = Vector2(7.37646, -6.10352e-05)
+shape = SubResource("RectangleShape2D_bcqwe")
+
+[node name="CharacterBody2D3" type="CharacterBody2D" parent="." groups=["Ship"]]
+position = Vector2(-2020, 124)
+rotation = 1.56958
+scale = Vector2(0.246766, 0.324852)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D3"]
+position = Vector2(-2.06326, 58.1411)
+shape = SubResource("RectangleShape2D_003yn")
+
+[node name="Ship" type="Sprite2D" parent="CharacterBody2D3"]
+texture = ExtResource("2_yq83s")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D3/Ship"]
+position = Vector2(-4.46237, 255.497)
+rotation = -1.55305
+scale = Vector2(1.52723, 0.628274)
+texture = ExtResource("3_nxvkg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D3/Ship"]
+position = Vector2(8.01101, 58.4959)
+scale = Vector2(4.31107, 7.10229)
+sprite_frames = SubResource("SpriteFrames_5hhv6")
+animation = &"explosion"
+frame = 9
+frame_progress = 1.0
+
+[node name="Dead" type="Area2D" parent="CharacterBody2D3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D3/Dead"]
+position = Vector2(-2.11017, 58.1157)
+shape = SubResource("RectangleShape2D_b1beu")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_pbqo0")
@@ -3043,7 +3227,7 @@ position = Vector2(605, 18)
 [node name="Door-x-achse-2" parent="." instance=ExtResource("11_m81kn")]
 position = Vector2(-597, -71)
 
-[node name="Node2D" parent="." instance=ExtResource("12_l4qw1")]
+[node name="Door-x-ache3" parent="." instance=ExtResource("12_l4qw1")]
 position = Vector2(-262, -71)
 
 [node name="Door-x-achse-4" parent="." instance=ExtResource("11_fmmal")]
@@ -3178,7 +3362,7 @@ theme_override_font_sizes/normal_font_size = 17
 text = "Sauerstoff + 9min"
 
 [node name="Player1" parent="." instance=ExtResource("11_mv8gp")]
-position = Vector2(-782, -48)
+position = Vector2(330, -39)
 
 [node name="Player2" parent="." instance=ExtResource("29_uvg72")]
 position = Vector2(1553, -42)
@@ -3326,7 +3510,133 @@ max_distance = 300.0
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_xiexq")
 
+[node name="Lamp" type="AnimatedSprite2D" parent="."]
+position = Vector2(1495, -119)
+scale = Vector2(0.291667, 0.267857)
+sprite_frames = SubResource("SpriteFrames_nh5v1")
+animation = &"on"
+autoplay = "on"
+frame_progress = 0.507939
+
+[node name="Comp_1" type="Sprite2D" parent="."]
+position = Vector2(-692, -113)
+scale = Vector2(0.772727, 0.836207)
+texture = ExtResource("38_k55u1")
+
+[node name="Comp" type="Area2D" parent="Comp_1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Comp_1/Comp"]
+position = Vector2(-9.70587, 61.7448)
+shape = SubResource("RectangleShape2D_poktt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Comp_1"]
+visible = false
+position = Vector2(57.5883, 58.1495)
+scale = Vector2(0.546569, 0.470668)
+texture = ExtResource("37_x5erc")
+
+[node name="Light_Lamp" type="AnimatedSprite2D" parent="."]
+position = Vector2(1500, -27)
+scale = Vector2(0.0834372, 0.023125)
+sprite_frames = SubResource("SpriteFrames_akbwn")
+autoplay = "default"
+frame_progress = 0.241039
+
+[node name="Piano1" type="Area2D" parent="."]
+position = Vector2(-1025, -81)
+scale = Vector2(0.111076, 0.105418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Piano1"]
+position = Vector2(-765.242, 341.496)
+shape = SubResource("RectangleShape2D_txdep")
+
+[node name="Piano" type="Sprite2D" parent="Piano1"]
+visible = false
+texture = ExtResource("40_4nhfl")
+
+[node name="Shoot" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shoot"]
+visible = false
+position = Vector2(-1142, 154)
+shape = SubResource("RectangleShape2D_8a1lq")
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("53_26ek5")
+
+[node name="Ship2" type="Sprite2D" parent="."]
+position = Vector2(570, -245)
+rotation = -1.57811
+scale = Vector2(0.272419, 0.344798)
+texture = ExtResource("2_yq83s")
+
+[node name="Barriere" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barriere"]
+position = Vector2(1065, -163)
+shape = SubResource("RectangleShape2D_i4017")
+
+[node name="Barriere2" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barriere2"]
+position = Vector2(1421, -159)
+shape = SubResource("RectangleShape2D_i4017")
+
+[node name="Comp_2" type="Sprite2D" parent="."]
+position = Vector2(-340, -112)
+scale = Vector2(0.770455, 0.851724)
+texture = ExtResource("38_k55u1")
+
+[node name="Comp2" type="Area2D" parent="Comp_2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Comp_2/Comp2"]
+position = Vector2(-0.648956, 59.5749)
+shape = SubResource("RectangleShape2D_yqlmr")
+
+[node name="Button" type="Sprite2D" parent="Comp_2"]
+visible = false
+position = Vector2(46.7257, 24.6559)
+scale = Vector2(0.0844396, 0.0689576)
+texture = ExtResource("54_p0upy")
+
+[node name="RFID" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RFID"]
+position = Vector2(435.5, -42.5)
+shape = SubResource("RectangleShape2D_kcrld")
+
+[node name="Sprite2D" type="Sprite2D" parent="RFID"]
+visible = false
+position = Vector2(468, -70)
+scale = Vector2(0.65625, 0.59375)
+texture = ExtResource("55_7dkaf")
+
+[node name="RFID2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RFID2"]
+position = Vector2(704, -42)
+shape = SubResource("RectangleShape2D_kcrld")
+
+[node name="Sprite2D" type="Sprite2D" parent="RFID2"]
+visible = false
+position = Vector2(668, -71)
+scale = Vector2(0.625, 0.53125)
+texture = ExtResource("55_7dkaf")
+flip_h = true
+
+[connection signal="body_entered" from="CharacterBody2D3/Dead" to="." method="_on_dead_body_entered"]
 [connection signal="ready" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_ready"]
 [connection signal="body_entered" from="pc/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="pc/Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="Gravity" to="." method="_on_gravity_body_entered"]
+[connection signal="body_entered" from="Comp_1/Comp" to="." method="_on_comp_body_entered"]
+[connection signal="body_exited" from="Comp_1/Comp" to="." method="_on_comp_body_exited"]
+[connection signal="body_entered" from="Piano1" to="." method="_on_piano_1_body_entered"]
+[connection signal="body_exited" from="Piano1" to="." method="_on_piano_1_body_exited"]
+[connection signal="body_entered" from="Shoot" to="." method="_on_shoot_body_entered"]
+[connection signal="body_entered" from="Comp_2/Comp2" to="." method="_on_comp_2_body_entered"]
+[connection signal="body_exited" from="Comp_2/Comp2" to="." method="_on_comp_2_body_exited"]
+[connection signal="body_entered" from="RFID" to="." method="_on_rfid_body_entered"]
+[connection signal="body_exited" from="RFID" to="." method="_on_rfid_body_exited"]
+[connection signal="body_entered" from="RFID2" to="." method="_on_rfid_2_body_entered"]
+[connection signal="body_exited" from="RFID2" to="." method="_on_rfid_2_body_exited"]
