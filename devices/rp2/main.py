@@ -5,6 +5,7 @@ from paho.mqtt.packettypes import PacketTypes
 import threading
 import RPi.GPIO as GPIO
 import logging
+import os
 
 from midi_ip_game import MidiIpGame
 from general_timer import Timer
@@ -14,6 +15,7 @@ from button_sequence_game import ButtonSequenceGame
 MQTT_BROKER = "192.168.0.102"  # Beispiel-Broker, ersetze diesen durch deinen Broker
 MQTT_PORT = 1883
 MQTT_TRANSPORT_PROTOCOL = "tcp"
+CLIENT_ID = "rp2"
 
 ### Needed MQTT Topics
 MQTT_TOPIC_RP2 = "/rp2"  # will
@@ -42,8 +44,11 @@ MainTimer = Timer()
 ButtonGame = ButtonSequenceGame()
 
 # Set up the logger
-logging.basicConfig(filename="rp2.log", format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+log_directory = "/home/rsommer/dhbw-wwi23h-systemanalyse-team1/devices/rp2"
+os.makedirs(log_directory, exist_ok=True)
+log_file = os.path.join(log_directory, "rp2.log")
 Logger = logging.getLogger("RP2")
+logging.basicConfig(filename=log_file, level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 # Set up GPIO mode once
 GPIO.setmode(GPIO.BCM)
@@ -67,18 +72,19 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'off':
         print("Button-Sequence started")
         isStartButtonSequence = True
+    Logger.info("Received message: " + msg.payload.decode("utf-8"))
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print("Connected: " + str(reason_code))
-    #logging.info("Connected client " + client + " with reason code: " + str(reason_code))
+    Logger.info("Connected client " + CLIENT_ID + " with reason code: " + str(reason_code))
 
 def on_connect_fail(client, userdata, properties, reason_code):
     print("Connection failed: " + str(reason_code))
-    #logging.ERROR("Connection failed with reason code: " + str(reason_code))
+    Logger.ERROR("Connection failed with reason code: " + str(reason_code))
 
-def on_disconnect(client, userdata, reason_code):
+def on_disconnect(client, userdata, flags, reason_code, properties):
     print("Disconnected: " + str(reason_code))
-    #logging.info("Disconnected client " + client + " with reason code: " + str(reason_code))
+    Logger.info("Disconnected client " + CLIENT_ID + " with reason code: " + str(reason_code))
 
 def on_log(client, userdata, level, buf):
     if level == 1 or level == 2:
@@ -91,7 +97,7 @@ def on_log(client, userdata, level, buf):
         Logger.debug(buf)
 
 ##### Client Setup
-client = mqtt.Client(client_id="rp2", protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+client = mqtt.Client(client_id=CLIENT_ID, protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 client.username_pw_set(username="rp2", password="rp2Arose1234!")
 client.on_connect = on_connect
 client.on_message = on_message
@@ -100,7 +106,7 @@ client.on_connect_fail = on_connect_fail
 client.on_log = lambda client, userdata, level, buf: Logger.log(level, buf)
 properties = Properties(PacketTypes.CONNECT)
 client.enable_logger()
-client.will_set(MQTT_TOPIC_RP2, payload=MainTimer.getRestTimeInSeconds, qos=2, retain=True)
+client.will_set(MQTT_TOPIC_RP2, payload=f"{MainTimer.getRestTimeInSeconds}", qos=2, retain=True)
 client.connect(MQTT_BROKER, MQTT_PORT, properties=properties, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
 client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 0), (MQTT_TOPIC_A5_PIANO, 2), (MQTT_TOPIC_B2_GRAVITY, 2)])
@@ -161,3 +167,10 @@ finally:
     GPIO.cleanup()
     client.disconnect()
     client.loop_stop()
+    #if os.path.exists(log_file):
+    #    with open(log_file, 'r') as file:
+    #        log_contents = file.read()
+    #    print(log_contents)
+    #else:
+    #    print("Log file not found!")
+    Logger.shutdown()
