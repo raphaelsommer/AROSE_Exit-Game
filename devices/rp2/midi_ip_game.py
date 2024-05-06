@@ -73,7 +73,16 @@ class MidiIpGame:
     ### Define a method to get the status of the IP Game for the main.py file    
     def getFinished(self):
         return self.areBothIPsRight
+    
+    ### Define a method to show 'Game Over' on the LCD Display when the timer runs out
+    def showGameOver(self):
+        for i in range(3):
+            self.lcd.clear()
+            self.lcd.message('Game Over!')
+            time.sleep(2)
+            self.lcd.clear()
 
+    
     ### Define a method to start the IP Game from the main.py file
     def startGame(self):
         self.lcd.message('Enter door IPs\non the Piano')
