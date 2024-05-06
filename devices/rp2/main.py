@@ -72,11 +72,12 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'off':
         print("Button-Sequence started")
         isStartButtonSequence = True
-    Logger.info("Received message: " + msg.payload.decode("utf-8"))
+    Logger.info("Received topic: " + msg.topic.decode("utf-8") + ", message: " + msg.payload.decode("utf-8"))
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print("Connected: " + str(reason_code))
     Logger.info("Connected client " + CLIENT_ID + " with reason code: " + str(reason_code))
+    client.publish(topic=MQTT_TOPIC_RP2, payload="connected", qos=2, retain=True)
 
 def on_connect_fail(client, userdata, properties, reason_code):
     print("Connection failed: " + str(reason_code))
@@ -96,6 +97,7 @@ def on_log(client, userdata, level, buf):
     else:
         Logger.debug(buf)
 
+
 ##### Client Setup
 client = mqtt.Client(client_id=CLIENT_ID, protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 client.username_pw_set(username="rp2", password="rp2Arose1234!")
@@ -103,7 +105,7 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.on_disconnect = on_disconnect
 client.on_connect_fail = on_connect_fail
-client.on_log = lambda client, userdata, level, buf: Logger.log(level, buf)
+client.on_log = on_log
 properties = Properties(PacketTypes.CONNECT)
 client.enable_logger()
 client.will_set(MQTT_TOPIC_RP2, payload=f"{MainTimer.getRestTimeInSeconds}", qos=2, retain=True)
@@ -112,22 +114,24 @@ client.loop_start()  # Starte den MQTT-Client im Hintergrund
 client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 0), (MQTT_TOPIC_A5_PIANO, 2), (MQTT_TOPIC_B2_GRAVITY, 2)])
 
 
+
 stop = False
 threads_started = {thread1: False, thread2: False, thread3: False}
+
 try:
     while not stop:
         if not thread1.is_alive() and not threads_started[thread1] and isStartTimer:
-            isStartTimer = False
+            #isStartTimer = False
             thread1 = threading.Thread(target=MainTimer.startTimer)
             thread1.start()
             threads_started[thread1] = True
         if not thread3.is_alive() and not threads_started[thread3] and isStartMidiIpGame:
-            isStartMidiIpGame = False
+            #isStartMidiIpGame = False
             thread3 = threading.Thread(target=MIDIIpGame.startGame)
             thread3.start()
             threads_started[thread3] = True
         if not thread2.is_alive() and not threads_started[thread2] and isStartButtonSequence:
-            isStartButtonSequence = False
+            #isStartButtonSequence = False
             thread2 = threading.Thread(target=ButtonGame.startGame)
             thread2.start()
             threads_started[thread2] = True
@@ -160,10 +164,19 @@ try:
 
 
 except KeyboardInterrupt:
-    MainTimer.stopTimer()
-    MIDIIpGame.stopGame()
-    ButtonGame.stopGame()
+    if isStartTimer:
+        MainTimer.stopTimer()
+    if isStartMidiIpGame:
+        MIDIIpGame.stopGame()
+    if isStartButtonSequence:
+        ButtonGame.stopGame()
 finally:
+    if not isStoppedTimer:
+        MainTimer.stopTimer()
+    if not isStoppedMidiIpGame:
+        MIDIIpGame.stopGame()
+    if not isStoppedButtonSequence:
+        ButtonGame.stopGame()
     GPIO.cleanup()
     client.disconnect()
     client.loop_stop()
