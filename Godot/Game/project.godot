@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Skripte/Global.gd"
+MQTT_Client="*res://Skripte/MQTT_Client.gd"
+MQTT="*res://Skripte/MQTT.gd"
 
 [display]
 

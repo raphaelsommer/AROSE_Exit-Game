@@ -1,4 +1,4 @@
-@tool extends Node
+extends Node
 #192.168.0.102 1883
 # MQTT client implementation in GDScript
 # Loosely based on https://github.com/pycom/pycom-libraries/blob/master/lib/mqtt/mqtt.py
@@ -8,19 +8,15 @@
 # mosquitto_sub -h test.mosquitto.org -v -t "metest/#"
 # mosquitto_pub -h test.mosquitto.org -t "metest/retain" -m "retained message" -r
 
-@export var client_id = ""
+@export var client_id = "rsMac"
 @export var verbose_level = 2  # 0 quiet, 1 connections and subscriptions, 2 all messages
 @export var binarymessages = false
 @export var pinginterval = 30
 
-var socket = null
-var sslsocket = null
-var websocket = null
+var socket = true
 
 const BCM_NOCONNECTION = 0
-const BCM_WAITING_WEBSOCKET_CONNECTION = 1
 const BCM_WAITING_SOCKET_CONNECTION = 2
-const BCM_WAITING_SSL_SOCKET_CONNECTION = 3
 const BCM_FAILED_CONNECTION = 5
 const BCM_WAITING_CONNMESSAGE = 10
 const BCM_WAITING_CONNACK = 19
@@ -31,9 +27,6 @@ var brokerconnectmode = BCM_NOCONNECTION
 var regexbrokerurl = RegEx.new()
 
 const DEFAULTBROKERPORT_TCP = 1883
-const DEFAULTBROKERPORT_SSL = 8886
-const DEFAULTBROKERPORT_WS = 8080
-const DEFAULTBROKERPORT_WSS = 8081
 
 const CP_PINGREQ = 0xc0
 const CP_PINGRESP = 0xd0
@@ -47,8 +40,8 @@ const CP_SUBACK = 0x90
 const CP_UNSUBACK = 0xb0
 
 var pid = 0
-var user = null
-var pswd = null
+var user = "rsMac"
+var pswd = "rsMacArose1234!"
 var keepalive = 120
 var lw_topic = null
 var lw_msg = null
@@ -67,58 +60,26 @@ var common_name = null
 
 func senddata(data):
 	var E = 0
-	if sslsocket != null:
-		E = sslsocket.put_data(data)
-	elif socket != null:
+	if socket != null:
 		E = socket.put_data(data)
-	elif websocket != null:
-		E = websocket.put_packet(data)
 	if E != 0:
 		print("bad senddata packet E=", E)
 	
 func receiveintobuffer():
-	if sslsocket != null:
-		var sslsocketstatus = sslsocket.get_status()
-		if sslsocketstatus == StreamPeerTLS.STATUS_CONNECTED or sslsocketstatus == StreamPeerTLS.STATUS_HANDSHAKING:
-			sslsocket.poll()
-			var n = sslsocket.get_available_bytes()
-			if n != 0:
-				var sv = sslsocket.get_data(n)
-				assert (sv[0] == 0)  # error code
-				receivedbuffer.append_array(sv[1])
-				
-	elif socket != null and socket.get_status() == StreamPeerTCP.STATUS_CONNECTED:
+	if socket != null and socket.get_status() == StreamPeerTCP.STATUS_CONNECTED:
 		socket.poll()
 		var n = socket.get_available_bytes()
 		if n != 0:
 			var sv = socket.get_data(n)
 			assert (sv[0] == 0)  # error code
 			receivedbuffer.append_array(sv[1])
-			
-
-	elif websocket != null:
-		websocket.poll()
-		while websocket.get_available_packet_count() != 0:
-			receivedbuffer.append_array(websocket.get_packet())
 	
 var pingticksnext0 = 0
 
 func _process(delta):
 	if brokerconnectmode == BCM_NOCONNECTION:
 		pass
-	elif brokerconnectmode == BCM_WAITING_WEBSOCKET_CONNECTION:
-		websocket.poll()
-		var websocketstate = websocket.get_ready_state()
-		if websocketstate == WebSocketPeer.STATE_CLOSED:
-			if verbose_level:
-				print("WebSocket closed with code: %d, reason %s." % [websocket.get_close_code(), websocket.get_close_reason()])
-			brokerconnectmode = BCM_FAILED_CONNECTION
-			emit_signal("broker_connection_failed")
-		elif websocketstate == WebSocketPeer.STATE_OPEN:
-			brokerconnectmode = BCM_WAITING_CONNMESSAGE
-			if verbose_level:
-				print("Websocket connection now open")
-			
+	
 	elif brokerconnectmode == BCM_WAITING_SOCKET_CONNECTION:
 		socket.poll()
 		var socketstatus = socket.get_status()
@@ -129,35 +90,7 @@ func _process(delta):
 			emit_signal("broker_connection_failed")
 		if socketstatus == StreamPeerTCP.STATUS_CONNECTED:
 			brokerconnectmode = BCM_WAITING_CONNMESSAGE
-
-	elif brokerconnectmode == BCM_WAITING_SSL_SOCKET_CONNECTION:
-		socket.poll()
-		var socketstatus = socket.get_status()
-		if socketstatus == StreamPeerTCP.STATUS_ERROR:
-			if verbose_level:
-				print("TCP socket error before SSL")
-			brokerconnectmode = BCM_FAILED_CONNECTION
-			emit_signal("broker_connection_failed")
-		if socketstatus == StreamPeerTCP.STATUS_CONNECTED:
-			if sslsocket == null:
-				sslsocket = StreamPeerTLS.new()
-				if verbose_level:
-					print("Connecting socket to SSL with common_name=", common_name)
-				var E3 = sslsocket.connect_to_stream(socket, common_name)
-				if E3 != 0:
-					print("bad sslsocket.connect_to_stream E=", E3)
-					brokerconnectmode = BCM_FAILED_CONNECTION
-					emit_signal("broker_connection_failed")
-					sslsocket = null
-			if sslsocket != null:
-				sslsocket.poll()
-				var sslsocketstatus = sslsocket.get_status()
-				if sslsocketstatus == StreamPeerTLS.STATUS_CONNECTED:
-					brokerconnectmode = BCM_WAITING_CONNMESSAGE
-				elif sslsocketstatus >= StreamPeerTLS.STATUS_ERROR:
-					print("bad sslsocket.connect_to_stream")
-					emit_signal("broker_connection_failed")
-				
+	
 	elif brokerconnectmode == BCM_WAITING_CONNMESSAGE:
 		senddata(firstmessagetoserver())
 		brokerconnectmode = BCM_WAITING_CONNACK
@@ -238,16 +171,9 @@ func cleanupsockets(retval=false):
 	if verbose_level:
 		print("cleanupsockets")
 	if socket:
-		if sslsocket:
-			sslsocket = null
 		socket.disconnect_from_host()
 		socket = null
-	else:
-		assert (sslsocket == null)
 
-	if websocket:
-		websocket.close()
-		websocket = null
 	brokerconnectmode = BCM_NOCONNECTION
 	return retval
 
@@ -256,10 +182,8 @@ func connect_to_broker(brokerurl):
 	var brokerserver = brokerurl
 	var brokerport = 1883
 	
-	
-	common_name = null	
-	
 	socket = StreamPeerTCP.new()
+	
 	if verbose_level:
 		print("Connecting to %s:%s" % [brokerserver, brokerport])
 	var E = socket.connect_to_host(brokerserver, brokerport)
@@ -270,13 +194,12 @@ func connect_to_broker(brokerurl):
 	
 	return true
 
-
 func disconnect_from_server():
 	if brokerconnectmode == BCM_CONNECTED:
 		senddata(PackedByteArray([0xE0, 0x00]))
 		emit_signal("broker_disconnected")
 	cleanupsockets()
-	
+
 func publish(stopic, smsg, retain=false, qos=0):
 	var msg = smsg.to_ascii_buffer() if not binarymessages else smsg
 	var topic = stopic.to_ascii_buffer()
@@ -349,7 +272,6 @@ func unsubscribe(stopic):
 	if verbose_level:
 		print("UNSUBSCRIBE[%d] topic=%s" % [pid, stopic])
 	senddata(msg)
-	
 
 func wait_msg():
 	var n = receivedbuffer.size()
@@ -387,6 +309,32 @@ func wait_msg():
 		
 		if verbose_level >= 2:
 			print("received topic=", topic, " msg=", msg)
+			if topic == "/gen/global" and msg == "stop":
+				#get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
+				print("GAME OVER...")
+			elif topic == "/b3/morse" and msg == "finished":
+				Global.door_b3 = 0
+				Global.door_b4 = 0
+				Global.door_a4 = 0
+				print("Opened B3, B4 and A4")
+			elif topic == "/a3/buttons" and msg == "finished":
+				Global.door_a3 = 0
+				Global.door_a5 = 0
+				Global.door_b2 = 0
+				Global.gravity = 1
+				print("Opened B2, A3, A5 and re-established Gravity")
+			elif topic == "/c1/rfid" and msg == "finished":
+				Global.door_c1 = 0
+				print("Openend JnR")
+			elif topic == "/c0/ip" and msg == "finished":
+				Global.door_c0 = 0
+				print("Openend C0")
+			elif topic == "/rk/wire" and msg == "win":
+				Global.door_rk = 1
+				print("Openend RK -> GAME WON")
+			elif topic == "/rk/wire" and msg == "fail":
+				#get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
+				print("GAME OVER")
 		emit_signal("received_message", topic, msg)
 		
 		if op & 6 == 2:
