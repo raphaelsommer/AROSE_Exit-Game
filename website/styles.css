@@ -1,30 +1,110 @@
-*{
-    padding: 0;
+/* Basic reset */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-html{
-    height: 100%;
-}
-body{
 
+body {
+    font-family: Arial, sans-serif;
     background-image: url(SpaceShuttle.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-
-
-
- }
- .menu{
-    margin-top: 40px;
- }
-.menu-item {
-    margin-top: 20px;
-}
-button{
-    margin-right: 50px;
-    text-decoration: none;
-    color: none;
-    background-image: none;
+    background-position: center;
+   
     
+}
+
+.menu-bar {
+    display: flex; /* Ordnet die Elemente in einer Reihe an */
+    align-items: center;
+    width: calc(1065 / 1440 * 100%); 
+    justify-content: center; 
+    margin-left: calc(375 / 1440 / 2 * 100%);
+    margin-right: calc(375 / 1440 / 2 * 100%);
+}
+
+
+.logo {
+    height: calc(100 / 1440 * 100%); /* Größe des Logos in Relation zum Bildschirm */
+    width: calc(100 / 1440 * 100%); 
+    margin-right: calc(19 / 1440 * 100%);
+}
+
+.title {
+    color: rgb(255, 255, 255);
+    font-size: auto; /* Schriftgröße */
+    margin-right: calc(167 / 1440 * 100%); /* Abstand zwischen Titel und Menü */
+
+}
+
+.menu-button {
+    display:block;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-right: calc(50 / 1440 * 100%);
+   /* padding: 14px 20px; /* Platz um die Elemente der Klasse */
+    text-decoration: none; /* Entfernt die Link-Unterstreichung */
+    transition: background-color 0.3s; /* Zeitspanne für den Hover-Effekt */
+}
+.menu-button :last-child{
+    margin: 0;
+}
+
+.menu-button:hover {
+    background-color: #555; /* Farbe des Hover-Effekt */
+}
+
+.Vorgeschichte{
+    display: flex; 
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: calc(1065 / 1440 * 100%); 
+    justify-content: center; 
+    margin-left: calc(375 / 1440 / 2 * 100%);
+    margin-right: calc(375 / 1440 / 2 * 100%);
+}
+.Vorgeschichte_Textfeld{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Ausblick{
+    display: flex; 
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: calc(1065 / 1440 * 100%); 
+    justify-content: center; 
+    margin-left: calc(375 / 1440 / 2 * 100%);
+    margin-right: calc(375 / 1440 / 2 * 100%);
+
+}
+.Ausblick_Textfeld{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Spielanleitung{
+    display: flex; 
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: calc(1065 / 1440 * 100%); 
+    justify-content: center; 
+    margin-left: calc(375 / 1440 / 2 * 100%);
+    margin-right: calc(375 / 1440 / 2 * 100%);
+}
+.Spielanleitung_Eingabe{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.Spielanleitung_hiddenContent{
+    display: block;
+    align-items: center;
+    justify-content: center;
 }
