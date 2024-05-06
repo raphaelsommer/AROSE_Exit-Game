@@ -46,6 +46,7 @@ func _on_gravity_body_entered(body):
 
 func _ready():
 	#await get_tree().create_timer(5).timeout
+	#await get_tree().create_timer(5).timeout
 	pass
 
 

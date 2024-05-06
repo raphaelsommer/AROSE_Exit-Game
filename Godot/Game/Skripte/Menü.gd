@@ -4,7 +4,7 @@ extends Node2D
 
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file("res://Szenen/Start.tscn")
+	get_tree().change_scene_to_file("res://Szenen/Loading_Screen2.tscn")
 	
 
 

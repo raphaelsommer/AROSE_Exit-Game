@@ -18,10 +18,7 @@ func _process(delta):
 		$AnimatedSprite2D.play("opens")
 		$AudioStreamPlayer2D.play()
 		Global.door_c1 = 1
-		await get_tree().create_timer(2).timeout
-		if(Global.game_hard):
-			get_tree().change_scene_to_file("res://Szenen/Dino-Game 3.tscn")
-		elif(!Global.game_hard):
-			get_tree().change_scene_to_file("res://Szenen/Dino-Game.tscn")
+		await get_tree().create_timer(1).timeout
+		get_tree().change_scene_to_file("res://Szenen/Loading_Screen.tscn")
 		
 	
