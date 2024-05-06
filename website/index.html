@@ -4,49 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AROSE</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="dummy.css" media="screen"/>
     
 </head>
 <body>
-    <div>
-        <h1>AROSE</h1>
-        <div  class="menu">                                 <!--Überschrift + Menüleiste-->
-            <button class="menu-item">Vorgeschichte</button>
-            <button class="menu-item">Ausblick</button>
-            <button class="menu-item">Spielanleitung</button>
-            <button class="menu-item">Über Uns</button>
-         </div>
-     </div>
-<div>
-    <button>Vorgeschichte</button>
-    <div>
-        <h6>Leica</h6>
-        <div><p>Leica Vorgeschichte</p></div>
-        <h6>Juri</h6>
-        <div><p>Juri Vorgeschichte</p></div>
-    </div>
-</div>
 
-<div>
-    <button>Ausblick</button>
-    <div>  
-        <p>Sauerstoffmaschiene</p>
-        <p>Problem/Gefahr - Tiere einbeziehen</p>
-        <p>Rätsel um KI andeuten</p>
-        <p>Minigames in Bezug zur Story als Hürden vorstellen</p>
+    <div class="menu-bar">
+        <img src="Rose 1.jpeg" alt="Logo" class="logo">
+        <div class="title">AROSE</div>
+        <a href="#Vorgeschichte" class="menu-button">Vorgeschichte</a>
+        <a href="#Ausblick" class="menu-button">Ausblick</a>
+        <a href="#Spielanleitung" class="menu-button">Spielanleitung</a>
+        <a href="#Über Uns" class="menu-button">Über Uns</a>
     </div>
+       
+<div class="Vorgeschichte">
+    <section id="Vorgeschichte"><button class="Vorgeschichte_Titel">Vorgeschichte</button> <!--Hier werden die Abschnitte als buttons erstellt, damit man später etwas mit den verlinken kann-->
+        <div class="Vorgeschichte_Textfeld">
+            <div class="Vorgeschichte_Text_Abschnitt"><h6>Leica</h6>
+                <div class="Vorgeschichte_Text_Körper">
+                    <p>
+                        Lorem Ipsum
+                    </p>
+                </div>
+            </div>    
+
+            <div class="Vorgeschichte_Text_Abschnitt"><h6>Juri</h6>
+                <div class="Vorgeschichte_Text_Körper">
+                    <p>
+                        Lorem Ipsum
+                    </p>
+                </div>
+            </div>
+        </div></section>
+</div>
+<div class="Ausblick">
+    <section id="Ausblick"> <button>Ausblick</button>
+    <div class="Ausblick_Textfeld">  
+        <p>Es ist das Jahr 2030, Stuttgart 21 befindet sich in der letzten Bauphase.
+
+            Ein Problem besteht jedoch: Wohin sollen die Eidechsen umgesiedelt werden? Die Eröffnung des neuen Bahnhofs kann nicht zugelassen werden, bevor ein geeignetes Habitat für die Eidechsen gefunden wurde.
+
+            Auch wenn die Eidechsen bereits umgesiedelt wurden, wird man sie nicht los. Ein starkes Homing-Verhalten der Reptilien sorgt dazu, dass die Tiere es immer wieder zurück nach Stuttgart treibt. Es scheint so als würden sie es von überall auf der Welt zurück nach Stuttgart schaffen.
+
+            Der Betrieb des Bahnhofes kann so nicht starten. Doch die Astronomie könnte abhilfe leisten. Dank fortgeschrittenen Teleskopen und Satelliten konnte ein geeigneter Himmelskörper für die Eidechsen gefunden werden.
+
+            Das AROSE-Astronauten Team welches für den Auftrag beauftragt wurde ist bereits seit mehreren Jahren auf diesem Geschäftszweig tätig. Das AROSE Team besteht aus angesehenen Astronauten. Für das Wohlbefinden der Tiere während der Reise ist Leica zuständig. Auf der Technischen Seite wird das AROSE-Team von Juri geführt.
+
+            Als Vorbereitung auf die Mission mussten aufgrund des starken Homing-Verhaltens der Tiere besondere Schutzmaßnahmen getroffen werden. Die Käfige sind extra robust gebaut.
+
+            Das vierköpfige Astronauten-Team welches von einer brandneuen KI namens Hainrich unterstützt wird hatte einen erfolgreichen Start. Das erste Ziel war die Raumstation, um zu prüfen wie die Eidechsen mit den neuen Gegebenheiten klar kommen. Das AROSE-Team erreichte die Raumstation erfolgreich.
+
+            Die nächsten Tage waren für die weitere Planumsetzung vorgesehen. Denn die Eidechsen sollen mithilfe einer Raketen-Drohne zu dem neu entdeckten Himmelskörper gebracht werden.
+
+            Doch zwei Tage nach dem ankommen an der Raumstation zeigte sich plötzlich ein Problem, denn die Sauerstoffaufbereitungsmaschiene arbeitet unerklärlicherweise nicht mehr. Der Grund konnte noch nicht gefunden werden. Jedoch sind die Sauerstoffkapazitäten bereits an ihren Grenzen. Von der Crew sind alle bis auf Leica und Juri nicht mehr ansprechbar. Wie lange der Sauerstoff für Juri und Leica ausreicht ist unklar. Die beiden müssen die Rettung über die Rettungskapsel vorbereiten. Die Rettungskapsel muss in spätestens 18 Minuten von der Raumstation losgelöst werden.
+
+            Unterstützten kann ihre KI “ASTRA“/”Mr.Blkh”, doch warum verlangt sie aufeinmal Coins für ihre Benutzung? Es bleibt für die beiden Überlebenden unerklärlich, genauso, wie der Ausfall der Sauerstoffversorgung.
+    </div></section>
 </div>
 <div>
-    <button>Spielanleitung</button>
-    <div>
-    <input type="text" id="secretCode" placeholder="Enter your code">
-    <button onclick="revealContent()">Reveal Content</button>
-    <div id="extraContent" class="hidden">
-        <h2>Secret Content to be unfold</h2>
-        <p>This is the secret content that appears when the correct code is entered.</p>
-    </div>
-    <script src="script.js"></script>
-    </div>
+    <div class="Spielanleitung">
+        <section id="Spielanleitung"><button>Spielanleitung</button> <!--Beim Abscnitt von der Spielanleitung gibt es ein Engabefeld-->
+        <div class="Spielanleitung_Eingabe">
+            <input type="text" id="secretCode" placeholder="Enter your code">
+            <button onclick="revealContent()">Reveal Content</button>
+            <script src="Ex-IT-Game.js"></script>
+        </div>    
+        <div id="extraContent" class="Spielanleitung_hiddenContent">
+            <h2>Secret Content to be unfold</h2>
+            <p>This is the secret content that appears when the correct code is entered.</p>
+        </div>
+    </div></section>
 </div>
 
 
