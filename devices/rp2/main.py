@@ -4,6 +4,7 @@ from paho.mqtt.properties import Properties
 from paho.mqtt.packettypes import PacketTypes
 import threading
 import RPi.GPIO as GPIO
+import logging
 
 from midi_ip_game import MidiIpGame
 from general_timer import Timer
@@ -15,6 +16,7 @@ MQTT_PORT = 1883
 MQTT_TRANSPORT_PROTOCOL = "tcp"
 
 ### Needed MQTT Topics
+MQTT_TOPIC_RP2 = "/rp2"  # will
 # Topics for General and Timer
 MQTT_TOPIC_GEN_GLOBAL = "/gen/global" # sub/pub
 # Topics for the MIDI-IP-Game
@@ -34,6 +36,23 @@ isStoppedMidiIpGame = False
 isStoppedTimer = False
 isStoppedButtonSequence = False
 
+# Initialize the games
+MIDIIpGame = MidiIpGame()
+MainTimer = Timer()
+ButtonGame = ButtonSequenceGame()
+
+# Set up the logger
+logging.basicConfig(filename="rp2.log", format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+Logger = logging.getLogger("RP2")
+
+# Set up GPIO mode once
+GPIO.setmode(GPIO.BCM)
+
+# "Prepare" (instantiate) threads for the games
+thread1 = threading.Thread(target=None)
+thread2 = threading.Thread(target=None)
+thread3 = threading.Thread(target=None)
+
 
 ### MQTT Methods
 def on_message(client, userdata, msg):
@@ -51,29 +70,41 @@ def on_message(client, userdata, msg):
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print("Connected: " + str(reason_code))
+    #logging.info("Connected client " + client + " with reason code: " + str(reason_code))
+
+def on_connect_fail(client, userdata, properties, reason_code):
+    print("Connection failed: " + str(reason_code))
+    #logging.ERROR("Connection failed with reason code: " + str(reason_code))
+
+def on_disconnect(client, userdata, reason_code):
+    print("Disconnected: " + str(reason_code))
+    #logging.info("Disconnected client " + client + " with reason code: " + str(reason_code))
+
+def on_log(client, userdata, level, buf):
+    if level == 1 or level == 2:
+        Logger.info(buf)
+    elif level == 4:
+        Logger.warning(buf)
+    elif level == 8:
+        Logger.error(buf)
+    else:
+        Logger.debug(buf)
 
 ##### Client Setup
 client = mqtt.Client(client_id="rp2", protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 client.username_pw_set(username="rp2", password="rp2Arose1234!")
 client.on_connect = on_connect
 client.on_message = on_message
+client.on_disconnect = on_disconnect
+client.on_connect_fail = on_connect_fail
+client.on_log = lambda client, userdata, level, buf: Logger.log(level, buf)
 properties = Properties(PacketTypes.CONNECT)
-client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
+client.enable_logger()
+client.will_set(MQTT_TOPIC_RP2, payload=MainTimer.getRestTimeInSeconds, qos=2, retain=True)
+client.connect(MQTT_BROKER, MQTT_PORT, properties=properties, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
 client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 0), (MQTT_TOPIC_A5_PIANO, 2), (MQTT_TOPIC_B2_GRAVITY, 2)])
 
-# Set up GPIO mode once
-GPIO.setmode(GPIO.BCM)
-
-# Initialize the games
-MIDIIpGame = MidiIpGame()
-MainTimer = Timer()
-ButtonGame = ButtonSequenceGame()
-
-# "Prepare" (instantiate) threads for the games
-thread1 = threading.Thread(target=None)
-thread2 = threading.Thread(target=None)
-thread3 = threading.Thread(target=None)
 
 stop = False
 threads_started = {thread1: False, thread2: False, thread3: False}

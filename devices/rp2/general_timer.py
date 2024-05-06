@@ -94,6 +94,10 @@ class Timer:
     def getFinished(self):
         return self.timerFinished
     
+    ### Define a method to get the rest time of the timer for the main.py file (last will message)
+    def getRestTimeInSeconds(self):
+        return (self.timerMin10 * 600) + (self.timerMin1 * 60) + (self.timerSec10 * 10) + self.timerSec1
+    
     ### Define a method to start the timer
     def startTimer(self):
         self.startTime = time.time()
