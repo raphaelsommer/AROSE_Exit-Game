@@ -57,14 +57,18 @@ class ButtonSequenceGame:
             self.set_led_color('none')    # Turn off the LED
             self.finished = True
         else:
-            self.blink_led('red', 3, 0.25)  # Blink red 3 times
+            for i in range(3):
+                if self.button_sequence[i] == self.correct_sequence[i]:
+                    self.blink_led('green', 1, 0.25)
+                else:
+                    self.blink_led('red', 1, 0.25)
             self.set_led_color('none')
             self.wrong_sequence_counter += 1
             if self.wrong_sequence_counter == 3:
                 time.sleep(0.5)
                 self.correct_sequence = random.sample([self.BUTTON1, self.BUTTON2, self.BUTTON3], 3)
                 print(str(self.correct_sequence))
-                self.blink_led('white', 3, 0.25)
+                self.blink_led('white', 3, 0.5)
             self.button_sequence.clear()
     
     ### Function to blink LED
@@ -78,11 +82,11 @@ class ButtonSequenceGame:
     ### Function to set LED color
     def set_led_color(self, color):
         colors = {
-            'red': (True, False, False),
-            'green': (False, True, False),
-            'blue': (False, False, True),
-            'white': (True, True, True),
-            'none': (False, False, False)
+            'red': (255, 0, 0),
+            'green': (0, 255, 0),
+            'blue': (0, 0, 255),
+            'white': (255, 255, 255),
+            'none': (0, 0, 0)
         }
         GPIO.output(self.RED_PIN, colors[color][0])
         GPIO.output(self.GREEN_PIN, colors[color][1])
@@ -98,7 +102,7 @@ class ButtonSequenceGame:
         # Set the LED color to none
         self.set_led_color('none')
         # Blink the LED white 3 times
-        self.blink_led('white', 3, 0.25)
+        self.blink_led('white', 3, 0.5)
 
         # Add the button callback function to the GPIO event detection
         GPIO.add_event_detect(self.BUTTON1, GPIO.FALLING, callback=self.button_callback, bouncetime=500)
