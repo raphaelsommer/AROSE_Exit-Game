@@ -7,7 +7,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url(SpaceShuttle.jpeg);
+    color: rgb(255, 255, 255);
+    background-image: url("assets/Background_2.2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
