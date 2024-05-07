@@ -25,7 +25,9 @@ var door_b3 = 1
 var door_b2 = 1
 var door_rk = 0
 var door_c0 = 1
-var mqtt_connect = false
+
+var mqtt_try_connect = false
+var mqtt_connected = false
 
 
 

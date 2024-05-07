@@ -8,6 +8,11 @@ func _ready():
 
 func _on_start_pressed():
 	get_tree().change_scene_to_file("res://Szenen/Loading_Screen2.tscn")
+	if Global.mqtt_connected:
+		MQTT_Client.sub()
+		MQTT_Client.pub("/gen/global", "start")
+	else:
+		print("WARNING: No MQTT Connected!")
 	
 
 
@@ -78,6 +83,16 @@ func _on_hard_pressed():
 
 
 func _on_button_pressed():
-	if(Global.mqtt_connect):
+	Global.mqtt_try_connect = true
+	MQTT_Client.mqttClient.connect_to_broker("192.168.0.102")
+	await get_tree().create_timer(2).timeout
+	
+	var error = MQTT_Client.checkConnect()
+	print(error)
+	if error == 0:
+		Global.mqtt_connected = true
 		$Sprite2D4/RichTextLabel.visible = false
 		$Sprite2D4/RichTextLabel2.visible = true
+	else:
+		$Sprite2D4/RichTextLabel.visible = false
+		$Sprite2D4/RichTextLabel3.visible = true
