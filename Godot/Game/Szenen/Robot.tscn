@@ -1,0 +1,138 @@
+[gd_scene load_steps=13 format=3 uid="uid://c0vatdni3sh3u"]
+
+[ext_resource type="Script" path="res://Skripte/Robot.gd" id="1_tir68"]
+[ext_resource type="Texture2D" uid="uid://b0at1brgferpa" path="res://KI/Good/Bot-off.png" id="2_17eld"]
+[ext_resource type="Texture2D" uid="uid://cap1yjayg31jw" path="res://KI/Good/Bot-on.png" id="3_3k5kk"]
+[ext_resource type="Texture2D" uid="uid://cpn52halcn5t1" path="res://Gui/Space_Game_GUI_PNG/PNG/Clouds/Cloud_03.png" id="4_6a5ww"]
+[ext_resource type="Texture2D" uid="uid://cgtgxg4eud81w" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_i.png" id="5_8l0xh"]
+[ext_resource type="Texture2D" uid="uid://ch0d3a7nn6gaj" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_v.png" id="5_jed18"]
+[ext_resource type="Texture2D" uid="uid://7n0qxx4g51nm" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_b.png" id="6_6h1gq"]
+[ext_resource type="Texture2D" uid="uid://dn3reqq3i0x5r" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_k.png" id="8_mnmx3"]
+[ext_resource type="AudioStream" uid="uid://cjh5ies5klptq" path="res://Sounds/Effects/Ki_voice/Good/vocal_samples/robot_1.ogg" id="9_gt0e0"]
+[ext_resource type="AudioStream" uid="uid://rx33twfl2ha3" path="res://Sounds/Effects/Ki_voice/Good/vocal_samples/robot_2.ogg" id="10_8jeg2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi7sk"]
+size = Vector2(59, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lsjjr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_17eld")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3k5kk")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[node name="Robot" type="Node2D"]
+script = ExtResource("1_tir68")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-12.5, -3.5)
+shape = SubResource("RectangleShape2D_qi7sk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4.5, -3.5)
+scale = Vector2(1.64286, 1.38889)
+sprite_frames = SubResource("SpriteFrames_lsjjr")
+animation = &"off"
+
+[node name="Text Robot" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-67, -72)
+scale = Vector2(0.187375, 0.199335)
+texture = ExtResource("4_6a5ww")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Text Robot"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+offset_left = -316.885
+offset_top = -267.675
+offset_right = 763.115
+offset_bottom = 117.325
+theme_override_font_sizes/normal_font_size = 37
+text = "Hello My name is ReyRey!
+You can buy lives from me
+for your further journey, 
+you will surely need them!
+
+
+Leave												Buy
+"
+
+[node name="Leave" type="Sprite2D" parent="Text Robot"]
+position = Vector2(-149.433, 65.2168)
+scale = Vector2(0.833723, 0.720314)
+texture = ExtResource("5_jed18")
+
+[node name="Buy" type="Sprite2D" parent="Text Robot"]
+position = Vector2(170.791, 64.2669)
+scale = Vector2(0.750334, 0.720314)
+texture = ExtResource("6_6h1gq")
+
+[node name="Press" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 23.0
+offset_top = -18.0
+offset_right = 74.0
+offset_bottom = 22.0
+text = "Press"
+
+[node name="I" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(80, -7)
+scale = Vector2(0.21875, 0.179688)
+texture = ExtResource("5_8l0xh")
+
+[node name="Keinecoins" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -130.0
+offset_top = -126.0
+offset_right = 19.0
+offset_bottom = -11.0
+theme_override_font_sizes/normal_font_size = 9
+text = "You don't have enough 
+coins, try again later.
+
+Good Luck!!"
+
+[node name="Continue" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-95, -59)
+scale = Vector2(0.177734, 0.126953)
+texture = ExtResource("8_mnmx3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Continue"]
+offset_left = -163.165
+offset_top = -23.6307
+offset_right = -67.165
+offset_bottom = 31.3693
+theme_override_font_sizes/normal_font_size = 35
+text = "Press"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Continue"]
+offset_left = 73.0
+offset_top = -16.0
+offset_right = 242.0
+offset_bottom = 39.0
+theme_override_font_sizes/normal_font_size = 35
+text = "to Leave"
+
+[node name="AudioStreamPlayer2D1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_gt0e0")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_8jeg2")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
