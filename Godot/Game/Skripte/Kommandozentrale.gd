@@ -12,8 +12,7 @@ func _physics_process(delta):
 
 
 func _ready():
-	await get_tree().create_timer(5).timeout
-	Global.animals = false
+	Global.animal_move_not = false
 
 
 func _on_ip_body_entered(body):

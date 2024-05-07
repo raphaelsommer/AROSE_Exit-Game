@@ -16,6 +16,7 @@ func _process(delta):
 		$Area2D.queue_free()
 		$AnimatedSprite2D2.play("on")
 		Global.key = false
+		Global.animals = true
 	elif(Input.is_action_just_pressed("Door-8")):
 		$RichTextLabel.visible = true
 		await get_tree().create_timer(2).timeout

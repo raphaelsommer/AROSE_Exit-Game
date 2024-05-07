@@ -13481,14 +13481,10 @@ layer_0/tile_data = PackedInt32Array(93, 0, 10, 94, 65536, 10, 95, 131072, 10, 9
 [node name="CharacterBody2D4" parent="." instance=ExtResource("23_3etch")]
 visible = false
 position = Vector2(1718, -13)
-collision_layer = 2
-collision_mask = 2
 
 [node name="CharacterBody2D5" parent="." instance=ExtResource("24_j5nwb")]
 visible = false
 position = Vector2(1698, -13)
-collision_layer = 2
-collision_mask = 2
 
 [node name="Ip" type="Area2D" parent="."]
 

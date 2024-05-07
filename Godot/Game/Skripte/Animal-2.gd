@@ -9,7 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _physics_process(delta):
-	if(move):
+	if(Global.animal_move and Global.animal_move_not):
 		$AnimatedSprite2D.play("run")
 		$".".position.x -= 2
 		await get_tree().create_timer(18.7).timeout
@@ -22,4 +22,4 @@ func _physics_process(delta):
 
 func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
-		move = true
+		Global.animal_move = true
