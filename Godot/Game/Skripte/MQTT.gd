@@ -58,9 +58,6 @@ var receivedbuffer : PackedByteArray = PackedByteArray()
 
 var common_name = null
 
-func checkConnection():
-	return socket.put_data(PackedByteArray([0x00]))
-
 func senddata(data):
 	var E = 0
 	if socket != null:

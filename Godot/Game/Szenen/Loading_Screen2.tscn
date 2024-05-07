@@ -54,21 +54,21 @@ autoplay = "idle"
 [node name="Camera2D" type="Camera2D" parent="AnimatedSprite2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(387, 192)
+position = Vector2(419, 192.5)
 texture = ExtResource("7_67ps6")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(493, 200)
+position = Vector2(525, 200.5)
 scale = Vector2(1.307, 1.307)
 texture = ExtResource("8_ugb5i")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(575, 200)
+position = Vector2(607, 200.5)
 scale = Vector2(1.256, 1.256)
 texture = ExtResource("9_ehpqn")
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
-position = Vector2(691, 200)
+position = Vector2(723, 200.5)
 scale = Vector2(1.162, 1.162)
 texture = ExtResource("10_rwsff")
 
@@ -83,3 +83,11 @@ text = "Loading..."
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_2yaxm")
 autoplay = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 330.0
+offset_top = 478.0
+offset_right = 841.0
+offset_bottom = 566.0
+text = "No MQTT connection detected, Game might function unproperly!"

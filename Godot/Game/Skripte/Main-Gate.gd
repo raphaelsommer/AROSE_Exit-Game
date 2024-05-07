@@ -8,6 +8,7 @@ func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
 		$pc/Sprite2D.visible = true
 		sauerstoff = true
+		$Gravity.queue_free()
 
 
 func _process(delta):

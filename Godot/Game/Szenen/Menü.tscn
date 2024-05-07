@@ -291,21 +291,12 @@ offset_bottom = 40.5478
 theme_override_font_sizes/normal_font_size = 35
 text = " Status: Connected"
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Sprite2D4"]
-visible = false
-offset_left = -163.858
-offset_top = -33.4522
-offset_right = 160.142
-offset_bottom = 40.5478
-theme_override_font_sizes/normal_font_size = 35
-text = " Status: Failed"
-
 [node name="Button" type="Button" parent="."]
 offset_left = -274.0
 offset_top = -17.0
 offset_right = -128.0
 offset_bottom = 14.0
-text = "Connect to MQTT"
+text = "MQTT Connection"
 expand_icon = true
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

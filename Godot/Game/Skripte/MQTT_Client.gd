@@ -4,16 +4,19 @@ var mqttClient = load("res://Skripte/MQTT.gd").new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	mqttClient.connect_to_broker("localhost")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Global.mqtt_try_connect:
-		mqttClient._process(delta)
+	mqttClient._process(delta)
 
-	
-func checkConnect():
-	return mqttClient.checkConnection()
+
+#func _on_mqtt_broker_connected():
+	#print("Connected") # Replace with function body.
+#
+#
+#func _on_mqtt_broker_connection_failed():
+	#print("Connection failed") # Replace with function body.
 
 func sub():
 	mqttClient.subscribe("/gen/global", 2)

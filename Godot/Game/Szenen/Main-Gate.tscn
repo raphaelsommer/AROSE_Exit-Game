@@ -3362,7 +3362,7 @@ theme_override_font_sizes/normal_font_size = 17
 text = "Sauerstoff + 9min"
 
 [node name="Player1" parent="." instance=ExtResource("11_mv8gp")]
-position = Vector2(336, -44)
+position = Vector2(-838, -48)
 
 [node name="Player2" parent="." instance=ExtResource("29_uvg72")]
 position = Vector2(1553, -42)
