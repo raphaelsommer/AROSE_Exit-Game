@@ -25,6 +25,10 @@ var door_b3 = 1
 var door_b2 = 1
 var door_rk = 0
 var door_c0 = 1
+<<<<<<< Updated upstream
+=======
+var mqtt_connect = false
+>>>>>>> Stashed changes
 
 
 

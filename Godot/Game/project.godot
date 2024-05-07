@@ -27,7 +27,11 @@ window/stretch/scale=4.0
 
 [editor_plugins]
 
+<<<<<<< Updated upstream
 enabled=PackedStringArray("res://addons/mqtt/plugin.cfg")
+=======
+enabled=PackedStringArray()
+>>>>>>> Stashed changes
 
 [input]
 

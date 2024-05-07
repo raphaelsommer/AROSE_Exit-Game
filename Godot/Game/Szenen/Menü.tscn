@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=25 format=3 uid="uid://cpqkqsbg22tkk"]
+=======
+[gd_scene load_steps=26 format=3 uid="uid://cpqkqsbg22tkk"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://Skripte/Menü.gd" id="1_ynd03"]
 [ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="1_yyfok"]
@@ -23,6 +27,10 @@
 [ext_resource type="Texture2D" uid="uid://dqersn35m0l8r" path="res://Erde/earth Kopie.png" id="15_gjb8d"]
 [ext_resource type="Texture2D" uid="uid://f38ri6yg6du0" path="res://Erde/earth Kopie 2.png" id="16_xrbxy"]
 [ext_resource type="Texture2D" uid="uid://bdhqpyb7pg7l7" path="res://Gui/Space_Game_GUI_PNG/PNG/Rating/Window.png" id="20_222lp"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="Texture2D" uid="uid://btqwo1p7fvyow" path="res://Gui/Space_Game_GUI_PNG/PNG/Pause/Table.png" id="24_aqi26"]
+>>>>>>> Stashed changes
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vulfq"]
 animations = [{
@@ -263,6 +271,41 @@ icon = ExtResource("3_ivrra")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-201, 0)
+scale = Vector2(0.488227, 0.388614)
+texture = ExtResource("24_aqi26")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(-204, 92)
+scale = Vector2(0.488227, 0.388614)
+texture = ExtResource("24_aqi26")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D4"]
+offset_left = -163.858
+offset_top = -33.4522
+offset_right = 160.142
+offset_bottom = 40.5478
+theme_override_font_sizes/normal_font_size = 35
+text = " Status: Disconnect"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D4"]
+visible = false
+offset_left = -163.858
+offset_top = -33.4522
+offset_right = 160.142
+offset_bottom = 40.5478
+theme_override_font_sizes/normal_font_size = 35
+text = " Status: Connected"
+
+[node name="Button" type="Button" parent="."]
+offset_left = -274.0
+offset_top = -17.0
+offset_right = -128.0
+offset_bottom = 14.0
+text = "MQTT Connection"
+expand_icon = true
+
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Info" to="." method="_on_info_pressed"]
@@ -273,3 +316,7 @@ icon = ExtResource("3_ivrra")
 [connection signal="pressed" from="Settings/Sprite2D3/Hard" to="." method="_on_hard_pressed"]
 [connection signal="pressed" from="FAQ" to="." method="_on_faq_pressed"]
 [connection signal="pressed" from="FAQ/Sprite2D/Exit_Faq" to="." method="_on_exit_faq_pressed"]
+<<<<<<< Updated upstream
+=======
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+>>>>>>> Stashed changes

@@ -13305,7 +13305,11 @@ scale = Vector2(0.521958, 0.369972)
 texture = ExtResource("22_u5lqx")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("10_g1nal")]
+<<<<<<< Updated upstream
 position = Vector2(41, -27)
+=======
+position = Vector2(1357, -36)
+>>>>>>> Stashed changes
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("11_fn2so")]
 position = Vector2(87, -28)

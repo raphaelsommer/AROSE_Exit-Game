@@ -11,6 +11,13 @@ func _physics_process(delta):
 	
 
 
+<<<<<<< Updated upstream
+=======
+func _ready():
+	await get_tree().create_timer(5).timeout
+	pass
+
+>>>>>>> Stashed changes
 
 func _on_ip_body_entered(body):
 	if(body.is_in_group("Player")):

@@ -1,7 +1,9 @@
 extends Node2D
 
 
-
+func _ready():
+	await get_tree().create_timer(5).timeout
+	Global.mqtt_connect = true
 
 func _on_start_pressed():
 	get_tree().change_scene_to_file("res://Szenen/Loading_Screen2.tscn")
@@ -70,3 +72,14 @@ func _on_simple_pressed():
 func _on_hard_pressed():
 	Global.game_hard = true
 	$Settings/Sprite2D3.visible = false
+<<<<<<< Updated upstream
+=======
+
+
+
+
+func _on_button_pressed():
+	if(Global.mqtt_connect):
+		$Sprite2D4/RichTextLabel.visible = false
+		$Sprite2D4/RichTextLabel2.visible = true
+>>>>>>> Stashed changes
