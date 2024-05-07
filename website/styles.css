@@ -104,7 +104,16 @@ body {
     text-align: center;
     justify-content: center;
 }
-.Spielanleitung_hiddenContent{
+
+.Spielanleitung_hiddenEingabe {
+    display: none;
+}
+
+.Spielanleitung_hiddenContent {
+    display: none;
+}
+
+.Spielanleitung_visibleContent {
     display: block;
     align-items: center;
     justify-content: center;
