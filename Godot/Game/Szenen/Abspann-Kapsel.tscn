@@ -24187,7 +24187,7 @@ offset_top = -265.603
 offset_right = 343.573
 offset_bottom = 131.397
 theme_override_font_sizes/normal_font_size = 60
-text = "Did you really thought you can escape me!!!
+text = "Did you really think you can escape me!!!
 This is your death!!"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

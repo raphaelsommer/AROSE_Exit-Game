@@ -34,11 +34,11 @@ var animal_move_not = true
 
 
 
-var timer
+var  timer
 
 func _ready():
 	timer = Timer.new()
-	timer.wait_time = float(5 * 60)
+	timer.wait_time = float(10 * 60)
 	timer.one_shot = true
 	timer.start()
 	timer.autostart = true

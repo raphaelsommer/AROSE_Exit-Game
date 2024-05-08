@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var elapsed = int(Global.timer.wait_time + Global.timer.time_left)
+	var elapsed = int(Global.timer.time_left)
 	var minutes = int(elapsed / 60)
 	var seconds = elapsed % 60
 	

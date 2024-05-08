@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bp5b2vrdgd6ii"]
+[gd_scene load_steps=40 format=3 uid="uid://bp5b2vrdgd6ii"]
 
 [ext_resource type="Script" path="res://Skripte/Kommandozentrale.gd" id="1_ppmsp"]
 [ext_resource type="Texture2D" uid="uid://q3knmxvoj68s" path="res://Game-Map/Kommandozentrale/Kommandozentrale-1.png" id="2_gbn30"]
@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://dd8bvw14gfnn8" path="res://Game-Map/Kommandozentrale/Kapsel-4.png" id="22_u5lqx"]
 [ext_resource type="PackedScene" uid="uid://bgll7tula2ayn" path="res://Szenen/Animal-1.tscn" id="23_3etch"]
 [ext_resource type="PackedScene" uid="uid://bbtdvh6t0wq4d" path="res://Szenen/Animal-2.tscn" id="24_j5nwb"]
+[ext_resource type="Texture2D" uid="uid://cs2d1md3nhqrd" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_0.png" id="25_10eoj"]
+[ext_resource type="Texture2D" uid="uid://b7vos0c8kwqjm" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_7.png" id="26_nqjdx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sqomc"]
 texture = ExtResource("2_gbn30")
@@ -13257,6 +13259,9 @@ sources/0 = SubResource("TileSetAtlasSource_pdoqk")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ibcsr"]
 size = Vector2(30, 142)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42h33"]
+size = Vector2(53, 57)
+
 [node name="Kommandozentrale" type="Node2D"]
 script = ExtResource("1_ppmsp")
 
@@ -13305,7 +13310,7 @@ scale = Vector2(0.521958, 0.369972)
 texture = ExtResource("22_u5lqx")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("10_g1nal")]
-position = Vector2(52, -36)
+position = Vector2(1377, -18)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("11_fn2so")]
 position = Vector2(87, -28)
@@ -13492,6 +13497,12 @@ position = Vector2(1698, -13)
 position = Vector2(337, -54)
 shape = SubResource("RectangleShape2D_ibcsr")
 
+[node name="Sprite2D" type="Sprite2D" parent="Ip"]
+visible = false
+position = Vector2(393, -71)
+scale = Vector2(0.203125, 0.191406)
+texture = ExtResource("25_10eoj")
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 visible = false
 offset_left = 312.0
@@ -13501,5 +13512,27 @@ offset_bottom = -106.0
 theme_override_font_sizes/normal_font_size = 19
 text = "  IP-Address"
 
+[node name="Kapsel" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kapsel"]
+position = Vector2(1514.5, -15.5)
+shape = SubResource("RectangleShape2D_42h33")
+
+[node name="Sprite2D" type="Sprite2D" parent="Kapsel"]
+visible = false
+position = Vector2(1536, -62)
+scale = Vector2(0.28125, 0.28125)
+texture = ExtResource("26_nqjdx")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Kapsel"]
+visible = false
+offset_left = 1492.0
+offset_top = -142.0
+offset_right = 1655.0
+offset_bottom = -102.0
+text = "Wire-Game start"
+
 [connection signal="body_entered" from="Ip" to="." method="_on_ip_body_entered"]
 [connection signal="body_exited" from="Ip" to="." method="_on_ip_body_exited"]
+[connection signal="body_entered" from="Kapsel" to="." method="_on_kapsel_body_entered"]
+[connection signal="body_exited" from="Kapsel" to="." method="_on_kapsel_body_exited"]
