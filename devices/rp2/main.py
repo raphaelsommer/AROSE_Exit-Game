@@ -61,11 +61,14 @@ thread3 = threading.Thread(target=None)
 
 ### MQTT Methods
 def on_message(client, userdata, msg):
-    global isStartMidiIpGame, isStartTimer, isStartButtonSequence
+    global isStartMidiIpGame, isStartTimer, isStartButtonSequence, stop
     # print(msg.topic + " " + str(msg.payload))
     if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'start':
         print("Timer start")
         isStartTimer = True
+    if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'stop':
+        print("Stop Game")
+        stop = true
     if msg.topic == MQTT_TOPIC_A5_PIANO and msg.payload.decode() == 'start':
         print("Starting MIDI-IP-Game")
         isStartMidiIpGame = True
