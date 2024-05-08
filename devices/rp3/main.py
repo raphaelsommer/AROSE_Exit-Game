@@ -74,6 +74,9 @@ def on_message(client, userdata, msg):
         print("Morse-Game start")
         isStartMorseGame = True
     if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'stop':
+        print("Game over!")
+        stop = True
+    if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'timeOver':
         print("Time ran out - Game over!")
         stop = True
     if msg.topic == MQTT_TOPIC_C1_RFID and msg.payload.decode() == 'start':
