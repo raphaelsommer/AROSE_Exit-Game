@@ -23,7 +23,6 @@ func _physics_process(delta):
 func _ready():
 	Global.animal_move_not = false
 
-
 func _on_ip_body_entered(body):
 	if(body.is_in_group("Player")):
 		$Ip/Sprite2D.visible = true

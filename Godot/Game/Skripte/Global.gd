@@ -48,7 +48,8 @@ func _ready():
 	
 	
 func _process(delta):
-	pass
+	if(timer.time_left <= 0):
+		get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
 	
 
 
