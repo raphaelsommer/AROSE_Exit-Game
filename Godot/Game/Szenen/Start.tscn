@@ -24306,7 +24306,7 @@ autoplay = true
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 633.0
 offset_top = 121.0
-offset_right = 5731.0
+offset_right = 5753.0
 offset_bottom = 165.0
 text = "Es ist das Jahr 2030 und das Großprojekt Stuttgart 21 befindet sich vor der Eröffnung. Jedoch wird die Eröffnung des neuen Bahnhofes von einem Katzen-Clan blockiert. Die Vierbeiner verlangen im Ausgleich zu ihrem Stuttgarter Kopfbahnhof einen Planeten nur für sich. Das AROSE-Astronauten-Team, bestehend aus Juri und Leica, stellt sich dieser Herausforderung. Unterstützt werden die beiden Astronauten von “ALI“ der Hauseigenen KI. Die AROSE-Crew befindet sich nun auf dem Weg zu einem noch unerforschten Planeten um die Katzen dort anzusiedeln. Doch plötzlich fehlt der Sauerstoff. Die Astronauten müssen schnellstmöglich in die Rettungskapsel..."
 

@@ -36,7 +36,7 @@ offset = Vector2(2.08165e-12, -150)
 [node name="Quit" type="Button" parent="."]
 offset_left = -76.0
 offset_top = 23.0
-offset_right = 87.0
+offset_right = 77.0
 offset_bottom = 174.0
 icon = ExtResource("5_f2gjg")
 expand_icon = true

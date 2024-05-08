@@ -83,6 +83,41 @@ scale = Vector2(0.62552, 0.693518)
 texture = ExtResource("1_yyfok")
 metadata/_edit_lock_ = true
 
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-201, 0)
+scale = Vector2(0.488227, 0.388614)
+texture = ExtResource("24_aqi26")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(-204, 92)
+scale = Vector2(0.488227, 0.388614)
+texture = ExtResource("24_aqi26")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D4"]
+offset_left = -163.858
+offset_top = -33.4522
+offset_right = 160.142
+offset_bottom = 40.5478
+theme_override_font_sizes/normal_font_size = 35
+text = " Status: Disconnect"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D4"]
+visible = false
+offset_left = -163.858
+offset_top = -33.4522
+offset_right = 160.142
+offset_bottom = 40.5478
+theme_override_font_sizes/normal_font_size = 35
+text = " Status: Connected"
+
+[node name="Button" type="Button" parent="."]
+offset_left = -274.0
+offset_top = -17.0
+offset_right = -128.0
+offset_bottom = 14.0
+text = "MQTT Connection"
+expand_icon = true
+
 [node name="Start" type="Button" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
@@ -264,41 +299,7 @@ icon = ExtResource("3_ivrra")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(-201, 0)
-scale = Vector2(0.488227, 0.388614)
-texture = ExtResource("24_aqi26")
-
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-position = Vector2(-204, 92)
-scale = Vector2(0.488227, 0.388614)
-texture = ExtResource("24_aqi26")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D4"]
-offset_left = -163.858
-offset_top = -33.4522
-offset_right = 160.142
-offset_bottom = 40.5478
-theme_override_font_sizes/normal_font_size = 35
-text = " Status: Disconnect"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D4"]
-visible = false
-offset_left = -163.858
-offset_top = -33.4522
-offset_right = 160.142
-offset_bottom = 40.5478
-theme_override_font_sizes/normal_font_size = 35
-text = " Status: Connected"
-
-[node name="Button" type="Button" parent="."]
-offset_left = -274.0
-offset_top = -17.0
-offset_right = -128.0
-offset_bottom = 14.0
-text = "MQTT Connection"
-expand_icon = true
-
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Info" to="." method="_on_info_pressed"]
@@ -309,4 +310,3 @@ expand_icon = true
 [connection signal="pressed" from="Settings/Sprite2D3/Hard" to="." method="_on_hard_pressed"]
 [connection signal="pressed" from="FAQ" to="." method="_on_faq_pressed"]
 [connection signal="pressed" from="FAQ/Sprite2D/Exit_Faq" to="." method="_on_exit_faq_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
