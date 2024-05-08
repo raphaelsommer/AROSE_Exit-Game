@@ -58,6 +58,9 @@ var receivedbuffer : PackedByteArray = PackedByteArray()
 
 var common_name = null
 
+func checkConnect():
+	return socket.put_data(PackedByteArray([0x00]))
+
 func senddata(data):
 	var E = 0
 	if socket != null:
@@ -309,8 +312,9 @@ func wait_msg():
 		
 		if verbose_level >= 2:
 			print("received topic=", topic, " msg=", msg)
-			if topic == "/gen/global" and msg == "stop":
-				#get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
+			if topic == "/gen/global" and msg == "timeOver":
+				Global.hasFailed = true
+				Global.realTimerOver = true
 				print("GAME OVER...")
 			elif topic == "/b3/morse" and msg == "finished":
 				Global.door_b3 = 0
@@ -333,14 +337,15 @@ func wait_msg():
 				Global.door_rk = 1
 				print("Openend RK -> GAME WON")
 			elif topic == "/rk/wire" and msg == "fail":
-				#get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
+				Global.hasFailed = true
 				print("GAME OVER")
 		emit_signal("received_message", topic, msg)
 		
 		if op & 6 == 2:
 			senddata(PackedByteArray([0x40, 0x02, (pid1 >> 8), (pid1 & 0xFF)]))
 		elif op & 6 == 4:
-			assert(0)
+			#assert(0)
+			pass
 
 	elif op == CP_CONNACK:
 		assert (sz == 2)

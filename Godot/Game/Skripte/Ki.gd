@@ -33,9 +33,9 @@ func _process(delta):
 func _physics_process(delta):
 	if(Input.is_action_just_pressed("Waffen_aktivieren")):
 		$Sprite2D2.visible = false
-		$Sprite2D.visible = false
+		#$Sprite2D.visible = false
 		Global.gun_on = true
-		$RichTextLabel.visible = true
+		#$RichTextLabel.visible = true
 		await get_tree().create_timer(1).timeout
 		$s.visible = true
 		$n.visible = true

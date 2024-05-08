@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cacsloi4u01gi" path="res://Spaceship/spaceRockets_001.png" id="2_wvhf4"]
 [ext_resource type="Texture2D" uid="uid://dwwrjyiygogy8" path="res://Spaceship/Antrieb.png" id="3_u7wmt"]
 [ext_resource type="Texture2D" uid="uid://cx10iknvpd6l0" path="res://Spaceship/rocket animated.png" id="4_jn3xn"]
-[ext_resource type="AudioStream" uid="uid://ge38pfcqtogw" path="res://Sounds/Effects/ScatterNoise1.mp3" id="5_2nv0e"]
+[ext_resource type="AudioStream" uid="uid://ge38pfcqtogw" path="res://Sounds/Effects/Spaceship/ScatterNoise1.mp3" id="5_2nv0e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfdyd"]
 size = Vector2(189, 20)

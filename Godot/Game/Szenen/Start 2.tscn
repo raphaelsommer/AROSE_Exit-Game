@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cx2bjo3q4fdif" path="res://Erde/earth1.png" id="4_jl0ph"]
 [ext_resource type="Texture2D" uid="uid://dqersn35m0l8r" path="res://Erde/earth Kopie.png" id="5_7celp"]
 [ext_resource type="Texture2D" uid="uid://f38ri6yg6du0" path="res://Erde/earth Kopie 2.png" id="6_5c60j"]
-[ext_resource type="AudioStream" uid="uid://ge38pfcqtogw" path="res://Sounds/Effects/ScatterNoise1.mp3" id="9_7hguo"]
+[ext_resource type="AudioStream" uid="uid://ge38pfcqtogw" path="res://Sounds/Effects/Spaceship/ScatterNoise1.mp3" id="9_7hguo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_315bn"]
 texture = ExtResource("1_44e0n")

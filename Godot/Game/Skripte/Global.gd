@@ -25,16 +25,18 @@ var door_b3 = 1
 var door_b2 = 1
 var door_rk = 0
 var door_c0 = 1
-var mqtt_connect = false
 var animal_move = false
 var animal_move_not = true
 
 
+var startMqtt = false
+var mqtt_connect = false
+
+var hasFailed = false
 
 
-
-
-var  timer
+var timer
+var realTimerOver = false
 
 func _ready():
 	timer = Timer.new()
@@ -48,9 +50,18 @@ func _ready():
 	
 	
 func _process(delta):
-	if(timer.time_left <= 0):
+	if(timer.time_left <= 0 and !hasFailed):
 		get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
-	
+		hasFailed = true
+		timer.stop()
+		MQTT_Client.pub("/gen/global", "stop")
+	elif(timer.time_left > 0 and !timer.is_stopped() and hasFailed):
+		get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
+		timer.stop()
+		MQTT_Client.pub("/gen/global", "stop")
+	elif(realTimerOver and hasFailed):
+		get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
+		timer.stop()
 
 
 

@@ -78,6 +78,14 @@ func _on_hard_pressed():
 
 
 func _on_button_pressed():
+	Global.startMqtt = true
+	MQTT_Client.mqttClient.connect_to_broker("192.168.0.102")
+	await get_tree().create_timer(2).timeout
+	MQTT_Client.checkConnection()
+	await get_tree().create_timer(1).timeout
 	if(Global.mqtt_connect):
-		$Sprite2D4/RichTextLabel.visible = false
-		$Sprite2D4/RichTextLabel2.visible = true
+		$Sprite2D4/RichTextLabel2.set_text("Connected")
+		MQTT_Client.sub()
+		MQTT_Client.pub("/gen/global", "start")
+	else:
+		$Sprite2D4/RichTextLabel2.set_text("! Failed !")

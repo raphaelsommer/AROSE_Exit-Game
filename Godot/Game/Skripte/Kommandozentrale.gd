@@ -1,6 +1,8 @@
 extends Node2D
 var ip = false
+var ipPressed = false
 var draht = false 
+var drahtPressed = false
 
 func _physics_process(delta):
 	await get_tree().create_timer(2).timeout
@@ -8,13 +10,29 @@ func _physics_process(delta):
 	if(Global.animals):
 		$CharacterBody2D4.visible = true
 		$CharacterBody2D5.visible = true
-	if(Input.is_action_just_pressed("IP") and ip):
+	if(Input.is_action_just_pressed("IP") and ip and !ipPressed):
+		$RichTextLabel.visible = true
+		$Ip/Sprite2D.visible = false
+		ipPressed = true
+		MQTT_Client.pub("/c0/ip", "start")
+		await get_tree().create_timer(2).timeout
+		$RichTextLabel.visible = false
+	elif(Input.is_action_just_pressed("IP") and ipPressed):
+		$RichTextLabel.set_text("Already started...")
 		$RichTextLabel.visible = true
 		$Ip/Sprite2D.visible = false
 		await get_tree().create_timer(2).timeout
 		$RichTextLabel.visible = false
 	if(Input.is_action_just_pressed("Draht") and draht):
 		$Kapsel/Sprite2D.visible = false
+		$Kapsel/RichTextLabel.visible = true
+		drahtPressed = true
+		MQTT_Client.pub("/rk/wire", "start")
+		await get_tree().create_timer(2).timeout
+		$Kapsel/RichTextLabel.visible = false
+	elif(Input.is_action_just_pressed("Draht") and draht):
+		$Kapsel/Sprite2D.visible = false
+		$Kapsel/RichTextLabel.set_text("Already started...")
 		$Kapsel/RichTextLabel.visible = true
 		await get_tree().create_timer(2).timeout
 		$Kapsel/RichTextLabel.visible = false
