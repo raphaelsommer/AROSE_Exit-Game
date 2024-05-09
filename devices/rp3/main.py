@@ -143,23 +143,23 @@ threads_started = {thread1: False, thread2: False, thread3: False, thread4: Fals
 
 try:
     while not stop:    
-        if not thread1.is_alive() and not threads_started[thread1] and isStartMorseGame:
-            #isStartMorseGame = False
+        if not thread1.is_alive() and not threads_started[thread1] and isStartMorseGame and not isStoppedMorseGame:
+            isStartMorseGame = False
             thread1 = threading.Thread(target=MorseGame.startGame)
             thread1.start()
             threads_started[thread1] = True
-        if not thread2.is_alive() and not threads_started[thread2] and isStartRfidGame:
-            #isStartRfidGame = False
+        if not thread2.is_alive() and not threads_started[thread2] and isStartRfidGame and not isStoppedRfidGame:
+            isStartRfidGame = False
             thread2 = threading.Thread(target=RfidGame.startGame)
             thread2.start()
             threads_started[thread2] = True
-        if not thread3.is_alive() and not threads_started[thread3] and isStartIpGame:
-            #isStartIpGame = False
+        if not thread3.is_alive() and not threads_started[thread3] and isStartIpGame and not isStoppedIpGame:
+            isStartIpGame = False
             thread3 = threading.Thread(target=IpGame.listen)
             thread3.start()
             threads_started[thread3] = True
-        if not thread4.is_alive() and not threads_started[thread4] and isStartWireGame:
-            #isStartWireGame = False
+        if not thread4.is_alive() and not threads_started[thread4] and isStartWireGame and not isStoppedWireGame:
+            isStartWireGame = False
             thread4 = threading.Thread(target=WireGame.startGame)
             thread4.start()
             threads_started[thread4] = True

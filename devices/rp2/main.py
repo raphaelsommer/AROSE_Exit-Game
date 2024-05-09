@@ -26,7 +26,7 @@ MQTT_TOPIC_A5_PIANO = "/a5/piano" # sub
 MQTT_TOPIC_C1_RFID = "/c1/rfid" # pub
 # Topics for the Button-Sequence-Game
 MQTT_TOPIC_B2_GRAVITY = "/b2/gravity" # sub
-MQTT_TOPIC_A3_BUTTON = "/a3/button" # pub
+MQTT_TOPIC_A3_BUTTON = "/a3/buttons" # pub
 
 
 # Flags for the MIDI-IP-Game, Timer and Button

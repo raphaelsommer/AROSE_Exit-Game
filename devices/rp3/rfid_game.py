@@ -81,7 +81,7 @@ class RFID:
         thread1.join()
         thread2.join()
 
-        if self.scanner1.success and self.scanner2.success:
+        if self.scanner1.success and self.scanner2.success and not self.finished:
             print("Success! Both correct cards detected simultaneously.")
             self.finished = True
             self.stopGame()

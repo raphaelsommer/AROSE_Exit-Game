@@ -9,8 +9,9 @@ import time
 class MidiIpGame:
 
     # Configure the USB MIDI Port:
-    PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 20:0'
-        
+    #PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 20:0'
+    PORT = 'Akai LPK25 Wireless MIDI 0'
+
     # Configure the Raspberry Pi pins for the LCD Display and the Buzzer:
     lcd_rs = 24
     lcd_en = 23
