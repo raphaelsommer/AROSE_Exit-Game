@@ -57,9 +57,14 @@ class ButtonSequenceGame:
             self.set_led_color('none')    # Turn off the LED
             self.finished = True
         else:
+            correct_onces = 0
             for i in range(3):
                 if self.button_sequence[i] == self.correct_sequence[i]:
+                    correct_onces += 1
+            for i in range(3):
+                if correct_onces > 0:
                     self.blink_led('green', 1, 0.25)
+                    correct_onces -= 1
                 else:
                     self.blink_led('red', 1, 0.25)
             self.set_led_color('none')
@@ -68,7 +73,7 @@ class ButtonSequenceGame:
                 time.sleep(0.5)
                 self.correct_sequence = random.sample([self.BUTTON1, self.BUTTON2, self.BUTTON3], 3)
                 print(str(self.correct_sequence))
-                self.blink_led('white', 3, 0.5)
+                self.blink_led('white', 3, 1)
             self.button_sequence.clear()
     
     ### Function to blink LED
