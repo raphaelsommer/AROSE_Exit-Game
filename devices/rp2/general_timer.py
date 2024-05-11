@@ -102,12 +102,12 @@ class Timer:
     def startTimer(self):
         self.startTime = time.time()
         while ((not self.stopped) and self.start):
-            self.display_digit(1, self.timerMin10, False)
-            self.display_digit(2, self.timerMin1, (int(self.timerSec1)%2)==0)
-            self.display_digit(3, self.timerSec10, False)
-            self.display_digit(4, self.timerSec1, False)
             self.currentTime = time.time()
             if (self.currentTime - self.startTime) >= 0.995:
+                self.display_digit(1, self.timerMin10, False)
+                self.display_digit(2, self.timerMin1, (int(self.timerSec1)%2)==0)
+                self.display_digit(3, self.timerSec10, False)
+                self.display_digit(4, self.timerSec1, False)
                 if self.timerSec1 == 0:
                     if self.timerSec10 == 0:
                         if self.timerMin1 == 0:
