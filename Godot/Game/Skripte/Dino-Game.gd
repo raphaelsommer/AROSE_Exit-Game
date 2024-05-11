@@ -11,7 +11,6 @@ func _physics_process(delta):
 func _ready():
 	await get_tree().create_timer(1).timeout
 	$"Door-Anfang".queue_free()
-	
 
 
 

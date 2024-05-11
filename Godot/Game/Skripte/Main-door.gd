@@ -5,7 +5,7 @@ func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Animal")):
 		$AnimatedSprite2D.play("opens")
 		$AudioStreamPlayer2D.play()
-	elif(body.is_in_group("Player") and Global.door_c1 == 0):
+	elif(body.is_in_group("Player") and Global.door_c1_left == 0 and Global.door_c1_right == 0 and Global.door_c1 == 0):
 		$AnimatedSprite2D.play("opens")
 		$AudioStreamPlayer2D.play()
 		await get_tree().create_timer(1.5).timeout

@@ -99,21 +99,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -293.59
-offset_top = -83.54
-offset_right = 30.4098
-offset_bottom = -9.54
+offset_left = -325.924
+offset_top = -83.9522
+offset_right = 14.0758
+offset_bottom = -9.95221
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 35
-text = "Disconnected"
+text = "   Disconnected"
 
 [node name="Button" type="Button" parent="."]
 offset_left = -274.0
 offset_top = -17.0
 offset_right = -128.0
 offset_bottom = 14.0
-text = "MQTT Connection"
+text = "Connect to Server"
 expand_icon = true
 
 [node name="Start" type="Button" parent="."]
@@ -125,6 +125,7 @@ offset_top = -29.0
 offset_right = 91.0
 offset_bottom = 34.0
 grow_horizontal = 0
+disabled = true
 icon = ExtResource("2_wsuxf")
 expand_icon = true
 
@@ -154,6 +155,14 @@ visible = false
 position = Vector2(26, -16)
 scale = Vector2(0.285036, 0.236842)
 texture = ExtResource("7_hslnn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Info/Sprite2D"]
+offset_left = -77.1832
+offset_top = -71.7778
+offset_right = 806.817
+offset_bottom = 1282.22
+theme_override_font_sizes/normal_font_size = 88
+text = "... :)"
 
 [node name="Rating" type="Button" parent="."]
 offset_left = -160.0

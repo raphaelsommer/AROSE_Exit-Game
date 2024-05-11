@@ -21,3 +21,5 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Kapsel")):
 		get_tree().change_scene_to_file("res://Szenen/Abspann.tscn")
+		if Global.mqtt_connect:
+			MQTT_Client.pub("/gen/global", "stop")

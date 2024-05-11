@@ -6,6 +6,8 @@ func _on_button_pressed():
 		get_tree().change_scene_to_file("res://Szenen/Abspann-Kapsel.tscn")
 	else:
 		get_tree().change_scene_to_file("res://Szenen/Abspann.tscn")
+	if Global.mqtt_connect:
+		MQTT_Client.mqttClient.disconnect_from_server()
 
 
 func _process(delta):

@@ -58,9 +58,6 @@ var receivedbuffer : PackedByteArray = PackedByteArray()
 
 var common_name = null
 
-func checkConnect():
-	return socket.put_data(PackedByteArray([0x00]))
-
 func senddata(data):
 	var E = 0
 	if socket != null:
@@ -86,6 +83,8 @@ func _process(delta):
 	elif brokerconnectmode == BCM_WAITING_SOCKET_CONNECTION:
 		socket.poll()
 		var socketstatus = socket.get_status()
+		if (Global.mqtt_status != socketstatus):
+			Global.mqtt_status = socketstatus
 		if socketstatus == StreamPeerTCP.STATUS_ERROR:
 			if verbose_level:
 				print("TCP socket error")
@@ -107,6 +106,7 @@ func _process(delta):
 
 	elif brokerconnectmode == BCM_FAILED_CONNECTION:
 		cleanupsockets()
+		Global.mqtt_connect = false
 
 func _ready():
 	regexbrokerurl.compile('^(tcp://|wss://|ws://|ssl://)?([^:\\s]+)(:\\d+)?(/\\S*)?$')
@@ -190,12 +190,16 @@ func connect_to_broker(brokerurl):
 	if verbose_level:
 		print("Connecting to %s:%s" % [brokerserver, brokerport])
 	var E = socket.connect_to_host(brokerserver, brokerport)
+	print(E)
+	#socket.poll()
+	#var E2 = socket.get_status()
+	#print(E2)
+	brokerconnectmode = BCM_WAITING_SOCKET_CONNECTION
 	if E != 0:
 		print("ERROR: socketclient.connect_to_url Err: ", E)
 		return cleanupsockets(false)
-	brokerconnectmode = BCM_WAITING_SOCKET_CONNECTION
-	
-	return true
+	else:
+		return true
 
 func disconnect_from_server():
 	if brokerconnectmode == BCM_CONNECTED:
@@ -327,9 +331,14 @@ func wait_msg():
 				Global.door_b2 = 0
 				Global.gravity = 1
 				print("Opened B2, A3, A5 and re-established Gravity")
-			elif topic == "/c1/rfid" and msg == "finished":
-				Global.door_c1 = 0
-				print("Openend JnR")
+			elif topic == "/c1/rfid":
+				if msg == "finished":
+					Global.door_c1 = 0
+					print("Openend JnR")
+				elif msg == "left":
+					Global.door_c1_left = 0
+				elif msg == "right":
+					Global.door_c1_right = 0
 			elif topic == "/c0/ip" and msg == "finished":
 				Global.door_c0 = 0
 				print("Openend C0")

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dr1vfanh5g1hf" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Win/Header.png" id="3_5h4uj"]
 [ext_resource type="Texture2D" uid="uid://dnpmglfi0qxn" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Win/Window.png" id="4_o7434"]
 [ext_resource type="Texture2D" uid="uid://c2sthyii3g7c6" path="res://Gui/Space_Game_GUI_PNG/PNG/Upgrade/Ok_BTN.png" id="6_4ievt"]
-[ext_resource type="AudioStream" uid="uid://h5p558rpkhcf" path="res://Sounds/Abspann/Heavy_ConceptB.wav" id="6_pnpud"]
+[ext_resource type="AudioStream" uid="uid://blx75u651tnst" path="res://Sounds/Abspann/Heavy_ConceptB.ogg" id="6_xkh4u"]
 [ext_resource type="Texture2D" uid="uid://d0b085cxj1f0a" path="res://Gui/Space_Game_GUI_PNG/PNG/You_Win/Play_BTN.png" id="7_1cuur"]
 
 [node name="Winner-Screen" type="Node2D"]
@@ -46,33 +46,33 @@ editable = false
 
 [node name="TextEdit4" type="TextEdit" parent="."]
 visible = false
-offset_left = -80.0
+offset_left = -90.0
 offset_top = 113.0
-offset_right = 112.0
+offset_right = 102.0
 offset_bottom = 154.0
 text = "           KI-Zerstört"
 editable = false
 
 [node name="TextEdit3" type="TextEdit" parent="."]
 visible = false
-offset_left = -81.0
+offset_left = -91.0
 offset_top = 72.0
-offset_right = 112.0
+offset_right = 102.0
 offset_bottom = 113.0
 text = "        Tiere Gerettet "
 editable = false
 
 [node name="TextEdit2" type="TextEdit" parent="."]
 visible = false
-offset_left = -81.0
+offset_left = -91.0
 offset_top = 32.0
-offset_right = 112.0
+offset_right = 102.0
 offset_bottom = 73.0
 text = "   Sauerstoff hergestellt"
 editable = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_pnpud")
+stream = ExtResource("6_xkh4u")
 autoplay = true
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]

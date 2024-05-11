@@ -14,12 +14,14 @@ var sauerstoff = false
 var key = false
 var gravity = true
 var player2_canMove = true
-var timer_on = false
+
 var door_a5 = 1
 var door_a4 = 1
 var door_a3 = 1
 var game_hard = false
 var door_c1 = 1
+var door_c1_left = 1
+var door_c1_right = 1
 var door_b4 = 1
 var door_b3 = 1
 var door_b2 = 1
@@ -30,39 +32,48 @@ var animal_move_not = true
 
 
 var startMqtt = false
+var mqtt_status = 0
 var mqtt_connect = false
+var mqtt_local = false
+var mqtt_stop = false
 
 var hasFailed = false
 
-
+var timer_on = false
+var timerStarted = false
 var timer
 var realTimerOver = false
 
 func _ready():
 	timer = Timer.new()
-	timer.wait_time = float(10 * 60)
+	timer.wait_time = float(9 * 60)
 	timer.one_shot = true
-	timer.start()
-	timer.autostart = true
 	add_child(timer)
 		
 	
 	
 	
 func _process(delta):
-	if(timer.time_left <= 0 and !hasFailed):
+	if(timer_on and !timerStarted):
+		timer.start()
+		timerStarted = true
+	if(timerStarted and timer.time_left <= 0 and !hasFailed):
 		get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
 		hasFailed = true
 		timer.stop()
-		MQTT_Client.pub("/gen/global", "stop")
-	elif(timer.time_left > 0 and !timer.is_stopped() and hasFailed):
+		if mqtt_connect:
+			MQTT_Client.pub("/gen/global", "stop")
+	elif(timerStarted and timer.time_left > 0 and !timer.is_stopped() and hasFailed):
 		get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
 		timer.stop()
-		MQTT_Client.pub("/gen/global", "stop")
+		if mqtt_connect:
+			MQTT_Client.pub("/gen/global", "stop")
 	elif(realTimerOver and hasFailed):
 		get_tree().change_scene_to_file("res://Szenen/Dead-Screen.tscn")
 		timer.stop()
-
+	if mqtt_stop:
+		if mqtt_connect:
+			MQTT_Client.pub("/gen/global", "stop")
 
 
 

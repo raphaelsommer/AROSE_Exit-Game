@@ -3421,13 +3421,14 @@ scale = Vector2(1.96937, 1.98219)
 texture = ExtResource("43_0a404")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Piano1"]
-visible = false
-offset_left = -990.313
-offset_top = -199.207
-offset_right = -216.313
-offset_bottom = -95.207
-theme_override_font_sizes/normal_font_size = 90
+offset_left = -1233.39
+offset_top = -294.067
+offset_right = -126.39
+offset_bottom = -96.0674
+theme_override_font_sizes/normal_font_size = 110
 text = "Piano-Game start"
+autowrap_mode = 2
+tab_size = 5
 
 [node name="Comp_2" type="Sprite2D" parent="."]
 position = Vector2(-340, -112)
@@ -3478,6 +3479,14 @@ text = "Button-Game start"
 position = Vector2(435.5, -42.5)
 shape = SubResource("RectangleShape2D_kcrld")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="RFID"]
+visible = false
+offset_left = 402.0
+offset_top = -107.0
+offset_right = 508.0
+offset_bottom = -83.0
+text = "scanned"
+
 [node name="Sprite2D" type="Sprite2D" parent="RFID"]
 visible = false
 position = Vector2(468, -70)
@@ -3489,6 +3498,14 @@ texture = ExtResource("55_7dkaf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RFID2"]
 position = Vector2(704, -42)
 shape = SubResource("RectangleShape2D_kcrld")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="RFID2"]
+visible = false
+offset_left = 670.0
+offset_top = -106.0
+offset_right = 776.0
+offset_bottom = -82.0
+text = "scanned"
 
 [node name="Sprite2D" type="Sprite2D" parent="RFID2"]
 visible = false

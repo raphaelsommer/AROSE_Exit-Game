@@ -14,7 +14,8 @@ func _physics_process(delta):
 		$RichTextLabel.visible = true
 		$Ip/Sprite2D.visible = false
 		ipPressed = true
-		MQTT_Client.pub("/c0/ip", "start")
+		if(Global.mqtt_connect):
+			MQTT_Client.pub("/c0/ip", "start")
 		await get_tree().create_timer(2).timeout
 		$RichTextLabel.visible = false
 	elif(Input.is_action_just_pressed("IP") and ipPressed):
@@ -23,14 +24,15 @@ func _physics_process(delta):
 		$Ip/Sprite2D.visible = false
 		await get_tree().create_timer(2).timeout
 		$RichTextLabel.visible = false
-	if(Input.is_action_just_pressed("Draht") and draht):
+	if(Input.is_action_just_pressed("Draht") and draht and !drahtPressed):
 		$Kapsel/Sprite2D.visible = false
 		$Kapsel/RichTextLabel.visible = true
 		drahtPressed = true
-		MQTT_Client.pub("/rk/wire", "start")
+		if(Global.mqtt_connect):
+			MQTT_Client.pub("/rk/wire", "start")
 		await get_tree().create_timer(2).timeout
 		$Kapsel/RichTextLabel.visible = false
-	elif(Input.is_action_just_pressed("Draht") and draht):
+	elif(Input.is_action_just_pressed("Draht") and drahtPressed):
 		$Kapsel/Sprite2D.visible = false
 		$Kapsel/RichTextLabel.set_text("Already started...")
 		$Kapsel/RichTextLabel.visible = true
@@ -56,10 +58,12 @@ func _on_ip_body_exited(body):
 
 
 func _on_kapsel_body_entered(body):
-	$Kapsel/Sprite2D.visible = true
-	draht = true
+	if(body.is_in_group("Player")):
+		$Kapsel/Sprite2D.visible = true
+		draht = true
 
 
 func _on_kapsel_body_exited(body):
-	$Kapsel/Sprite2D.visible = false
-	draht = false
+	if(body.is_in_group("Player")):
+		$Kapsel/Sprite2D.visible = false
+		draht = false

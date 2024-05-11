@@ -12,6 +12,7 @@ func _on_area_2d_body_entered(body):
 func _physics_process(delta):
 	if(Input.is_action_just_pressed("Door-k-2")):
 		$"../AnimatedSprite2D".play("opens")
+		$"../AudioStreamPlayer2D".play()
 		
 		$".".queue_free()
 

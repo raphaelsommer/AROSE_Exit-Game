@@ -19,11 +19,21 @@ func _process(delta):
 #func _on_mqtt_broker_connection_failed():
 	#print("Connection failed") # Replace with function body.
 
-func checkConnection():
-	var error = mqttClient.checkConnect()
-	print(error)
-	if (error == 0):
-		Global.mqtt_connect = true
+#func checkConnection():
+	#var error = mqttClient.checkConnect()
+	#print(error)
+	#if (error == 0):
+		#Global.mqtt_connect = true
+		
+func tryConnect():
+	var E = mqttClient.connect_to_broker("192.168.0.102")
+	await get_tree().create_timer(2).timeout
+	if (Global.mqtt_status < 2):
+		mqttClient.cleanupsockets()
+		print("Connection to Raspi-Network failed, trying local...")
+		E = mqttClient.connect_to_broker("localhost")
+		Global.mqtt_local = true
+	return E
 
 func sub():
 	mqttClient.subscribe("/gen/global", 2)

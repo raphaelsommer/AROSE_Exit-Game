@@ -24300,17 +24300,16 @@ frame = 2
 frame_progress = 0.933366
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-visible = false
 offset_left = 633.0
 offset_top = 121.0
 offset_right = 5753.0
 offset_bottom = 165.0
-text = "Es ist das Jahr 2030 und das Großprojekt Stuttgart 21 befindet sich vor der Eröffnung. Jedoch wird die Eröffnung des neuen Bahnhofes von einem Katzen-Clan blockiert. Die Vierbeiner verlangen im Ausgleich zu ihrem Stuttgarter Kopfbahnhof einen Planeten nur für sich. Das AROSE-Astronauten-Team, bestehend aus Juri und Leica, stellt sich dieser Herausforderung. Unterstützt werden die beiden Astronauten von “ALI“ der Hauseigenen KI. Die AROSE-Crew befindet sich nun auf dem Weg zu einem noch unerforschten Planeten um die Katzen dort anzusiedeln. Doch plötzlich fehlt der Sauerstoff. Die Astronauten müssen schnellstmöglich in die Rettungskapsel..."
+text = "2030: Das Großprojekt Stuttgart 21 soll fertiggestellt werden. Jedoch wird die Eröffnung von einem Katzen-Clan blockiert. Die Vierbeiner verlangen im Ausgleich einen eigenen Planeten. Die \"AROSE\" Crew, bestehend aus Juri und Leica, stellt sich der Herausforderung. Unterstützt werden sie von “ALI“, der hauseigenen KI. Die Crew befindet sich nun auf dem Weg um die Katzen umzusiedeln. Doch plötzlich fällt die Sauerstoffversorgung aus. Die Rettungskapsel scheint der einzige Ausweg zu sein..."
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(6190, 18)
+position = Vector2(4818, 4)
 shape = SubResource("RectangleShape2D_mm0pq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

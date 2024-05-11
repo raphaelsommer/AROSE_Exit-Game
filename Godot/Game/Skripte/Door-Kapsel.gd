@@ -11,6 +11,8 @@ func _process(delta):
 		$AnimatedSprite2D.play("close")
 		await get_tree().create_timer(2).timeout
 		get_tree().change_scene_to_file("res://Szenen/Winner-Screen.tscn")
+		if Global.mqtt_connect:
+			MQTT_Client.pub("/gen/global", "stop")
 
 
 

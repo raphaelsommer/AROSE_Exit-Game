@@ -15,6 +15,7 @@ func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
 		$pc/Sprite2D.visible = true
 		sauerstoff = true
+	
 		
 func _ready():
 	await get_tree().create_timer(5).timeout
@@ -23,7 +24,7 @@ func _ready():
 func _process(delta):
 	if(Input.is_action_just_pressed("Sauerstoff") and sauerstoff and !refilledSauerstoff):
 		Global.sauerstoff = true
-		Global.timer.set_wait_time(Global.timer.get_time_left() + float(8 * 60))
+		Global.timer.set_wait_time(Global.timer.get_time_left() + float(9 * 60))
 		Global.timer.start()
 		print(Global.timer.get_time_left())
 		$pc/Area2D.queue_free()
@@ -44,7 +45,8 @@ func _process(delta):
 		$Comp_2/Button3.visible = false
 		$Comp_2/RichTextLabel.visible = true
 		buttonPressed = true
-		MQTT_Client.pub("/b2/gravity", "off")
+		if(Global.mqtt_connect):
+			MQTT_Client.pub("/b2/gravity", "off")
 		await get_tree().create_timer(2).timeout
 		$Comp_2/RichTextLabel.visible = false
 	elif(Input.is_action_just_pressed("Button") and buttonPressed):
@@ -76,7 +78,8 @@ func _process(delta):
 		$Piano1/Sprite2D.visible = false
 		$Piano1/RichTextLabel.visible = true
 		pianoPressed = true
-		MQTT_Client.pub("/a5/piano", "start")
+		if(Global.mqtt_connect):
+			MQTT_Client.pub("/a5/piano", "start")
 		await get_tree().create_timer(2).timeout
 		$Piano1/RichTextLabel.visible = false
 	elif(Input.is_action_just_pressed("Piano") and pianoPressed):
@@ -86,7 +89,13 @@ func _process(delta):
 		$Piano1/RichTextLabel.visible = true
 		await get_tree().create_timer(2).timeout
 		$Piano1/RichTextLabel.visible = false
-
+	if(Global.door_c1_left == 0):
+		$RFID/RichTextLabel.visible = true
+	if(Global.door_c1_right == 0):
+		$RFID2/RichTextLabel2.visible = true
+	if (Global.door_b3 == 0):
+		$Lamp.visible = false
+		$Light_Lamp.visible = false
 
 
 
@@ -171,7 +180,7 @@ func _on_dead_body_entered(body):
 
 
 func _on_comp_2_body_entered(body):
-	if(body.is_in_group("Player")):
+	if(body.is_in_group("Player") and !Global.gravity):
 		$Comp_2/Button.visible = true
 		$Comp_2/Button2.visible = true
 		$Comp_2/Button3.visible = true
