@@ -10,7 +10,11 @@ class MidiIpGame:
 
     # Configure the USB MIDI Port:
     #PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 20:0'
-    PORT = 'Akai LPK25 Wireless MIDI 0'
+    gen_port = mido.open_output()
+
+    ports_available = mido.get_output_names()
+    
+    PORT = ports_available[1]
 
     # Configure the Raspberry Pi pins for the LCD Display and the Buzzer:
     lcd_rs = 24
