@@ -31,11 +31,11 @@ class Timer:
     start = True
     stopped = False
     timerFinished = False
-    INITTIME = 19
+    INITTIME = 0
     timerMin10 = (INITTIME - (INITTIME % 10)) // 10
     timerMin1 = INITTIME % 10
-    timerSec10 = 0
-    timerSec1 = 0
+    timerSec10 = 5
+    timerSec1 = 8
 
     ### Define the constructor of the class
     def __init__(self):

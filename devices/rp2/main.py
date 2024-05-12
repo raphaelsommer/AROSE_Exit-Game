@@ -44,7 +44,7 @@ MainTimer = Timer()
 ButtonGame = ButtonSequenceGame()
 
 # Set up the logger
-log_directory = "/home/rsommer/dhbw-wwi23h-systemanalyse-team1/devices/rp2"
+log_directory = "/home/student/Dokumente/dhbw-wwi23h-systemanalyse-team1/devices/rp2"
 os.makedirs(log_directory, exist_ok=True)
 log_file = os.path.join(log_directory, "rp2.log")
 Logger = logging.getLogger("RP2")
@@ -68,27 +68,27 @@ def on_message(client, userdata, msg):
         isStartTimer = True
     if msg.topic == MQTT_TOPIC_GEN_GLOBAL and msg.payload.decode() == 'stop':
         print("Stop Game")
-        stop = true
+        stop = True
     if msg.topic == MQTT_TOPIC_A5_PIANO and msg.payload.decode() == 'start':
         print("Starting MIDI-IP-Game")
         isStartMidiIpGame = True
     if msg.topic == MQTT_TOPIC_B2_GRAVITY and msg.payload.decode() == 'off':
         print("Button-Sequence started")
         isStartButtonSequence = True
-    Logger.info("Received topic: " + msg.topic.decode("utf-8") + ", message: " + msg.payload.decode("utf-8"))
+    #Logger.info("Received topic: " + msg.topic.decode("utf-8") + ", message: " + msg.payload.decode("utf-8"))
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print("Connected: " + str(reason_code))
-    Logger.info("Connected client " + CLIENT_ID + " with reason code: " + str(reason_code))
+    #Logger.info("Connected client " + CLIENT_ID + " with reason code: " + str(reason_code))
     client.publish(topic=MQTT_TOPIC_RP2, payload="connected", qos=2, retain=True)
 
 def on_connect_fail(client, userdata, properties, reason_code):
     print("Connection failed: " + str(reason_code))
-    Logger.ERROR("Connection failed with reason code: " + str(reason_code))
+    #Logger.ERROR("Connection failed with reason code: " + str(reason_code))
 
 def on_disconnect(client, userdata, flags, reason_code, properties):
     print("Disconnected: " + str(reason_code))
-    Logger.info("Disconnected client " + CLIENT_ID + " with reason code: " + str(reason_code))
+    #Logger.info("Disconnected client " + CLIENT_ID + " with reason code: " + str(reason_code))
 
 def on_log(client, userdata, level, buf):
     if level == 1 or level == 2:
@@ -124,17 +124,17 @@ threads_started = {thread1: False, thread2: False, thread3: False}
 try:
     while not stop:
         if not thread1.is_alive() and not threads_started[thread1] and isStartTimer:
-            #isStartTimer = False
+            isStartTimer = False
             thread1 = threading.Thread(target=MainTimer.startTimer)
             thread1.start()
             threads_started[thread1] = True
         if not thread3.is_alive() and not threads_started[thread3] and isStartMidiIpGame:
-            #isStartMidiIpGame = False
+            isStartMidiIpGame = False
             thread3 = threading.Thread(target=MIDIIpGame.startGame)
             thread3.start()
             threads_started[thread3] = True
         if not thread2.is_alive() and not threads_started[thread2] and isStartButtonSequence:
-            #isStartButtonSequence = False
+            isStartButtonSequence = False
             thread2 = threading.Thread(target=ButtonGame.startGame)
             thread2.start()
             threads_started[thread2] = True
@@ -189,4 +189,5 @@ finally:
     #    print(log_contents)
     #else:
     #    print("Log file not found!")
-    Logger.shutdown()
+    
+    #Logger.shutdown()
