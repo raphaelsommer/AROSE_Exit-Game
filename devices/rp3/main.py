@@ -50,7 +50,7 @@ IpGame = IP()
 WireGame = Wire()
 
 # Set up the logger
-log_directory = "/home/rsommer/dhbw-wwi23h-systemanalyse-team1/devices/rp3"
+log_directory = "/home/rsommer/Documents/dhbw-wwi23h-systemanalyse-team1/devices/rp3"
 os.makedirs(log_directory, exist_ok=True)
 log_file = os.path.join(log_directory, "rp3.log")
 Logger = logging.getLogger("RP3")
@@ -95,20 +95,20 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == '2':
         print("Nail touched - Wire not touched")
         WireGame.changeState(2)'''
-    Logger.info("Received topic: " + msg.topic.decode("utf-8") + ", message: " + msg.payload.decode("utf-8"))
+    #Logger.info("Received topic: " + msg.topic.decode("utf-8") + ", message: " + msg.payload.decode("utf-8"))
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print("Connected: " + str(reason_code))
-    Logger.info("Connected client " + CLIENT_ID + " with reason code: " + str(reason_code))
+    #Logger.info("Connected client " + CLIENT_ID + " with reason code: " + str(reason_code))
     client.publish(topic=MQTT_TOPIC_RP3, payload="connected", qos=2, retain=True)
 
 def on_connect_fail(client, userdata, properties, reason_code):
     print("Connection failed: " + str(reason_code))
-    Logger.ERROR("Connection failed with reason code: " + str(reason_code))
+    #Logger.ERROR("Connection failed with reason code: " + str(reason_code))
 
 def on_disconnect(client, userdata, flags, reason_code, properties):
     print("Disconnected: " + str(reason_code))
-    Logger.info("Disconnected client " + CLIENT_ID + " with reason code: " + str(reason_code))
+    #Logger.info("Disconnected client " + CLIENT_ID + " with reason code: " + str(reason_code))
 
 def on_log(client, userdata, level, buf):
     if level == 1 or level == 2:
@@ -170,6 +170,12 @@ try:
             #MorseGame.stopGame()
             isStoppedMorseGame = True
             client.publish(topic=MQTT_TOPIC_B3_MORSE, payload="finished", qos=2)
+        if RfidGame.getLeft() and not isStoppedRfidGame:
+            print("Left Rfid-Card scanned")
+            client.publish(topic=MQTT_TOPIC_C1_RFID, payload="left", qos=2)
+        if RfidGame.getRight() and not isStoppedRfidGame:
+            print("Right Rfid-Card scanned")
+            client.publish(topic=MQTT_TOPIC_C1_RFID, payload="right", qos=2)
         if RfidGame.getFinished() and not isStoppedRfidGame:
             print("Stopping Rfid-Game")
             isStoppedRfidGame = True
@@ -221,4 +227,5 @@ finally:
     #    print(log_contents)
     #else:
     #    print("Log file not found!")
-    Logger.shutdown()
+    
+    #Logger.shutdown()
