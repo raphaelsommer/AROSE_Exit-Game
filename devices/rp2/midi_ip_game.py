@@ -34,6 +34,9 @@ class MidiIpGame:
     IP2_entered = []
     areBothIPsRight = False
 
+    # Flag to reset the input
+    reset = False
+
     
     ### Define the constructor of the class
     def __init__(self):
@@ -71,6 +74,9 @@ class MidiIpGame:
                         time.sleep(1)
                         self.buzzer.stop()
                         time.sleep(1)
+                    elif self.IP_part == 48:
+                        self.reset = True
+                        break
                     else:
                         self.lcd.clear()
                         self.lcd.message(f'Note value too\nlow, try again...')
@@ -95,7 +101,14 @@ class MidiIpGame:
         try:
             while not self.areBothIPsRight:
                 self.enterIP(self.IP1_entered, 1)
-                self.enterIP(self.IP2_entered, 2)
+                if self.reset:
+                    self.lcd.clear()
+                    self.lcd.message(f'Reset IPs,\ntry again...')
+                    self.IP1_entered = self.resetIP(self.IP1_entered)
+                    self.IP2_entered = self.resetIP(self.IP2_entered)
+                    self.reset = False
+                else:
+                    self.enterIP(self.IP2_entered, 2)
                 if (self.IP1_entered == [192, 168, 180, 198] and self.IP2_entered == [192, 168, 222, 210]):
                     self.lcd.clear()
                     self.lcd.message('Both IPs are\nright!')

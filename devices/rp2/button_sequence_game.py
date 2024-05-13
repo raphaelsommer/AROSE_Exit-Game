@@ -15,7 +15,7 @@ class ButtonSequenceGame:
 
     # Variables for debouncing softening
     last_press_time = 0
-    debounce_treshold = 0.5
+    debounce_treshold = 0.8
 
     # Initialize the variables
     button_sequence = []
@@ -69,7 +69,7 @@ class ButtonSequenceGame:
                     self.blink_led('red', 1, 0.25)
             self.set_led_color('none')
             self.wrong_sequence_counter += 1
-            if self.wrong_sequence_counter == 3:
+            if self.wrong_sequence_counter >= 3:
                 time.sleep(0.5)
                 self.correct_sequence = random.sample([self.BUTTON1, self.BUTTON2, self.BUTTON3], 3)
                 print(str(self.correct_sequence))
@@ -110,9 +110,9 @@ class ButtonSequenceGame:
         self.blink_led('white', 3, 0.5)
 
         # Add the button callback function to the GPIO event detection
-        GPIO.add_event_detect(self.BUTTON1, GPIO.FALLING, callback=self.button_callback, bouncetime=500)
-        GPIO.add_event_detect(self.BUTTON2, GPIO.FALLING, callback=self.button_callback, bouncetime=500)
-        GPIO.add_event_detect(self.BUTTON3, GPIO.FALLING, callback=self.button_callback, bouncetime=500)
+        GPIO.add_event_detect(self.BUTTON1, GPIO.FALLING, callback=self.button_callback, bouncetime=self.debounce_treshold*1000)
+        GPIO.add_event_detect(self.BUTTON2, GPIO.FALLING, callback=self.button_callback, bouncetime=self.debounce_treshold*1000)
+        GPIO.add_event_detect(self.BUTTON3, GPIO.FALLING, callback=self.button_callback, bouncetime=self.debounce_treshold*1000)
 
         # Wait until the game is finished
         while not self.finished:
