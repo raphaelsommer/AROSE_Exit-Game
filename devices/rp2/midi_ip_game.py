@@ -74,7 +74,7 @@ class MidiIpGame:
                         time.sleep(1)
                         self.buzzer.stop()
                         time.sleep(1)
-                    elif self.IP_part == 48:
+                    elif IP_part == 48:
                         self.reset = True
                         break
                     else:
@@ -118,6 +118,12 @@ class MidiIpGame:
                     time.sleep(2)
                     self.lcd.clear()
                     self.areBothIPsRight = True
+                elif self.reset:
+                    self.lcd.clear()
+                    self.lcd.message(f'Reset IPs,\ntry again...')
+                    self.IP1_entered = self.resetIP(self.IP1_entered)
+                    self.IP2_entered = self.resetIP(self.IP2_entered)
+                    self.reset = False
                 else:
                     self.lcd.clear()
                     self.lcd.message('At least one IP\nis wrong!')

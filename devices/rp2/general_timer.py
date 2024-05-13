@@ -103,7 +103,7 @@ class Timer:
         self.startTime = time.time()
         while ((not self.stopped) and self.start):
             self.currentTime = time.time()
-            if (self.currentTime - self.startTime) >= 0.1:
+            if (self.currentTime - self.startTime) >= 0.997:
                 self.display_digit(1, self.timerMin10, False)
                 self.display_digit(2, self.timerMin1, (int(self.timerSec1)%2)==0)
                 self.display_digit(3, self.timerSec10, False)
