@@ -187,9 +187,9 @@ try:
         if (WireGame.getGameState() == 1 or WireGame.getGameState() == 2) and not isStoppedWireGame:
             print("Stopping Wire-Game")
             isStoppedWireGame = True
-            if WireGame.getGameState() == 2:
+            if WireGame.getGameState() == 1:
                 client.publish(topic=MQTT_TOPIC_RK_WIRE, payload="win", qos=2)
-            elif WireGame.getGameState() == 1:
+            elif WireGame.getGameState() == 2:
                 client.publish(topic=MQTT_TOPIC_RK_WIRE, payload="fail", qos=2)
             stop = True
 
