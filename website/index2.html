@@ -46,9 +46,9 @@
         }
 
         .background {
-            width: 50%;
-            height: 50%;
-            background: url('assets/Background_2.2.jpg') center center/cover no-repeat;
+            width: 100%;
+            height: 100%;
+            background: url('/assets/Background_2.2.jpg') center center/cover no-repeat;
             transition: transform 0.5s ease, opacity 0.5s ease;
         }
 
@@ -106,7 +106,7 @@
         }
 
         .anleitung-section {
-            height: 75vh;
+            height: 75%;
             background: linear-gradient(to bottom, #000000, #080a2e);
             color: white;
         }
@@ -122,25 +122,84 @@
         .Anleitung_visibleContent {
             display: flex;
             flex-direction: column;
+
         }
 
         .repo-section {
-            height: 25vh;
+            height: 25%;
             background: linear-gradient(to top, #000000, #080a2e);
             color: white;
+            width: 100%;
+
         }
 
         .story-section {
-            height: 100vh;
+            height: 100%;
             background: linear-gradient(to bottom, #000000, #020f31);
             color: white;
+            width: 100%;
+
         }
 
         .aboutus-section {
-            height: 75vh;
+            height: 75%;
             background: linear-gradient(to top, #000000, #020f31);
             color: white;
+            width: 100%;
         }
+
+        .content {
+            display: flex; /* Aligns the elements in a row */
+            text-align: center;
+            align-items: center;
+            width: calc(1065 / 1440 * 100%); 
+            justify-content: center; 
+            margin-left: calc(375 / 1440 / 2 * 100%);
+            margin-right: calc(375 / 1440 / 2 * 100%);
+        }
+        .content_titel{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        .persons {
+            display: flex;
+           /* align-items: center;
+            justify-content: center;*/
+           
+        }
+        
+
+        .persons_textblock{
+            padding-right: 15px;
+            margin-bottom: 15px;
+
+        }
+        .persons_textblock :last-child{
+            margin-right: 0;
+            margin-bottom: 0;
+        }
+
+        .persons_titles {
+            display: flex;
+            font-size: 1.2em;
+            padding: 5px 5px 5px 5px;
+            text-decoration: underline;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .persons_texts {
+            font-size: 1em;
+            padding: 5px 5px 5px 5px;
+
+        }
+
 
     </style>
 </head>
@@ -159,7 +218,7 @@
             <li><a href="#resources" onclick="resetOpacity()">epo</a></li>
             <li>
                 <div class="logo" id="logo">
-                    <img src="assets/logo.png" alt="Logo">
+                    <img src="/assets/logo.png" alt="Logo">
                 </div>
             </li>
             <li>
@@ -183,26 +242,27 @@
     <section id="anleitung" class="section anleitung-section">
         <div class="content">
             <div id="input" class="Anleitung_Input">
-                <h2>Enter code to reveal instruction PDF</h2>
-                <input type="text" id="secretCode" placeholder="Enter your code">
+                <h2 class="content_titel">Enter code to reveal instruction PDF</h2>
+                <input type="password" id="secretCode" placeholder="Enter your code">
                 <button onclick="revealContent()">Submit</button>
             </div>    
             <div id="extraContent" class="Anleitung_hiddenContent">
                 <h2>Download the instructions below:</h2> 
-                <a href="assets/Git.pdf" target="_blank">AROSE-Anleitung</a>
+                <a href="assets/spielanleitungen.pdf" target="_blank">AROSE-Anleitung</a>
             </div>
         </div>
     </section>
 
     <section id="resources" class="section repo-section">
         <div class="content">
-            <p>Link to repository</p>
+            <p class="content_titel"><a href="https://github.com/raphaelsommer/dhbw-wwi23h-systemanalyse-team1">Link to repository</a></p>
         </div>
     </section>
 
     <section id="story" class="section story-section">
+        <div class="content_titel"><h2>Story</h2></div>
         <div class="content">
-            <p>
+            <p class="persons_texts">
                 Es ist das Jahr 2030, Stuttgart 21 befindet sich in der letzten Bauphase.
                 Ein Problem besteht jedoch: Wohin sollen die Eidechsen umgesiedelt werden? Die Eröffnung des neuen Bahnhofs kann nicht zugelassen werden, bevor ein geeignetes Habitat für die Eidechsen gefunden wurde.
                 Auch wenn die Eidechsen bereits umgesiedelt wurden, wird man sie nicht los. Ein starkes Homing-Verhalten der Reptilien sorgt dazu, dass die Tiere es immer wieder zurück nach Stuttgart treibt. Es scheint so als würden sie es von überall auf der Welt zurück nach Stuttgart schaffen.
@@ -216,10 +276,90 @@
             </p>
         </div>
     </section>
-
+    
     <section id="aboutus" class="section aboutus-section">
+        <div class="content_titel"><h2>About us</h2></div>
         <div class="content">
-            <p>About us</p>
+            <div class="persons">
+                <div class="persons_group">
+                    <div>
+                        <div class="persons_textblock"><p class="persons_titles">Raphael der Stratege</p>
+                            <p class="persons_text">
+                                Raphael, der Stratege, ein Meister des Jiras und Githubs, dessen Pläne so 
+                                verschlungen sind, dass selbst seine eigenen Leute manchmal verwirrt sind. 
+                                Er entwirft Diagramme wie andere ein Mahl kochen – mit viel Geschmack und 
+                                vielen Zutaten. Doch einmal, bei der großen Gruppenarbeit von Blauenfeld, befahl er 
+                                seinen Männern, „nach Westen zu marschieren, bei der Eiche links!“ Leider war 
+                                die Eiche vor drei Jahren gefallen. Seine Krieger irrten stundenlang und fanden
+                                sich schließlich auf einem Bauernfest wieder, wo sie, statt zu kämpfen, am 
+                                Wetttrinken teilnahmen. Raphael aber schmunzelte und sprach: „Ein Sieg für 
+                                die Moral, wenn auch nicht in der Uni.“                            
+                            </p>
+                        </div>
+                        <div class="persons_textblock"><p class="persons_titles">Leander der Weise</p>
+                            <p class="persons_text">
+                                Leander, genannt der Weise, ein Gelehrter von großem Ansehen und tiefem Wissen. 
+                                Er verbringt seine Tage in der Stille von Confluence, umgeben von staubigen 
+                                Folianten und uralten Schriften. Doch wehe dem, der ihn fragt, wo etwas liegt 
+                                oder wie man zum nächsten Markt kommt! „Ich weiß viel von den Sternen und der 
+                                alten Sprache“, sagt er, „doch fragt mich nicht nach dem Weg zur Mühle.“ So 
+                                rätselhaft ist sein Wissen, dass die Dorfkinder Wetten abschließen, ob Leander 
+                                den Weg zu seinem eigenen Haus findet, wenn er von seinen Büchern aufblickt.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="persons_group">
+                    <div>
+                        <div class="persons_textblock"><p class="persons_titles">Hendrik der Magier</p>
+                            <p class="persons_text">
+                                Hendrik, der Meister der Magie, ein Zauberer von nicht geringem Ruhm, doch seine 
+                                Zauberei oft misslingt auf humorvolle Weis'. Beim Fest der Wintersonnenwende 
+                                beschwor er eine Eidechse aus Rauch, der den Himmel verdunkeln sollte. Doch was 
+                                erschien, war nur eine Katze, die in die Höh' sprang und im Wein des Barons landete. 
+                                „Bei den alten Codes“, schwört Hendrik, „ich wollte nur importieren, nicht amüsieren!“ 
+                                Doch jedes Kind lacht und ruft ihm zu, wenn er vorübergeht, frohlockend über den Zauberer, 
+                                der eher ein Spaßmacher als ein Schrecken der Feinde ist.
+                            </p>
+                        </div>
+                        <div class="persons_textblock"><p class="persons_titles">Basti der Barde</p>
+                            <p class="persons_text">
+                                Und nun, lasst uns singen und lachen mit Basti, dem Barden, dessen Lieder die Herzen der Ladies
+                                erfreuen, doch dessen Gedächtnis so kurz wie das Schnurren einer Katze. Mit Laute in 
+                                Hand betritt er die Bühne, ein Lied anzustimmen, das die Edlen erhebt. Doch mitten in der 
+                                PowerPoint, sein Blick wird stumm – vergessen die Worte, das Publikum brummt. „Ei, was war’s 
+                                doch gleich?“, gesteht er mit Lachen, und aus dem Versprecher wird Komik geschaffen. Die 
+                                Zuhörer johlen, denn trotz aller Missgeschicke, Bastis gut' Mien' und sein Frohsinn machen alles wett.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="persons_group">
+                    <div>
+                        <div class="persons_textblock">
+                            <p class="persons_titles">Max der Alchemist</p>
+                            <p class="persons_text">
+                                Oh höret, höret, von Max, dem Alchemist, ein Meister der verbotenen Künste, der mehr oft in seinen 
+                                Tränken braut als in Weisheit sühnt. Einst suchte er das Elixier des ew'gen Schärfe, doch was er fand, 
+                                war nur ein Trank der ew'gen Blähung. So geht er nun, wo er wandelt, ein Wind folgt seiner Spur, 
+                                der die Nasen der Komilitonen in Mitleidenschaft zieht. „Bei Kerim`s Bart“, ruft er, „dies war nicht 
+                                das Ziel meiner Alchemie!“ Doch lacht das ganze Dorf, wenn Max, der meisterhafte Gasgelehrte, vorüberzieht, 
+                                seine Flaschen und Kolben immer klirrend wie die Glocken des Narren.
+                            </p>
+                        </div>
+                        <div class="persons_textblock">
+                            <p class="persons_titles">Kerim der Schönbart</p>
+                            <p class="persons_text">
+                                Nun wendet Eure Ohren dem Kerim zu, genannt der Schönbart, dessen Antlitz so fein behaart, dass selbst 
+                                die Rosen neidisch sind auf seine Zier. Kein Bildschirm kann seiner Schönheit widerstehen, keine CPU bleibt 
+                                unberührt von seinem Anblick. Doch ach, so eitel ist unser Kerim, dass er stets versäumt, des Lebens ernste 
+                                Pflichten zu bedenken. „Fürwahr“, spricht er, „kann der Code warten, doch dieser Bart, er muss gepflegt 
+                                sein!“ Beim Festbankett, statt des Codes Schlacht, führt er Kämme und Bürsten mit sich und streicht sein Haar zu Glanz und Pracht.
+                            </p>
+                        </div>
+                    </div>
+                </div>    
+            </div> 
         </div>
     </section>
 
@@ -259,13 +399,13 @@
             var extraContent = document.getElementById("extraContent");
             //var input = document.getElementsById("input");
 
-            if (secretCode === "1234") { 
+            if (secretCode === "AROSE") { 
                 extraContent.classList.remove("Anleitung_hiddenContent");
                 extraContent.classList.add("Anleitung_visibleContent");
                 input.classList.remove("Anleitung_Input");
                 input.classList.add("Anleitung_hiddenInput");
             } else {
-                alert("Wrong code!");
+                alert("In a garden where secrets sleep, Under moon’s watchful eyes, I keep. From whispers low, within the dark, With dawn’s first light, my life doth spark. Not plant, nor flower, yet I bloom, Rising silently from night’s gloom. What am I, that with light grows? Think carefully, the answer AROSE.");
             }
         }
     </script>
