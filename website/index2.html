@@ -31,7 +31,7 @@
         }
 
         .background-container {
-            opacity: 0.1;
+            opacity: 0.2;
             position: fixed;
             top: 0;
             left: 0;
@@ -46,9 +46,9 @@
         }
 
         .background {
-            width: 100%;
-            height: 100%;
-            background: url('/assets/Background_2.2.jpg') center center/cover no-repeat;
+            width: 65%;
+            height: 65%;
+            background: url('assets/Background_2.2.jpg') center center/cover no-repeat;
             transition: transform 0.5s ease, opacity 0.5s ease;
         }
 
@@ -106,7 +106,7 @@
         }
 
         .anleitung-section {
-            height: 75%;
+            height: 70vh;
             background: linear-gradient(to bottom, #000000, #080a2e);
             color: white;
         }
@@ -126,15 +126,22 @@
         }
 
         .repo-section {
-            height: 25%;
+            flex-direction: column;
+            height: 70vh;
             background: linear-gradient(to top, #000000, #080a2e);
             color: white;
             width: 100%;
 
         }
 
+        .repo-section a {
+            color: white;
+            text-decoration: underline;
+        }
+
         .story-section {
-            height: 100%;
+            flex-direction: column;
+            height: 110vh;
             background: linear-gradient(to bottom, #000000, #020f31);
             color: white;
             width: 100%;
@@ -142,20 +149,20 @@
         }
 
         .aboutus-section {
-            height: 75%;
+            flex-direction: column;
+            height: 100%;
             background: linear-gradient(to top, #000000, #020f31);
             color: white;
             width: 100%;
         }
 
         .content {
-            display: flex; /* Aligns the elements in a row */
+            display: flex;
             text-align: center;
             align-items: center;
-            width: calc(1065 / 1440 * 100%); 
-            justify-content: center; 
-            margin-left: calc(375 / 1440 / 2 * 100%);
-            margin-right: calc(375 / 1440 / 2 * 100%);
+            justify-content: center;
+            margin-left: 10%;
+            margin-right: 10%;
         }
         .content_titel{
             display: flex;
@@ -164,7 +171,7 @@
             align-items: center;
             margin-bottom: 20px;
             font-size: 1.5em;
-            text-decoration: underline;
+            /*text-decoration: underline;*/
         }
 
         .persons {
@@ -218,7 +225,7 @@
             <li><a href="#resources" onclick="resetOpacity()">epo</a></li>
             <li>
                 <div class="logo" id="logo">
-                    <img src="/assets/logo.png" alt="Logo">
+                    <img src="assets/logo.png" alt="Logo">
                 </div>
             </li>
             <li>
@@ -254,8 +261,9 @@
     </section>
 
     <section id="resources" class="section repo-section">
+        <div class="content_titel"><h2>Repository</h2></div>
         <div class="content">
-            <p class="content_titel"><a href="https://github.com/raphaelsommer/dhbw-wwi23h-systemanalyse-team1">Link to repository</a></p>
+            <a href="https://github.com/raphaelsommer/dhbw-wwi23h-systemanalyse-team1">Link to repository</a>
         </div>
     </section>
 
@@ -382,12 +390,12 @@
                 if (clickedLink) {
                     document.getElementById("nav-bar").style.opacity = 1;
                     document.getElementById("logo").style.opacity = 1;
-                    document.getElementById("background-container").style.opacity = 0.1 + opacity;
+                    document.getElementById("background-container").style.opacity = 0.2 + opacity;
                     document.getElementById("background").style.transform = `scale(${scale})`;
                 } else {
                     document.getElementById("nav-bar").style.opacity = opacity;
                     document.getElementById("logo").style.opacity = opacity;
-                    document.getElementById("background-container").style.opacity = 0.1 + opacity;
+                    document.getElementById("background-container").style.opacity = 0.2 + opacity;
                     document.getElementById("background").style.transform = `scale(${scale})`;
                 }
             }
