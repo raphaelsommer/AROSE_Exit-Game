@@ -59,6 +59,7 @@ thread2 = threading.Thread(target=None)
 thread3 = threading.Thread(target=None)
 
 
+
 ### MQTT Methods
 def on_message(client, userdata, msg):
     global isStartMidiIpGame, isStartTimer, isStartButtonSequence, stop
@@ -115,6 +116,7 @@ client.will_set(MQTT_TOPIC_RP2, payload=f"{MainTimer.getRestTimeInSeconds}", qos
 client.connect(MQTT_BROKER, MQTT_PORT, properties=properties, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
 client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 0), (MQTT_TOPIC_A5_PIANO, 2), (MQTT_TOPIC_B2_GRAVITY, 2)])
+
 
 
 

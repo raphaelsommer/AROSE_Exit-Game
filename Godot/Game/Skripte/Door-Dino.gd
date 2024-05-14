@@ -16,6 +16,8 @@ func _physics_process(delta):
 		$Sprite2D.visible = false
 		Global.door_open = true
 		$AnimatedSprite2D.play("opens")
+		$AudioStreamPlayer2D.play()
 		$CharacterBody2D.queue_free()
 		$Sprite2D.queue_free()
 		$Area2D.queue_free()
+	

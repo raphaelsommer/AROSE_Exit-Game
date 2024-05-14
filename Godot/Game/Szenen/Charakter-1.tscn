@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://djeclnf0t85n3"]
+[gd_scene load_steps=27 format=3 uid="uid://djeclnf0t85n3"]
 
 [ext_resource type="Script" path="res://Skripte/Charakter-1.gd" id="1_fbrjd"]
 [ext_resource type="Texture2D" uid="uid://c1nffihvhe72t" path="res://Charaktere/Charakter_1/Dead/Dead-2.png" id="3_804ir"]
 [ext_resource type="Texture2D" uid="uid://dpirmpuc6xsq3" path="res://Charaktere/Charakter_1/Dead/Dead-3.png" id="4_0g7ji"]
 [ext_resource type="Texture2D" uid="uid://c7gwu0j3yh43g" path="res://Charaktere/Charakter_1/Dead/Dead-4.png" id="5_36dnt"]
+[ext_resource type="Texture2D" uid="uid://ceo1fm10qw4wv" path="res://Charaktere/Charakter_1/Jump/Jump-6.png" id="5_w87ac"]
 [ext_resource type="Texture2D" uid="uid://dtorvq1vx6pac" path="res://Charaktere/Charakter_1/Idle/Idle-1.png" id="6_jxpmr"]
 [ext_resource type="Texture2D" uid="uid://dcc3ij85ybfxa" path="res://Charaktere/Charakter_1/Idle/Idle-2.png" id="7_wmyfe"]
 [ext_resource type="Texture2D" uid="uid://yuqmhsjdbwfd" path="res://Charaktere/Charakter_1/Idle/Idle-3.png" id="8_xb2aw"]
@@ -15,7 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://c2cle6agca14l" path="res://Charaktere/Charakter_1/Run/Run-5.png" id="20_6wpf6"]
 [ext_resource type="Texture2D" uid="uid://dpgf060g7qwsr" path="res://Charaktere/Charakter_1/Run/Run-6.png" id="21_ku5ry"]
 [ext_resource type="Texture2D" uid="uid://butpb8yyhdonw" path="res://Charaktere/Charakter_1/Run/Run-7.png" id="22_7dbwi"]
+[ext_resource type="AudioStream" uid="uid://cefinl2o2wfda" path="res://Sounds/Effects/yd-Sounds/steps_platform.ogg" id="23_7v6ge"]
 [ext_resource type="Texture2D" uid="uid://eswsb5t57p5n" path="res://Charaktere/Charakter_1/Run/Run-8.png" id="23_nypw3"]
+[ext_resource type="PackedScene" uid="uid://bbocoreb5cnga" path="res://Szenen/Gui-Player.tscn" id="24_5fwvr"]
 [ext_resource type="Texture2D" uid="uid://cgspveemvaquw" path="res://Charaktere/Charakter_1/Run/Run-9.png" id="24_criru"]
 [ext_resource type="Texture2D" uid="uid://bdj657f065e6m" path="res://Charaktere/Charakter_1/Run/Run-10.png" id="25_kq4xp"]
 [ext_resource type="Texture2D" uid="uid://dqe2nbjtwnlti" path="res://Charaktere/Charakter_1/Run/Run-11.png" id="26_ku3q5"]
@@ -39,6 +42,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_w87ac")
+}],
+"loop": true,
+"name": &"fall",
 "speed": 5.0
 }, {
 "frames": [{
@@ -124,10 +135,12 @@ shape = SubResource("RectangleShape2D_efwtd")
 position = Vector2(6, -8)
 scale = Vector2(1.40625, 1.44286)
 sprite_frames = SubResource("SpriteFrames_hm6ix")
-animation = &"shoot"
+animation = &"fall"
 autoplay = "idle"
-frame = 1
-frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_7v6ge")
+
+[node name="Node2D" parent="." instance=ExtResource("24_5fwvr")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false

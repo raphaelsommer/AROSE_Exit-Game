@@ -12,6 +12,7 @@ func _physics_process(delta):
 	if(Input.is_action_just_pressed("Enter_Switch")):
 		$Sprite2D.visible = false
 		$AnimatedSprite2D.play("on")
+		$AudioStreamPlayer2D.play()
 		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file("res://Szenen/Kommandozentrale.tscn")
 

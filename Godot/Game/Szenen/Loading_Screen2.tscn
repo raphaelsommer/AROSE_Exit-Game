@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://djrt04tunr1wp"]
+
+[ext_resource type="Script" path="res://Skripte/Loading_Screen2.gd" id="1_77boe"]
+[ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="2_x11s6"]
+[ext_resource type="Texture2D" uid="uid://f38ri6yg6du0" path="res://Erde/earth Kopie 2.png" id="3_10kch"]
+[ext_resource type="Texture2D" uid="uid://depqbkq1xh5q" path="res://Erde/earth.png" id="4_uvd0h"]
+[ext_resource type="Texture2D" uid="uid://cx2bjo3q4fdif" path="res://Erde/earth1.png" id="5_tenfw"]
+[ext_resource type="Texture2D" uid="uid://dqersn35m0l8r" path="res://Erde/earth Kopie.png" id="6_y43us"]
+[ext_resource type="Texture2D" uid="uid://hk20lpx56cg5" path="res://Gui/Title/Title-1.png" id="7_67ps6"]
+[ext_resource type="Texture2D" uid="uid://hj17166r8rf1" path="res://Gui/Title/Title-2.png" id="8_ugb5i"]
+[ext_resource type="Texture2D" uid="uid://dn43w366x4wym" path="res://Gui/Title/Title-3.png" id="9_ehpqn"]
+[ext_resource type="Texture2D" uid="uid://6wsqba14xunb" path="res://Gui/Title/Title-4.png" id="10_rwsff"]
+[ext_resource type="AudioStream" uid="uid://bi3iatw3mdl4k" path="res://Sounds/GUI/ObservingTheStar/ObservingTheStar.ogg" id="11_2yaxm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mbh73"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_10kch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uvd0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tenfw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y43us")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Loading" type="Node2D"]
+script = ExtResource("1_77boe")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(520, 298)
+texture = ExtResource("2_x11s6")
+metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(568, 353)
+scale = Vector2(0.282, 0.258)
+sprite_frames = SubResource("SpriteFrames_mbh73")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Camera2D" type="Camera2D" parent="AnimatedSprite2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(419, 192.5)
+texture = ExtResource("7_67ps6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(525, 200.5)
+scale = Vector2(1.307, 1.307)
+texture = ExtResource("8_ugb5i")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(607, 200.5)
+scale = Vector2(1.256, 1.256)
+texture = ExtResource("9_ehpqn")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(723, 200.5)
+scale = Vector2(1.162, 1.162)
+texture = ExtResource("10_rwsff")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 529.0
+offset_top = 449.0
+offset_right = 702.0
+offset_bottom = 493.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Loading..."
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_2yaxm")
+autoplay = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 330.0
+offset_top = 478.0
+offset_right = 841.0
+offset_bottom = 566.0
+text = "No MQTT connection detected, Game might function unproperly!"
