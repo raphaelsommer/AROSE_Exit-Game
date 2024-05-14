@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgdrgwttbabbk"]
+[gd_scene load_steps=5 format=3 uid="uid://dgdrgwttbabbk"]
 
 [ext_resource type="Script" path="res://Skripte/Spikes.gd" id="1_k4ybx"]
 [ext_resource type="Texture2D" uid="uid://d3sa01ebsdutp" path="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Objects/Spike.png" id="2_lddwq"]
+[ext_resource type="AudioStream" uid="uid://pj2c8xk0rdix" path="res://Sounds/Effects/Animal/Meow/playerhit.wav" id="3_mmktj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fk7pd"]
 size = Vector2(38, 22.5)
@@ -19,5 +20,8 @@ shape = SubResource("RectangleShape2D_fk7pd")
 position = Vector2(-22.25, -18.5)
 scale = Vector2(0.169922, 0.144531)
 texture = ExtResource("2_lddwq")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_mmktj")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

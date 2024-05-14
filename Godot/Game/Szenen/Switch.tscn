@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://da6uj5b8evqw0"]
+[gd_scene load_steps=8 format=3 uid="uid://da6uj5b8evqw0"]
 
 [ext_resource type="Script" path="res://Skripte/Switch.gd" id="1_l0uie"]
 [ext_resource type="Texture2D" uid="uid://b6olfavny71oh" path="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Objects/Switch (2).png" id="1_rxmqw"]
 [ext_resource type="Texture2D" uid="uid://ie2ly4yfdm26" path="res://Game-Map/Dino_Game/FreeSciFiPlatform/png/Objects/Switch (1).png" id="2_6ctc1"]
 [ext_resource type="Texture2D" uid="uid://gdgw1emyvuxu" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_p.png" id="4_0wu7h"]
+[ext_resource type="AudioStream" uid="uid://dj65sj014akn2" path="res://Sounds/Effects/yd-Sounds/cogs.ogg" id="5_4ks0i"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1pphf"]
 animations = [{
@@ -47,6 +48,9 @@ visible = false
 position = Vector2(24, -9)
 scale = Vector2(0.229492, 0.191406)
 texture = ExtResource("4_0wu7h")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_4ks0i")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-
+var buyable = false
 
 
 func _on_ready():
@@ -17,6 +17,7 @@ func _on_area_2d_body_entered(body):
 
 func _physics_process(delta):
 	if(Input.is_action_just_pressed("Interagieren")):
+		buyable = true
 		$AudioStreamPlayer2D1.play()
 		$Press.visible = false
 		$I.visible = false
@@ -26,8 +27,9 @@ func _physics_process(delta):
 		$"Text Robot".visible = false
 		$Press.visible = true
 		$I.visible = true
+		buyable = false
 		
-	if(Input.is_action_just_pressed("kaufen")):
+	if(Input.is_action_just_pressed("kaufen") and (Global.coins >= 5) and buyable):
 		print(Global.coins)
 		$AudioStreamPlayer2D2.play()
 		Global.coins -= 5
