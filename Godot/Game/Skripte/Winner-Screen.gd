@@ -7,6 +7,7 @@ func _on_button_pressed():
 	else:
 		get_tree().change_scene_to_file("res://Szenen/Abspann.tscn")
 	if Global.mqtt_connect:
+		MQTT_Client.pub("/gen/global", "stop")
 		MQTT_Client.mqttClient.disconnect_from_server()
 
 
