@@ -31,11 +31,11 @@ class Timer:
     start = True
     stopped = False
     timerFinished = False
-    INITTIME = 18
+    INITTIME = 17
     timerMin10 = (INITTIME - (INITTIME % 10)) // 10
     timerMin1 = INITTIME % 10
-    timerSec10 = 0
-    timerSec1 = 0
+    timerSec10 = 5
+    timerSec1 = 8
 
     ### Define the constructor of the class
     def __init__(self):
@@ -94,39 +94,46 @@ class Timer:
     def getFinished(self):
         return self.timerFinished
     
+    ### Define a method to get the rest time of the timer for the main.py file (last will message)
+    def getRestTimeInSeconds(self):
+        return (self.timerMin10 * 600) + (self.timerMin1 * 60) + (self.timerSec10 * 10) + self.timerSec1
+    
     ### Define a method to start the timer
     def startTimer(self):
-        while not self.stopped:
-            if self.start:
-                self.display_digit(1, self.timerMin10)
-                self.display_digit(2, self.timerMin1)
-                self.display_digit(3, self.timerSec10)
-                self.display_digit(4, self.timerSec1, True)
-                time.sleep(1)
+        self.startTime = time.time()
+        while ((not self.stopped) and self.start):
+            self.currentTime = time.time()
+            if (self.currentTime - self.startTime) >= 0.997:
+                self.display_digit(1, self.timerMin10, False)
+                self.display_digit(2, self.timerMin1, (int(self.timerSec1)%2)==0)
+                self.display_digit(3, self.timerSec10, False)
+                self.display_digit(4, self.timerSec1, False)
                 if self.timerSec1 == 0:
                     if self.timerSec10 == 0:
                         if self.timerMin1 == 0:
                             if self.timerMin10 == 0:
                                 self.stopped = True
-                            else:
-                                self.timerMin10 -= 1
-                                self.timerMin1 = 9
-                        else:
-                            self.timerMin1 -= 1
-                    else:
-                        self.timerSec10 -= 1
-                    self.timerSec1 = 9
-                else:
-                    self.timerSec1 -= 1
+                    
+                            self.timerMin10 -= 1
+                            self.timerMin1 = 10
+                        
+                        self.timerMin1 -= 1
+                        self.timerSec10 = 6
+                    
+                    self.timerSec10 -= 1
+                    self.timerSec1 = 10
+                
+                self.timerSec1 -= 1
+                self.startTime = self.currentTime
         self.clear_display()
         self.alarm()
         self.timerFinished = True
+        self.stopTimer()
 
     ### Define a method to stop the timer
     def stopTimer(self):
         self.stopped = True
         self.clear_display()
-        self.buzzer.off()
         self.timerMin10 = (self.INITTIME - (self.INITTIME % 10)) // 10
         self.timerMin1 = self.INITTIME % 10
         self.timerSec10 = 0

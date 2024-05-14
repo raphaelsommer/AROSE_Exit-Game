@@ -50,34 +50,67 @@ class RFIDReader:
                         print(f"Scanner {self.device}: Incorrect card.")
             time.sleep(0.5)
 
-def end_program(scanners):
-    for scanner in scanners:
-        scanner.reader.Close()
+class RFID:
 
-def main():
+    finished = False
+    left = False
+    right = False
+
     RIGHT_CARD_UID1 = {0xB3, 0xD8, 0x61, 0x1A, 0x10}
     RIGHT_CARD_UID2 = {0x3, 0x41, 0x8D, 0x1A, 0xD5}
 
     scanner1 = RFIDReader(device=0, right_uid=RIGHT_CARD_UID1)
     scanner2 = RFIDReader(device=1, right_uid=RIGHT_CARD_UID2)
 
-    thread1 = threading.Thread(target=scanner1.run)
-    thread2 = threading.Thread(target=scanner2.run)
+    stopReader = False
 
-    thread1.start()
-    thread2.start()
+    def getLeft(self):
+        return self.left
 
-    thread1.join()
-    thread2.join()
+    def getRight(self):
+        return self.right
 
-    if scanner1.success and scanner2.success:
-        print("Success! Both correct cards detected simultaneously.")
-        end_program(scanners=(scanner1, scanner2))
-    else:
-        print("The program did not end with both scanners detecting the correct cards.")
+    def getFinished(self):
+        return self.finished
 
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        GPIO.cleanup()
+    def stopGame(self):
+        self.scanner1.reader.Close()
+        self.scanner2.reader.Close()
+
+    def startGame(self):
+
+        
+
+        thread1 = threading.Thread(target=self.scanner1.run)
+        thread2 = threading.Thread(target=self.scanner2.run)
+
+        thread1.start()
+        thread2.start()
+
+        while not self.finished:
+
+            if self.scanner1.success and not self.finished:
+                print("Scanned left")
+                self.left = True
+
+            if self.scanner2.success and not self.finished:
+                print("Scanned right")
+                self.right = True
+
+            if self.scanner1.success and self.scanner2.success and not self.finished:
+                print("Success! Both correct cards detected simultaneously.")
+                self.finished = True
+                self.stopGame()
+            else:
+                print("The program did not end with both scanners detecting the correct cards.")
+
+            thread1.join()
+            thread2.join()
+
+
+
+    """ if __name__ == "__main__":
+        try:
+            main()
+        except KeyboardInterrupt:
+            GPIO.cleanup() """
