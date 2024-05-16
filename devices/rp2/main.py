@@ -100,6 +100,7 @@ def on_log(client, userdata, level, buf):
 ##### Client Setup
 client = mqtt.Client(client_id=CLIENT_ID, protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 client.username_pw_set(username="rp2", password="rp2Arose1234!")
+
 client.on_connect = on_connect
 client.on_message = on_message
 client.on_disconnect = on_disconnect
@@ -108,7 +109,7 @@ client.on_log = on_log
 
 client.enable_logger()
 client.will_set(MQTT_TOPIC_RP2, payload=f"{MainTimer.getRestTimeInSeconds}", qos=2, retain=True)
-client.connect(MQTT_BROKER, MQTT_PORT, properties=properties, keepalive=60)
+client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
 client.loop_start()  # Starte den MQTT-Client im Hintergrund
 client.subscribe([(MQTT_TOPIC_GEN_GLOBAL, 0), (MQTT_TOPIC_A5_PIANO, 2), (MQTT_TOPIC_B2_GRAVITY, 2)])
 
