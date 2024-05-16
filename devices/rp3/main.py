@@ -109,7 +109,7 @@ def on_log(client, userdata, level, buf):
         Logger.debug(buf)
 
 # Client Setup
-client = mqtt.Client(client_id=CLIENT_ID, protocol=mqtt.MQTTv5, transport=MQTT_TRANSPORT_PROTOCOL)
+client = mqtt.Client(client_id=CLIENT_ID, protocol=mqtt.MQTTv5, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 client.username_pw_set(username="rp3", password="rp3Arose1234!")
 client.on_connect = on_connect
 client.on_message = on_message
