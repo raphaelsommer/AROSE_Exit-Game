@@ -19,18 +19,19 @@ MQTT_TRANSPORT_PROTOCOL = "tcp"  # The transport protocol to use
 CLIENT_ID = "rp3"  # The client ID for the MQTT client
 
 # MQTT Topics
-MQTT_TOPIC_RP3 = "/rp3"  # The will topic
-MQTT_TOPIC_GEN_GLOBAL = "/gen/global"  # General global topic for start/stop signals
-MQTT_TOPIC_B3_MORSE = "/b3/morse"  # Topic for the Morse game
-MQTT_TOPIC_C1_RFID = "/c1/rfid"  # Topic for the RFID game
-MQTT_TOPIC_C0_IP = "/c0/ip"  # Topic for the IP game
-MQTT_TOPIC_RK_WIRE = "/rk/wire"  # Topic for the Wire game
+MQTT_TOPIC_RP3 = "/rp3" # Last will topic
+MQTT_TOPIC_GEN_GLOBAL = "/gen/global" # sub/pub global topic for start/stop signals
+MQTT_TOPIC_B3_MORSE = "/b3/morse" # pub Topic for the Morse game
+MQTT_TOPIC_C1_RFID = "/c1/rfid" # sub/pub Topic for the RFID game
+MQTT_TOPIC_C0_IP = "/c0/ip" # sub/pub Topic for the IP game
+MQTT_TOPIC_RK_WIRE = "/rk/wire" # sub/pub Topic for the Wire game
 
 # Game Flags
 isStartMorseGame = False
 isStartRfidGame = False
 isStartIpGame = False
 isStartWireGame = False
+
 isStoppedMorseGame = False
 isStoppedRfidGame = False
 isStoppedIpGame = False
@@ -68,6 +69,7 @@ def on_message(client, userdata, msg):
     if msg.topic == MQTT_TOPIC_GEN_GLOBAL:
         payload = msg.payload.decode()
         if payload == 'start':
+            print("Starting Morse Game")
             isStartMorseGame = True
         elif payload == 'stop':
             stop = True
@@ -75,15 +77,19 @@ def on_message(client, userdata, msg):
             stop = True
 
     if msg.topic == MQTT_TOPIC_C1_RFID and msg.payload.decode() == 'start':
+        print("Starting RFID Game")
         isStartRfidGame = True
 
     if msg.topic == MQTT_TOPIC_C0_IP and msg.payload.decode() == 'start':
+        print("Starting IP Game")
         isStartIpGame = True
 
     if msg.topic == MQTT_TOPIC_RK_WIRE and msg.payload.decode() == 'start':
+        print("Starting Wire Game")
         isStartWireGame = True
 
 def on_connect(client, userdata, flags, reason_code, properties):
+    print("Connected: " + str(reason_code))
     client.publish(topic=MQTT_TOPIC_RP3, payload="connected", qos=2, retain=True)
 
 def on_connect_fail(client, userdata, properties, reason_code):
@@ -149,24 +155,28 @@ try:
 
         # Handle game completion and MQTT notifications
         if MorseGame.getFinished() and not isStoppedMorseGame:
+            print("Stopping Morse Game")
             isStoppedMorseGame = True
             client.publish(topic=MQTT_TOPIC_B3_MORSE, payload="finished", qos=2)
         
         if RfidGame.getLeft() and not isStoppedRfidGame:
+            print("RFID Game: Left scanned")
             client.publish(topic=MQTT_TOPIC_C1_RFID, payload="left", qos=2)
-        
         if RfidGame.getRight() and not isStoppedRfidGame:
+            print("RFID Game: Right scanned")
             client.publish(topic=MQTT_TOPIC_C1_RFID, payload="right", qos=2)
-        
         if RfidGame.getFinished() and not isStoppedRfidGame:
+            print("Stopping RFID Game")
             isStoppedRfidGame = True
             client.publish(topic=MQTT_TOPIC_C1_RFID, payload="finished", qos=2)
         
         if IpGame.getIP() != "" and not isStoppedIpGame:
+            print("IP Game: IP scanned")
             isStoppedIpGame = True
             client.publish(topic=MQTT_TOPIC_C0_IP, payload="finished", qos=2)
         
         if (WireGame.getGameState() in [1, 2]) and not isStoppedWireGame:
+            print("Stopping Wire Game")
             isStoppedWireGame = True
             payload = "win" if WireGame.getGameState() == 1 else "fail"
             client.publish(topic=MQTT_TOPIC_RK_WIRE, payload=payload, qos=2)
@@ -201,4 +211,3 @@ finally:
     GPIO.cleanup()
     client.disconnect()
     client.loop_stop()
-    #Logger.shutdown() 
