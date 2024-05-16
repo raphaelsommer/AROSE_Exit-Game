@@ -1,7 +1,7 @@
 import time
 import paho.mqtt.client as mqtt
-from paho.mqtt.properties import Properties
-from paho.mqtt.packettypes import PacketTypes
+#from paho.mqtt.properties import Properties
+#from paho.mqtt.packettypes import PacketTypes
 import threading
 import RPi.GPIO as GPIO
 import logging
@@ -117,7 +117,7 @@ client.on_disconnect = on_disconnect
 client.on_connect_fail = on_connect_fail
 client.on_log = on_log
 
-properties = Properties(PacketTypes.CONNECT)
+#properties = Properties(PacketTypes.CONNECT)
 client.enable_logger()
 client.will_set(MQTT_TOPIC_RP3, payload="disconnected", qos=2, retain=True)
 client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
