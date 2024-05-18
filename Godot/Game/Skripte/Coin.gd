@@ -2,7 +2,7 @@ extends Node2D
 
 
 
-
+#Wenn Spieler in den Coin läuft bekommen sie einen coin dau und der coin verschwindet
 func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
 		Global.coins += 1

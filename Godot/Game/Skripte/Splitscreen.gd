@@ -5,7 +5,7 @@ extends Node
 		viewport = $"HBoxContainer/SubViewportContainer/SubViewport",
 		camera = $"HBoxContainer/SubViewportContainer/SubViewport/Camera2D",
 		player = $HBoxContainer/SubViewportContainer/SubViewport/MainGate/Player1,
-	},
+	},			#Der Viewport, Kamera und Spieler wird für die Richtige seite des Bildschrimes eingestellt
 	"2": {
 		viewport = $"HBoxContainer/SubViewportContainer2/SubViewport",
 		camera = $"HBoxContainer/SubViewportContainer2/SubViewport/Camera2D2",
@@ -21,7 +21,7 @@ func _ready() -> void:
 		remote_transform.remote_path = node.camera.get_path()
 		node.player.add_child(remote_transform)
 	
-		
+		#Das was Spiler 1 sieh(die Map) soll auch SPieler 2 sehen, leider hat dass mit dem Hintergund nicht geklappt
 
 
 

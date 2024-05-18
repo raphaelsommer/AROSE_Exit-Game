@@ -10,7 +10,7 @@ func _process(delta):
 		spwan(self.position)
 
 
-func spwan(targetLocation):
+func spwan(targetLocation): #Spieler bekommen einen coin wenn die türe geöffnet wird
 	
 	var newItem = null
 	newItem = preload("res://Szenen/Coin.tscn")
