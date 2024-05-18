@@ -20,9 +20,9 @@ func _ready() -> void:
 		var remote_transform := RemoteTransform2D.new()
 		remote_transform.remote_path = node.camera.get_path()
 		node.player.add_child(remote_transform)
-	
-		#Das was Spiler 1 sieh(die Map) soll auch SPieler 2 sehen, leider hat dass mit dem Hintergund nicht geklappt
-
+	var sprite = $HBoxContainer/SubViewportContainer2/SubViewport/Bg
+		#Das was Spieler 1 sieh(die Map) soll auch SPieler 2 sehen, leider hat dass mit dem Hintergund nicht geklappt
+	sprite.scale = Vector2(2, 2)
 
 
 	
