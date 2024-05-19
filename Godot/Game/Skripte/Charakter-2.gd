@@ -46,11 +46,11 @@ func _physics_process(delta):
 		
 	
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("Player_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	
-	var direction = Input.get_axis("move_left", "move_right")
+	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction and Global.player2_canMove:
 		velocity.x = direction * SPEED
 		

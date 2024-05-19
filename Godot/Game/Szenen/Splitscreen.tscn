@@ -8,7 +8,7 @@
 script = ExtResource("1_cay0j")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_right = 946.0
+offset_right = 770.0
 offset_bottom = 580.0
 theme_override_constants/separation = 0
 
@@ -19,12 +19,14 @@ layout_mode = 2
 disable_3d = true
 handle_input_locally = false
 audio_listener_enable_2d = true
-size = Vector2i(360, 573)
+size = Vector2i(373, 573)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
+[node name="Bg" type="Sprite2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
+position = Vector2(85.69, -86.62)
+texture = ExtResource("3_lsvth")
 
-[node name="MainGate" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_125j2")]
+[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(10, 2.08165e-12)
@@ -36,11 +38,9 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer2"]
 handle_input_locally = false
 audio_listener_enable_2d = true
-size = Vector2i(550, 579)
+size = Vector2i(373, 579)
 render_target_update_mode = 4
 
-[node name="Bg" type="Sprite2D" parent="HBoxContainer/SubViewportContainer2/SubViewport"]
-position = Vector2(627, 232)
-texture = ExtResource("3_lsvth")
+[node name="MainGate" parent="HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("2_125j2")]
 
 [node name="Camera2D2" type="Camera2D" parent="HBoxContainer/SubViewportContainer2/SubViewport"]

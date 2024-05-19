@@ -44,11 +44,11 @@ func _physics_process(delta):
 			animSprite.play("run") #Wenn ich mich bewge die run animation
 			
 	
-	if Input.is_action_just_pressed("Player_jump") and is_on_floor(): #Wenn jump gedückt wird springt der charaker
+	if Input.is_action_just_pressed("jump") and is_on_floor(): #Wenn jump gedückt wird springt der charaker
 		velocity.y = JUMP_VELOCITY
 
 	
-	var direction = Input.get_axis("ui_left", "ui_right") #Jenachdem welche richtung gedrückt wird dahin läuft der Charakter
+	var direction = Input.get_axis("move_left", "move_right") #Jenachdem welche richtung gedrückt wird dahin läuft der Charakter
 	if direction and Global.player1_canMove:
 		velocity.x = direction * SPEED
 		
