@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import random
 
-##### Define a class for the Button Sequence Game which is going to be instantiated in the main.py file
+##### A class for the Button Sequence Game which is going to be instantiated in the main.py file
 class ButtonSequenceGame:
 
     # Pin configuration
@@ -23,7 +23,7 @@ class ButtonSequenceGame:
     correct_sequence = random.sample([BUTTON1, BUTTON2, BUTTON3], 3)
     wrong_sequence_counter = 0
 
-    ### Define the constructor of the class
+    ### The constructor of the class
     def __init__(self):
         # Set up the GPIO
         GPIO.setup(self.RED_PIN, GPIO.OUT)
@@ -49,7 +49,7 @@ class ButtonSequenceGame:
             else:
                 self.button_sequence.clear()    
 
-    ### Define a method to check the button sequence
+    ### A method to check the button sequence
     def check_sequence(self):
         if self.button_sequence == self.correct_sequence:
             self.blink_led('green', 2, 0.25)
@@ -97,11 +97,11 @@ class ButtonSequenceGame:
         GPIO.output(self.GREEN_PIN, colors[color][1])
         GPIO.output(self.BLUE_PIN, colors[color][2])
 
-    ### Define a method to get the finish state of the game
+    ### A method to get the finish state of the game
     def getFinished(self):
         return self.finished
 
-    ### Define a method to start the Button Sequence Game from the main.py file
+    ### A method to start the Button Sequence Game from the main.py file
     def startGame(self):
 
         # Set the LED color to none
@@ -119,7 +119,7 @@ class ButtonSequenceGame:
             time.sleep(0.1)
         #self.stopGame()
     
-    ### Define a method to stop/interrupt the Button Sequence Game from the main.py file
+    ### A method to stop/interrupt the Button Sequence Game from the main.py file
     def stopGame(self):
         # Set the LED color to none
         self.set_led_color('none')
