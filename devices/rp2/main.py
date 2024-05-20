@@ -168,7 +168,7 @@ try:
                 thread.join()
                 threads_started[key] = False
 
-
+# Stop Code if User takes over
 except KeyboardInterrupt:
     if isStartTimer:
         MainTimer.stopTimer()
