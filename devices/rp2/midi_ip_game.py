@@ -5,7 +5,7 @@ from gpiozero import TonalBuzzer
 from gpiozero.tones import Tone
 import time
 
-##### Define a class for the MIDI IP Game which is going to be instantiated in the main.py file
+##### A class for the MIDI IP Game which is going to be instantiated in the main.py file
 class MidiIpGame:
 
     # Configure the USB MIDI Port:
@@ -46,17 +46,17 @@ class MidiIpGame:
         # Clear the LCD Display to avoid any previous messages and to prevent any errors and glitches
         self.lcd.clear()
         
-    ### Define a method to revert the entered IP address back to the initial state so that it can be re-entered
+    ### A method to revert the entered IP address back to the initial state so that it can be re-entered
     def resetIP(self, IP):
         IP = []
         return IP
     
-    ### Define a method to convert the entered IP address from a list of integers to a string
+    ### A method to convert the entered IP address from a list of integers to a string
     def IPToString(self, IP):
         IP_string = '.'.join(str(ip) for ip in IP)
         return IP_string
 
-    ### Define a method to enter the IP address via the MIDI Piano
+    ### A method to enter the IP address via the MIDI Piano
     def enterIP(self, IP, door):
         self.lcd.clear()
         self.lcd.message(f'Change door{door} IP:')
@@ -81,11 +81,11 @@ class MidiIpGame:
                         self.lcd.clear()
                         self.lcd.message(f'Note value too\nlow, try again...')
 
-    ### Define a method to get the status of the IP Game for the main.py file    
+    ### A method to get the status of the IP Game for the main.py file    
     def getFinished(self):
         return self.areBothIPsRight
     
-    ### Define a method to show 'Game Over' on the LCD Display when the timer runs out
+    ### A method to show 'Game Over' on the LCD Display when the timer runs out
     def showGameOver(self):
         for i in range(3):
             self.lcd.clear()
@@ -94,7 +94,7 @@ class MidiIpGame:
             self.lcd.clear()
 
     
-    ### Define a method to start the IP Game from the main.py file
+    ### A method to start the IP Game from the main.py file
     def startGame(self):
         self.lcd.message('Enter door IPs\non the Piano')
         time.sleep(3)
@@ -137,7 +137,7 @@ class MidiIpGame:
         except KeyboardInterrupt:
             self.lcd.clear()
 
-    ### Define a method to stop/interrupt the IP Game from the main.py file
+    ### A method to stop/interrupt the IP Game from the main.py file
     def stopGame(self):
         self.buzzer.close()
         self.lcd.clear()
