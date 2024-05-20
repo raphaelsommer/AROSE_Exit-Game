@@ -37,7 +37,7 @@ class Timer:
     timerSec10 = 5
     timerSec1 = 8
 
-    ### Define the constructor of the class
+    ### The constructor of the class
     def __init__(self):
         # SPI Configuration
         self.spi = spidev.SpiDev()
@@ -45,11 +45,11 @@ class Timer:
         self.spi.max_speed_hz = 5000
         self.setup_display()
 
-    ### Define a method to write a byte to the display
+    ### A method to write a byte to the display
     def write_byte(self, register, data):
         self.spi.xfer2([register, data])
 
-    ### Define a method to setup the display
+    ### A method to setup the display
     def setup_display(self):
         # Initialize display
         self.write_byte(0x0c, 0x01)  # Shutdown register
@@ -57,12 +57,12 @@ class Timer:
         self.write_byte(0x0b, 0x07)  # Scan limit register (show all digits)
         self.clear_display()
 
-    ### Define a method to clear the display
+    ### A method to clear the display
     def clear_display(self):
         for digit in range(1, 9):
             self.write_byte(digit, 0x00)
     
-    ### Define a method to display a digit on the display
+    ### A method to display a digit on the display
     def display_digit(self, position, value, colon=False):
         if 0 <= value <= 9:
             data = self.SEGMENT_MAP[str(value)]
@@ -70,7 +70,7 @@ class Timer:
                 data |= 0x80
             self.write_byte(position, data)
 
-    ### Define a method to play the alarm sound
+    ### A method to play the alarm sound
     def alarm(self):
         count5sec = 0
         start_time = time.time()
@@ -90,15 +90,15 @@ class Timer:
                 count5sec += 1
                 start_time = current_time
 
-    ### Define a method to get the status of the timer for the main.py file
+    ### A method to get the status of the timer for the main.py file
     def getFinished(self):
         return self.timerFinished
     
-    ### Define a method to get the rest time of the timer for the main.py file (last will message)
+    ### A method to get the rest time of the timer for the main.py file (last will message)
     def getRestTimeInSeconds(self):
         return (self.timerMin10 * 600) + (self.timerMin1 * 60) + (self.timerSec10 * 10) + self.timerSec1
     
-    ### Define a method to start the timer
+    ### A method to start the timer
     def startTimer(self):
         self.startTime = time.time()
         while ((not self.stopped) and self.start):
@@ -130,7 +130,7 @@ class Timer:
         self.timerFinished = True
         self.stopTimer()
 
-    ### Define a method to stop the timer
+    ### A method to stop the timer
     def stopTimer(self):
         self.stopped = True
         self.clear_display()
