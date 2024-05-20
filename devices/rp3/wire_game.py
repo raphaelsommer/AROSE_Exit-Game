@@ -23,6 +23,9 @@ class Wire:
     # Start the Wire Game from the main.py
     def startGame(self):
         while self.gameState == 0:
+
+            # GPIO5 ist mit dem Draht verbunden. Wenn hierüber ein Strom länger als 0,2 Sekunden fließt hat der Spieler verloren und das Spiel wird beendet.
+            # GPIO4 ist mit dem Nagel verbunden. Wenn der Spieler den Nagel erreicht ohne den Draht zu lange zu berühren, fließt ein Strom und das Spiel wird erfolgreich beendet.
             if GPIO.input(5):
                 time.sleep(0.2)
                 if GPIO.input(5):
