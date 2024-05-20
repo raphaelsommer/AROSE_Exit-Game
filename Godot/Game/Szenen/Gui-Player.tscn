@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbocoreb5cnga"]
+
+[ext_resource type="Texture2D" uid="uid://c1t2c5qkg6a5i" path="res://Gui/Space_Game_GUI_PNG/PNG/Hangar/HP_Icon.png" id="1_6slfr"]
+[ext_resource type="Script" path="res://Skripte/Gui-Player.gd" id="1_t36e7"]
+[ext_resource type="Texture2D" uid="uid://umybmcwtdy4j" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_UI/Clock_Icon.png" id="2_lehsi"]
+[ext_resource type="Texture2D" uid="uid://ieyod6x30iki" path="res://Coins/Idle/01.png" id="3_h44dn"]
+[ext_resource type="Texture2D" uid="uid://bkuwo3i5mqnab" path="res://Key/Idle/1.png" id="5_mm4e3"]
+
+[node name="Gui_player" type="CanvasLayer"]
+script = ExtResource("1_t36e7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 1.0
+offset_right = 12.0
+offset_bottom = 99.0
+grow_horizontal = 0
+scale = Vector2(0.994601, 1.01285)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Leben" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 30)
+layout_mode = 2
+text = "00"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer"]
+position = Vector2(-15, 13)
+scale = Vector2(0.407692, 0.372727)
+texture = ExtResource("1_6slfr")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Coins" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(60, 30)
+layout_mode = 2
+text = "00"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer3"]
+position = Vector2(-16, 12)
+scale = Vector2(1.4734, 1.41392)
+texture = ExtResource("3_h44dn")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Time" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 30)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer2"]
+position = Vector2(-15, 13)
+scale = Vector2(0.407692, 0.372727)
+texture = ExtResource("2_lehsi")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Time" type="RichTextLabel" parent="VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(60, 30)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer4"]
+position = Vector2(-14, 11)
+scale = Vector2(1.51859, 1.41667)
+texture = ExtResource("5_mm4e3")

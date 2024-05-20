@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://byu1yc5hsdtdi"]
+[gd_scene load_steps=33 format=3 uid="uid://byu1yc5hsdtdi"]
 
 [ext_resource type="Script" path="res://Skripte/Ki.gd" id="1_vsfo1"]
 [ext_resource type="Texture2D" uid="uid://b3fraroiy6rdr" path="res://KI/Evil/Metal/Idle/Robot idle 1.png" id="2_tcm7m"]
@@ -24,6 +24,10 @@
 [ext_resource type="Texture2D" uid="uid://brbxsepf5t20x" path="res://Effekte/Explosion/sprites/explosion-animation7.png" id="22_3auyc"]
 [ext_resource type="Texture2D" uid="uid://dskhxblhatpm0" path="res://Effekte/Explosion/sprites/explosion-animation8.png" id="23_qjv07"]
 [ext_resource type="Texture2D" uid="uid://badikj6md4e4a" path="res://Effekte/Explosion/sprites/explosion-animation9.png" id="24_kgi5a"]
+[ext_resource type="Texture2D" uid="uid://dlogmyubn4esa" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_s.png" id="25_wqc5c"]
+[ext_resource type="Texture2D" uid="uid://wb6gtycmwn5m" path="res://Gui/Buttons/kf_controller_prompts_r8/keyboard/kb_n.png" id="26_vqurc"]
+[ext_resource type="AudioStream" uid="uid://c6e0p4uq00ahe" path="res://Sounds/Effects/Ki_voice/Evil/FireMadnessVoice/phrase1-1.ogg" id="27_75jrg"]
+[ext_resource type="AudioStream" uid="uid://cymixk3iv6r2k" path="res://Sounds/Effects/yd-Sounds/explode.ogg" id="28_yot3u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0j5hm"]
 radius = 16.0
@@ -81,7 +85,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iyegp"]
 size = Vector2(20, 51)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vgrr4"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_liuh6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -114,6 +118,11 @@ animations = [{
 "loop": false,
 "name": &"explosion",
 "speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["ki"]]
@@ -130,7 +139,6 @@ scale = Vector2(0.0641071, 0.0533512)
 sprite_frames = SubResource("SpriteFrames_0lyuu")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.993893
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -152,7 +160,7 @@ offset_bottom = 97.2037
 theme_override_font_sizes/normal_font_size = 42
 text = "How did you get here???
 ...
-Its not necessary, you cant stop it anyway!!!!"
+It doesn't matter now, you can't stop me anyways!!!!"
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
@@ -169,12 +177,28 @@ offset_bottom = 21.0
 theme_override_font_sizes/normal_font_size = 12
 text = "Weapons ready!"
 
-[node name="explosion" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.999999, -5)
+scale = Vector2(1.68304, 1.65625)
+sprite_frames = SubResource("SpriteFrames_liuh6")
+animation = &"idle"
+
+[node name="s" type="Sprite2D" parent="."]
 visible = false
-scale = Vector2(1.58036, 1.39062)
-sprite_frames = SubResource("SpriteFrames_vgrr4")
-animation = &"explosion"
-frame = 8
-frame_progress = 1.0
+position = Vector2(-186, -16)
+scale = Vector2(0.273437, 0.25)
+texture = ExtResource("25_wqc5c")
+
+[node name="n" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-143, -15)
+scale = Vector2(0.242188, 0.242188)
+texture = ExtResource("26_vqurc")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("27_75jrg")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_yot3u")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

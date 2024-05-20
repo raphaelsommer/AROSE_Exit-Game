@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://corug5a8vcnn8"
+path="res://.godot/imported/Birds and Wind - Ambient.ogg-3b94680ebdd016df7b6c5c26f180cb3f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/Effects/Birds and Wind - Ambient.ogg"
+dest_files=["res://.godot/imported/Birds and Wind - Ambient.ogg-3b94680ebdd016df7b6c5c26f180cb3f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

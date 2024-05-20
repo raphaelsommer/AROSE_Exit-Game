@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://p04e2hkt2nlh"]
+
+[ext_resource type="Script" path="res://Skripte/MQTT_Client.gd" id="1_yw07u"]
+[ext_resource type="Script" path="res://Skripte/MQTT.gd" id="2_h4m3q"]
+
+[node name="MQTT_Client" type="Node"]
+script = ExtResource("1_yw07u")
+
+[node name="MQTT" type="Node" parent="."]
+script = ExtResource("2_h4m3q")

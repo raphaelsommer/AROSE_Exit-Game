@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2xwvt7fhko4n"]
+[gd_scene load_steps=9 format=3 uid="uid://d2xwvt7fhko4n"]
 
 [ext_resource type="Script" path="res://Skripte/Coin.gd" id="1_t4o34"]
 [ext_resource type="Texture2D" uid="uid://ieyod6x30iki" path="res://Coins/Idle/01.png" id="2_gnd3k"]
 [ext_resource type="Texture2D" uid="uid://b1lyre7fqd44c" path="res://Coins/Idle/02.png" id="3_nbvs7"]
 [ext_resource type="Texture2D" uid="uid://bxetj6wbg13h7" path="res://Coins/Idle/03.png" id="4_nba46"]
 [ext_resource type="Texture2D" uid="uid://d3wtt0rembftp" path="res://Coins/Idle/04.png" id="5_ith2t"]
+[ext_resource type="AudioStream" uid="uid://ehlduo4o71vl" path="res://Sounds/Effects/Animal/Meow/collectRed.wav" id="6_pt1sd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tuae5"]
 animations = [{
@@ -42,5 +43,9 @@ frame_progress = 0.31155
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_3ju8n")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_pt1sd")
+volume_db = 0.07
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -9,8 +9,13 @@ import time
 class MidiIpGame:
 
     # Configure the USB MIDI Port:
-    PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 20:0'
-        
+    #PORT = 'Akai LPK25 Wireless:Akai LPK25 Wireless MIDI 1 20:0'
+    gen_port = mido.open_output()
+
+    ports_available = mido.get_output_names()
+    
+    PORT = ports_available[1]
+
     # Configure the Raspberry Pi pins for the LCD Display and the Buzzer:
     lcd_rs = 24
     lcd_en = 23
@@ -28,6 +33,9 @@ class MidiIpGame:
     IP1_entered = []
     IP2_entered = []
     areBothIPsRight = False
+
+    # Flag to reset the input
+    reset = False
 
     
     ### Define the constructor of the class
@@ -50,31 +58,57 @@ class MidiIpGame:
 
     ### Define a method to enter the IP address via the MIDI Piano
     def enterIP(self, IP, door):
+        self.lcd.clear()
+        self.lcd.message(f'Change door{door} IP:')
         with mido.open_input(self.PORT) as listener:
             for input in listener:
                 if len(IP) > 3:
-                          break
+                    break
                 if not input.is_meta and input.type == 'note_on':
                     IP_part = input.note
-                    self.buzzer.play(Tone(midi=IP_part))
-                    IP.append((IP_part-32)*6)
-                    self.lcd.clear()
-                    self.lcd.message(f'Change door{door} IP:\n{self.IPToString(IP)}')
-                    time.sleep(1)
-                    self.buzzer.stop()
-                    time.sleep(1)
+                    if IP_part > 56:
+                        self.buzzer.play(Tone(midi=IP_part))
+                        IP.append((IP_part-32)*6)
+                        self.lcd.clear()
+                        self.lcd.message(f'Change door{door} IP:\n{self.IPToString(IP)}')
+                        time.sleep(1)
+                        self.buzzer.stop()
+                        time.sleep(1)
+                    elif IP_part == 48:
+                        self.reset = True
+                        break
+                    else:
+                        self.lcd.clear()
+                        self.lcd.message(f'Note value too\nlow, try again...')
 
     ### Define a method to get the status of the IP Game for the main.py file    
     def getFinished(self):
         return self.areBothIPsRight
+    
+    ### Define a method to show 'Game Over' on the LCD Display when the timer runs out
+    def showGameOver(self):
+        for i in range(3):
+            self.lcd.clear()
+            self.lcd.message('Game Over!')
+            time.sleep(2)
+            self.lcd.clear()
 
+    
     ### Define a method to start the IP Game from the main.py file
     def startGame(self):
         self.lcd.message('Enter door IPs\non the Piano')
+        time.sleep(3)
         try:
             while not self.areBothIPsRight:
                 self.enterIP(self.IP1_entered, 1)
-                self.enterIP(self.IP2_entered, 2)
+                if self.reset:
+                    self.lcd.clear()
+                    self.lcd.message(f'Reset IPs,\ntry again...')
+                    self.IP1_entered = self.resetIP(self.IP1_entered)
+                    self.IP2_entered = self.resetIP(self.IP2_entered)
+                    self.reset = False
+                else:
+                    self.enterIP(self.IP2_entered, 2)
                 if (self.IP1_entered == [192, 168, 180, 198] and self.IP2_entered == [192, 168, 222, 210]):
                     self.lcd.clear()
                     self.lcd.message('Both IPs are\nright!')
@@ -84,6 +118,12 @@ class MidiIpGame:
                     time.sleep(2)
                     self.lcd.clear()
                     self.areBothIPsRight = True
+                elif self.reset:
+                    self.lcd.clear()
+                    self.lcd.message(f'Reset IPs,\ntry again...')
+                    self.IP1_entered = self.resetIP(self.IP1_entered)
+                    self.IP2_entered = self.resetIP(self.IP2_entered)
+                    self.reset = False
                 else:
                     self.lcd.clear()
                     self.lcd.message('At least one IP\nis wrong!')
@@ -99,8 +139,9 @@ class MidiIpGame:
 
     ### Define a method to stop/interrupt the IP Game from the main.py file
     def stopGame(self):
+        self.buzzer.close()
         self.lcd.clear()
-        self.buzzer.stop()
+        #self.buzzer.stop()
         self.resetIP(self.IP1_entered)
         self.resetIP(self.IP2_entered)
         self.areBothIPsRight = False
