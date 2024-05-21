@@ -26,6 +26,7 @@ from mfrc522 import MFRC522
 +-------------------+-----------------------+-----------------------+
 """
 
+# Initialize the RFID Reader
 class RFIDReader:
     def __init__(self, device, right_uid):
         self.device = device
@@ -35,6 +36,8 @@ class RFIDReader:
         self.success = False
 
     def run(self):
+
+        # Scans until both cards have been succesfully scanned
         while not self.success:
             print(f"Scanner {self.device} scanning...")
             status, TagType = self.reader.Request(self.reader.PICC_REQIDL)
@@ -50,6 +53,7 @@ class RFIDReader:
                         print(f"Scanner {self.device}: Incorrect card.")
             time.sleep(0.5)
 
+#Defines Class RFID
 class RFID:
 
     finished = False
@@ -80,13 +84,14 @@ class RFID:
     def startGame(self):
 
         
-
+# Initialize threads for scanners
         thread1 = threading.Thread(target=self.scanner1.run)
         thread2 = threading.Thread(target=self.scanner2.run)
 
         thread1.start()
         thread2.start()
 
+# Check if scan was successful
         while not self.finished:
 
             if self.scanner1.success and not self.finished:
@@ -103,7 +108,7 @@ class RFID:
                 self.stopGame()
             else:
                 print("The program did not end with both scanners detecting the correct cards.")
-
+# Start threads
             thread1.join()
             thread2.join()
 
