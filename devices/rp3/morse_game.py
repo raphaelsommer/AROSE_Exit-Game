@@ -21,6 +21,7 @@ class Morse:
         ['*', '0', '#', 'D']
     ]
 
+    # Define RGB values for colors
     COLORS = {
         'red': (255, 0, 0),
         'green': (0, 255, 0),
@@ -42,8 +43,10 @@ class Morse:
         '9': '----.'
     }
 
+    # Morsecode
     CODE_TO_MORSE = ['E', '4', 'C', '3', 'D', '7', 'O', '2']
     CORRECT_CODE = [CODE_TO_MORSE[3], CODE_TO_MORSE[7], CODE_TO_MORSE[5], CODE_TO_MORSE[1]]
+    # Lengths in seconds for morse signals and breaks between them
     SHORT = 0.2
     LONG = 0.8
     BETWEEN = 1
