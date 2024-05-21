@@ -3,12 +3,12 @@ extends Node2D
 var buyable = false
 
 
-func _on_ready():			#Der Bot ist ausgeschalten
+func _on_ready():
 	$AnimatedSprite2D.play("off")
 	
 	
 
-func _on_area_2d_body_entered(body): #Wenn spieler die area betreten geht er an und man kann mit ihm interagieren
+func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
 		$AnimatedSprite2D.play("on")
 		$Press.visible = true
@@ -16,22 +16,21 @@ func _on_area_2d_body_entered(body): #Wenn spieler die area betreten geht er an 
 
 
 func _physics_process(delta):
-	if(Input.is_action_just_pressed("Interagieren")):	#man bekommt jetzt die Möglickeit leben zu kaufen oder die aktion abzubrechen
+	if(Input.is_action_just_pressed("Interagieren")):
 		buyable = true
 		$AudioStreamPlayer2D1.play()
 		$Press.visible = false
 		$I.visible = false
 		$"Text Robot".visible = true
 		
-	if(Input.is_action_just_pressed("Abbruch")):	#Bei abbruch schält sich der bot wieder ab
+	if(Input.is_action_just_pressed("Abbruch")):
 		$"Text Robot".visible = false
 		$Press.visible = true
 		$I.visible = true
 		buyable = false
 		
-		#Bei Kaufen bekommen die Spieler ein leben dazu und Ihnen werden 5 coins abgezogen
 	if(Input.is_action_just_pressed("kaufen") and (Global.coins >= 5) and buyable):
-		print(Global.coins)			
+		print(Global.coins)
 		$AudioStreamPlayer2D2.play()
 		Global.coins -= 5
 		print(Global.coins)
@@ -60,7 +59,7 @@ func _physics_process(delta):
 	#$Sprite2D.visible = false
 
 
-func _on_area_2d_body_exited(body): #Wenn spieler area verlässt schält sich der bot wieder ab
+func _on_area_2d_body_exited(body):
 	if(body.is_in_group("Player")):
 		$Press.visible = false
 		$I.visible = false

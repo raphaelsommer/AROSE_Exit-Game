@@ -1,20 +1,19 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0  #Katze geschwindigkeit 200
-const JUMP_VELOCITY = -400.0 #Katze Sprunghöhe
+const SPEED = 200.0
+const JUMP_VELOCITY = -400.0
 var move = false
-var meow = false 
+var meow = false
 
-#Schwerkraft aus den Projekteinstellungen laden und mit RigidBody-Knoten zu verbinden.
-
+# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	pass
 
 
-func _physics_process(delta): #Wenn Katzen befreit wurden werden variablen true und sie bewegen sich zu den türen 
+func _physics_process(delta):
 	if(Global.animal_move and Global.animal_move_not):
 		$AnimatedSprite2D.play("run")
 		$".".position.x -= 2
@@ -30,7 +29,7 @@ func _physics_process(delta): #Wenn Katzen befreit wurden werden variablen true 
 
 
 
-func _on_area_2d_body_entered(body): #Wenn spieler in die Area kommen fangen katzen an sich zu bewegen und eigentlich zu meown aber die funktion wird weggelassen
+func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
 		move = true
 		meow = true

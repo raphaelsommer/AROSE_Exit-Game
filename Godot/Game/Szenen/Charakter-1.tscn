@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://djeclnf0t85n3"]
+[gd_scene load_steps=27 format=3 uid="uid://djeclnf0t85n3"]
 
 [ext_resource type="Script" path="res://Skripte/Charakter-1.gd" id="1_fbrjd"]
 [ext_resource type="Texture2D" uid="uid://c1nffihvhe72t" path="res://Charaktere/Charakter_1/Dead/Dead-2.png" id="3_804ir"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://butpb8yyhdonw" path="res://Charaktere/Charakter_1/Run/Run-7.png" id="22_7dbwi"]
 [ext_resource type="AudioStream" uid="uid://cefinl2o2wfda" path="res://Sounds/Effects/yd-Sounds/steps_platform.ogg" id="23_7v6ge"]
 [ext_resource type="Texture2D" uid="uid://eswsb5t57p5n" path="res://Charaktere/Charakter_1/Run/Run-8.png" id="23_nypw3"]
+[ext_resource type="PackedScene" uid="uid://bbocoreb5cnga" path="res://Szenen/Gui-Player.tscn" id="24_5fwvr"]
 [ext_resource type="Texture2D" uid="uid://cgspveemvaquw" path="res://Charaktere/Charakter_1/Run/Run-9.png" id="24_criru"]
 [ext_resource type="Texture2D" uid="uid://bdj657f065e6m" path="res://Charaktere/Charakter_1/Run/Run-10.png" id="25_kq4xp"]
 [ext_resource type="Texture2D" uid="uid://dqe2nbjtwnlti" path="res://Charaktere/Charakter_1/Run/Run-11.png" id="26_ku3q5"]
@@ -139,3 +140,7 @@ autoplay = "idle"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("23_7v6ge")
+
+[node name="Node2D" parent="." instance=ExtResource("24_5fwvr")]
+
+[node name="Camera2D" type="Camera2D" parent="."]

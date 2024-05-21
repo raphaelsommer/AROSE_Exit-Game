@@ -1,14 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1jvak0djqnm1"]
+[gd_scene load_steps=3 format=3 uid="uid://b1jvak0djqnm1"]
 
 [ext_resource type="Script" path="res://Skripte/Splitscreen.gd" id="1_cay0j"]
 [ext_resource type="PackedScene" uid="uid://csr2iccem55o2" path="res://Szenen/Main-Gate.tscn" id="2_125j2"]
-[ext_resource type="Texture2D" uid="uid://byd0qr3ivpfgv" path="res://Gui/Space_Game_GUI_PNG/PNG/Main_Menu/BG.png" id="3_lsvth"]
 
 [node name="Splitscreen" type="Node"]
 script = ExtResource("1_cay0j")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_right = 770.0
+offset_right = 946.0
 offset_bottom = 580.0
 theme_override_constants/separation = 0
 
@@ -19,12 +18,10 @@ layout_mode = 2
 disable_3d = true
 handle_input_locally = false
 audio_listener_enable_2d = true
-size = Vector2i(373, 573)
+size = Vector2i(360, 573)
 render_target_update_mode = 4
 
-[node name="Bg" type="Sprite2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
-position = Vector2(85.69, -86.62)
-texture = ExtResource("3_lsvth")
+[node name="MainGate" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_125j2")]
 
 [node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
 
@@ -38,9 +35,7 @@ layout_mode = 2
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer2"]
 handle_input_locally = false
 audio_listener_enable_2d = true
-size = Vector2i(373, 579)
+size = Vector2i(550, 579)
 render_target_update_mode = 4
-
-[node name="MainGate" parent="HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("2_125j2")]
 
 [node name="Camera2D2" type="Camera2D" parent="HBoxContainer/SubViewportContainer2/SubViewport"]

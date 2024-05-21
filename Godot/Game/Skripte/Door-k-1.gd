@@ -3,7 +3,7 @@ extends Node2D
 
 
 
-func _process(delta): #Wenn zustand der Türe 0 ist öffnet sie sich, nachricht kommt von mqtt broker
+func _process(delta):
 	if(Global.door_c0 == 0):
 		$AnimatedSprite2D.play("opens")
 		$AudioStreamPlayer2D.play()

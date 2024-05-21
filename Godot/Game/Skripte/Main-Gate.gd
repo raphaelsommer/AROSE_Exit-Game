@@ -1,6 +1,6 @@
 extends Node2D
 
-#boolesche variablen für die Spiele
+
 var sauerstoff = false
 var refilledSauerstoff = false
 var shoot = false
@@ -11,18 +11,18 @@ var morsePressed = false
 var piano = false
 var pianoPressed = false
 
-func _on_area_2d_body_entered(body): #Wenn Spieler in area kommt wird pc bild sichtbar
+func _on_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
 		$pc/Sprite2D.visible = true
 		sauerstoff = true
 	
 		
 func _ready():
-	await get_tree().create_timer(5).timeout #Keine funktion
+	await get_tree().create_timer(5).timeout
 
 
 func _process(delta):
-	if(Input.is_action_just_pressed("Sauerstoff") and sauerstoff and !refilledSauerstoff): #Sauerstoff wird hinzugefügt/timer wird erhöht
+	if(Input.is_action_just_pressed("Sauerstoff") and sauerstoff and !refilledSauerstoff):
 		Global.sauerstoff = true
 		Global.timer.set_wait_time(Global.timer.get_time_left() + float(9 * 60))
 		Global.timer.start()
@@ -34,11 +34,11 @@ func _process(delta):
 		sauerstoff = false
 		refilledSauerstoff = true
 	$CharacterBody2D3.position.x += 3
-	if(shoot):							#Funktion um raumschiff am anfang zu zerstören
+	if(shoot):
 		$Rocket.position.x += 10
 		$Rocket2.position.x += 10
 		$Ship2.position.x -= 10
-	if(Input.is_action_just_pressed("Button") and button and !buttonPressed): #Button spiel starten
+	if(Input.is_action_just_pressed("Button") and button and !buttonPressed):
 		$"Comp_2/3".visible = false
 		$Comp_2/Button.visible = false
 		$Comp_2/Button2.visible = false
@@ -73,7 +73,7 @@ func _process(delta):
 		#$Comp_1/RichTextLabel.visible = true
 		#await get_tree().create_timer(2).timeout
 		#$Comp_1/RichTextLabel.visible = false
-	if(Input.is_action_just_pressed("Piano") and piano and !pianoPressed): #Verschiedene Funktionalitäten um die Türen zu öffnen wenn die spiele erfolgreich abgeschlossen wurde und was man drücken muss um spiel zu starten
+	if(Input.is_action_just_pressed("Piano") and piano and !pianoPressed):
 		$Piano1/Piano.visible = false
 		$Piano1/Sprite2D.visible = false
 		$Piano1/RichTextLabel.visible = true
@@ -99,7 +99,7 @@ func _process(delta):
 
 
 
-func _on_area_2d_body_exited(body): #Wenn spieler area verlässt wird das pc bild wieder unsichtbar
+func _on_area_2d_body_exited(body):
 	if(body.is_in_group("Player")):
 		$pc/Sprite2D.visible = false
 		
@@ -108,7 +108,7 @@ func _on_area_2d_body_exited(body): #Wenn spieler area verlässt wird das pc bil
 
 
 
-func _on_gravity_body_entered(body): #Wenn spieler 2 in area kommt geht der Sauerstoff aus und er schwebt an der decke
+func _on_gravity_body_entered(body):
 	if(body.is_in_group("Player2")):
 		Global.gravity = false
 		$Gravity.queue_free()
@@ -135,7 +135,7 @@ func _on_gravity_body_entered(body): #Wenn spieler 2 in area kommt geht der Saue
 		#morse = false
 		
 		
-#Gleiches prinzip bei den unteren funktionen wenn spieler in die area kommt wird sichtbar was er zu tun hat und wenn er sie verlässt verschwienden die sprites wieder, man kann ein spiel nur einmal starten
+
 
 func _on_piano_1_body_entered(body):
 	if(body.is_in_group("Player")):
@@ -166,7 +166,7 @@ func _on_shoot_body_entered(body):
 
 
 
-func _on_dead_body_entered(body): #Raumdchiff soll zerstört werden wenn raumschiff in die area  kommt 
+func _on_dead_body_entered(body):
 	if(body.is_in_group("Dead")):
 		$CharacterBody2D3/Ship/AnimatedSprite2D.play("explosion")
 		$AudioStreamPlayer3.play()

@@ -8,16 +8,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var elapsed = int(Global.timer.time_left) #Hier wird die auteilung gemacht wie die zeit dargestellt werden soll
+	var elapsed = int(Global.timer.time_left)
 	var minutes = int(elapsed / 60)
 	var seconds = elapsed % 60
 	
 
 	
 	
-	$VBoxContainer/HBoxContainer/Leben.text = str (Global.player_hp) #Leben der Spieler wird angezeigt
-	$VBoxContainer/HBoxContainer3/Coins.text = str (Global.coins) #Coins werden angezeigt
-	$VBoxContainer/HBoxContainer2/Time.text = '%02d:%02d' % [minutes, seconds] #timer wird angezeigt
+	$VBoxContainer/HBoxContainer/Leben.text = str (Global.player_hp)
+	$VBoxContainer/HBoxContainer3/Coins.text = str (Global.coins)
+	$VBoxContainer/HBoxContainer2/Time.text = '%02d:%02d' % [minutes, seconds]
 	
 	if(Global.key):
-		$VBoxContainer/HBoxContainer4.visible = true #Wenn schlüssel eingesammelt wird, wird angezigt dass der schlüssel im inventar ist
+		$VBoxContainer/HBoxContainer4.visible = true

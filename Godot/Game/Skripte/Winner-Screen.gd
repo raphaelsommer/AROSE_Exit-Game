@@ -2,16 +2,16 @@ extends Node2D
 var text_edit
 
 func _on_button_pressed():
-	if(Global.ki_destroyed): #Wenn button gedrückt wird und die KI zerstört wurde gibt es einen anderen Abspann
+	if(Global.ki_destroyed):
 		get_tree().change_scene_to_file("res://Szenen/Abspann-Kapsel.tscn")
-	else: #Wenn ki nicht zerstört wurde normaler Abspann
+	else:
 		get_tree().change_scene_to_file("res://Szenen/Abspann.tscn")
-	if Global.mqtt_connect: #Mqtt verbindung wird getrennt
+	if Global.mqtt_connect:
 		MQTT_Client.pub("/gen/global", "stop")
 		MQTT_Client.mqttClient.disconnect_from_server()
 
 
-func _process(delta):   #Wenn die Aufgaben im Spiel erfüllt wurden erscheinen die Texte
+func _process(delta):
 	if(Global.ki_destroyed):
 		$TextEdit4.visible = true
 	if(Global.animals):
